@@ -239,6 +239,11 @@
   	<gcupload username="${gc.username}" password="${gc.password}" projectname="sagetv-addons" filename="${build}/packages/${pkg.war.name}" targetfilename="${pkg.war.name}" summary="nielm web interface war file" labels="QA-Snapshot,Type-Plugin,OpSys-All" />
   </target>
 
+  <target name="submit" depends="deliver" description="Submit plugin to SageTV repository">
+	<taskdef classname="com.google.code.sagetvaddons.dev.ant.task.SageTvPluginSubmitter" name="sagesubmit" />
+  	<sagesubmit name="Derek Battams" user="Slugger" email="derek@battams.ca" pluginid="Web" reqtype="UPGRADE" descriptor="${build}/packages/plugin-${plugin.version}.xml" />
+  </target>
+
   <target name="clean"
         description="clean up" >
     <!-- Delete the ${build} and ${dist} directory trees -->
