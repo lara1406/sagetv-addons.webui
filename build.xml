@@ -1,0 +1,231 @@
+<project name="Nielm's SageTV Web Interface for Jetty" default="dist" basedir=".">
+  <!-- set global properties for this build -->
+  <property file="build.properties"/>
+  <property name="plugin.version" value="2.31"/>
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="sage.jar" value="C:\Program Files\SageTV\SageTV\Sage.jar" />
+  <property name="libs" location="X:\" />
+  <path id="bld.jars">
+    <fileset dir="${libs}">
+      <include name="*.jar" />
+    </fileset>
+    <pathelement path="${sage.jar}" />
+  </path>
+  <condition property="filename.suffix" value="-${build.number}" else="">
+    <isset property="build.number"/>
+  </condition>
+
+  <!--property name="download.url.location" value="http://download.sage.tv/plugins/jreichen/web"/-->
+  <property name="download.url.location" value="http://downloads.sourceforge.net/project/sageplugins/webserver/v${plugin.version}/plugin"/>
+  <property name="download.url.params" value=""/>
+  
+  <target name="init" depends="clean">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${build}/classes"/>
+    <mkdir dir="${build}/jar"/>
+    <mkdir dir="${build}/war"/>
+    <!--mkdir dir="${build}/zip"/>
+    <mkdir dir="${build}/zip/jetty"/>
+    <mkdir dir="${build}/zip/jetty/contexts"/>
+    <mkdir dir="${build}/zip/jetty/webapps"/-->
+    <mkdir dir="${build}/packages"/>
+    <mkdir dir="${build}/packages/context"/>
+    <mkdir dir="${build}/packages/properties"/>
+    <mkdir dir="${build}/packages/war"/>
+    <mkdir dir="${build}/packages/warfiles"/>
+    <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac target="1.5" debug="true" debuglevel="lines,vars,source" srcdir="${src}" destdir="${build}/classes" classpathref="bld.jars" />
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="${build}/jar/nielm_sagewebserver.jar">
+      <fileset dir="${build}/classes" />
+      <manifest>
+        <attribute name="Specification-Title" value="SageTV Web Interface"/>
+        <attribute name="Specification-Version" value="${plugin.version}"/>
+        <attribute name="Implementation-Title" value="SageTV Web Interface"/>
+        <attribute name="Implementation-Version" value="${plugin.version}"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="war" depends="compile"
+        description="generate the distribution" >
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <war destfile="${build}/war/nielm_sagewebserver.war" webxml="web.xml">
+       <fileset dir="webserver/webroot/">
+         <include name="*.*" /> <!-- this pattern is not recursive -->
+         <exclude name="index.html"/>
+       </fileset>
+       <fileset dir="webserver/webroot/sage/">
+         <include name="**/*" />
+       </fileset>
+       <lib file="${sageutilsJar}"/>
+       <lib file="${sagexmlinfoJar}"/>
+       <classes dir="${build}/classes" />
+       <manifest>
+          <attribute name="Specification-Title" value="SageTV Web Interface"/>
+          <attribute name="Specification-Version" value="${plugin.version}"/>
+          <attribute name="Implementation-Title" value="SageTV Web Interface"/>
+          <attribute name="Implementation-Version" value="${plugin.version}"/>
+       </manifest>
+    </war>
+  </target>
+
+  <!-- create the newer zip that has a war file, this is the default build -->
+  <target name="zip-jetty" depends="war">
+    <zip destfile="${dist}/nielm_websrv_jetty${filename.suffix}.zip">
+      <zipfileset dir="${build}/war" prefix="jetty/webapps" />
+      <zipfileset dir="." prefix="jetty/contexts" includes="nielm_websrv.context.xml" />
+      <zipfileset dir="webserver" prefix="webserver">
+        <include name="extenders.properties" />
+        <include name="paths.properties" />
+        <include name="transcode.properties" />
+        <include name="readme.txt" />
+      </zipfileset>
+    </zip>
+  </target>
+
+  <target name="package-context">
+    <copy todir="${build}/packages/context" file="nielm_websrv.context.xml"/>
+
+    <fixcrlf srcdir="${build}/packages/context" eol="dos">
+      <include name="**/*.xml"/>
+    </fixcrlf>
+
+    <zip destfile="${build}/packages/nielm-websrv-context-file-${plugin.version}.zip">
+      <zipfileset prefix="jetty/contexts" dir="${build}/packages/context"/>
+    </zip>
+  </target>
+
+  <target name="package-properties">
+    <copy todir="${build}/packages/properties">
+      <fileset dir="webserver">
+        <include name="extenders.properties" />
+        <include name="paths.properties" />
+        <include name="transcode.properties" />
+        <include name="readme.txt" />
+      </fileset>
+    </copy>
+
+    <fixcrlf srcdir="${build}/packages/properties" eol="dos">
+      <include name="**/*.*"/>
+    </fixcrlf>
+
+    <zip destfile="${build}/packages/nielm-websrv-properties-file-${plugin.version}.zip">
+      <zipfileset prefix="webserver" dir="${build}/packages/properties">
+        <include name="readme.txt"/>
+        <include name="transcode.properties"/>
+      </zipfileset>
+    </zip>
+
+    <zip destfile="${build}/packages/nielm-websrv-user-properties-file-${plugin.version}.zip">
+      <zipfileset prefix="webserver" dir="${build}/packages/properties">
+        <include name="extenders.properties"/>
+        <include name="paths.properties"/>
+      </zipfileset>
+    </zip>
+
+  </target>
+
+  <target name="package-war" depends="jar">
+
+    <copy file="web.xml" todir="${build}/packages/warfiles/WEB-INF" includeemptydirs="true"/>
+
+    <copy todir="${build}/packages/warfiles" includeemptydirs="true">
+      <fileset dir="webserver/webroot/">
+        <include name="*.*" /> <!-- this pattern is not recursive -->
+        <exclude name="index.html"/>
+      </fileset>
+      <fileset dir="webserver/webroot/sage/">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+
+    <fixcrlf srcdir="${build}/packages/warfiles" eol="dos">
+      <include name="**/*.MF"/>
+      <include name="**/*.html"/>
+      <include name="**/*.xml"/>
+      <include name="**/*.css"/>
+      <include name="**/*.js"/>
+      <include name="**/*.jsp"/>
+      <include name="**/*.jspf"/>
+      <include name="**/*.json"/>
+      <include name="**/*.tag"/>
+      <include name="**/*.txt"/>
+    </fixcrlf>
+
+    <war basedir="${build}/packages/warfiles"
+         destfile="${build}/packages/war/nielm_sagewebserver.war"
+         webxml="${build}/packages/warfiles/WEB-INF/web.xml">
+      <manifest>
+        <attribute name="Specification-Title" value="SageTV Web Interface"/>
+        <attribute name="Specification-Version" value="${plugin.version}"/>
+        <attribute name="Implementation-Title" value="SageTV Web Interface"/>
+        <attribute name="Implementation-Version" value="${plugin.version}"/>
+      </manifest>
+    </war>
+
+    <zip destfile="${build}/packages/nielm-websrv-war-file-${plugin.version}.zip">
+      <zipfileset dir="${build}/packages/war" prefix="jetty/webapps" />
+    </zip>
+    <zip destfile="${build}/packages/nielm-websrv-jar-file-${plugin.version}.zip">
+      <zipfileset dir="${build}/jar" prefix="" />
+    </zip>
+  </target>
+
+  <!-- Create the plugin's package for SageTV 7.0 and later -->
+  <target name="dist-plugin" depends="package-context, package-properties, package-war">
+    <copy tofile="${build}/packages/plugin-${plugin.version}.xml" file="plugin.xml">
+    </copy>
+
+    <tstamp>
+      <format property="last.modified" pattern="yyyy.MM.dd" />
+    </tstamp>
+
+  	<checksum file="${build}/packages/nielm-websrv-jar-file-${plugin.version}.zip" property="md5.jar-file"/>
+    <checksum file="${build}/packages/nielm-websrv-context-file-${plugin.version}.zip" property="md5.context-file"/>
+    <checksum file="${build}/packages/nielm-websrv-properties-file-${plugin.version}.zip" property="md5.properties-file"/>
+    <checksum file="${build}/packages/nielm-websrv-user-properties-file-${plugin.version}.zip" property="md5.userproperties-file"/>
+    <checksum file="${build}/packages/nielm-websrv-war-file-${plugin.version}.zip" property="md5.war-file"/>
+
+    <replace file="${build}/packages/plugin-${plugin.version}.xml" summary="yes">
+      <replacefilter token="@@jar-file-checksum@@"             value="${md5.jar-file}"/>
+      <replacefilter token="@@context-file-checksum@@"         value="${md5.context-file}"/>
+      <replacefilter token="@@properties-file-checksum@@"      value="${md5.properties-file}"/>
+      <replacefilter token="@@user-properties-file-checksum@@" value="${md5.userproperties-file}"/>
+      <replacefilter token="@@war-file-checksum@@"             value="${md5.war-file}"/>
+      <replacefilter token="@@last-modified@@"                 value="${last.modified}"/>
+      <replacefilter token="@@download-url-location@@"         value="${download.url.location}"/>
+      <replacefilter token="@@download-url-params@@"           value="${download.url.params}"/>
+      <replacefilter token="@@plugin-version@@"                value="${plugin.version}"/>
+      <replacefilter token="@@build-number@@"                  value="${build.number}"/>
+      <replacefilter token="@@plugin-impl-version@@"           value="${plugin.version}"/>
+    </replace>
+
+    <zip basedir="${build}/packages" destfile="${dist}/nielm-websrv-plugin-${plugin.version}.zip">
+       <include name="*.zip"/>
+       <include name="*.xml"/>
+    </zip>
+
+  </target>
+
+  <target name="dist" depends="zip-jetty,dist-plugin"/>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>

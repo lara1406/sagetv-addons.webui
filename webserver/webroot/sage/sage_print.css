@@ -1,0 +1,107 @@
+/* ---------------------------------------------------- */
+/* Global settings */
+
+body {
+	background-color:#FFFFFF;
+	color:#000000;
+	background-image: none;
+	text-decoration:none;
+}
+a {
+	color:#000000;
+	text-decoration:underline;
+}
+a:visited {
+	color:#000000;
+	text-decoration:underline;
+}
+/* ---------------------------------------------------- */
+/* Title bar */
+div#title{
+	margin-top:0px; 
+}
+/* ---------------------------------------------------- */
+/* Main content */
+div#content{
+	top:5px; 
+	left:2%; 
+	width:96%;
+}
+	/* ---------------------------------------------------- */
+	/* Detailed info for airing */
+	div#airdetailedinfo {
+		margin-left:0px; 
+	}
+	/* ---------------------------------------------------- */
+	/* Commands on Detailed info for airing */
+	div#commands{
+		display:none;
+	}
+	div.exphideall {
+		display:none;
+	}
+	/* ---------------------------------------------------- */
+	/* airings list with folders */
+	div.airings span.Summary {
+		display: none;
+	}
+	div.airings  span.Details {
+		display: block;
+	}
+
+/*-------------------------------------------------- */
+/* Options block */
+div#options {
+	display: none;
+}
+/*-------------------------------------------------- */
+/* conflicts block */
+div.conflict {
+	border: 1px solid #000;
+	}
+
+/*-------------------------------------------------- */
+/* Upper menu bar */
+/*-------------------------------------------------- */
+/* Upper menu bar */
+
+	.m0l0mouto {
+		display:none;
+	}	
+	.m0l0mouti {
+		display:none;
+	}		
+	.m0l0moveri {
+		display:none;
+	}
+	.m0l0movero {
+		display:none;
+	}	
+	.m0l0mdowni {
+		display:none;
+	}
+	.m0l0mdowno {
+		display:none;
+	}	
+	.m0l1mouti {
+		display:none;
+	}
+	.m0l1mouto {
+		display:none;
+	}	
+	.m0l1moveri {
+		display:none;
+	}
+	.m0l1movero {
+		display:none;
+	}	
+	.m0l1mdowni {
+		display:none;
+	}
+	.m0l1mdowno {
+		display:none;
+	}	
+/*-------------------------------------------------- */	
+	.epgcell td.showfavorite {
+		border-color: #000000;
+	}

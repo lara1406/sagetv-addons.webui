@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="webserver/bin/JARs/nielm_sagewebserver.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/webserver/webserver.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=webserver/&lt;net.sf.sageplugins.webserver{Version.java[Version" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/webserver/.cvsignore"/>
+        <javaElement handleIdentifier="=webserver/&lt;viecili.jrss.generator.elem"/>
+        <file path="/webserver/.classpath"/>
+        <javaElement handleIdentifier="=webserver/&lt;viecili.jrss.generator"/>
+        <javaElement handleIdentifier="=webserver/&lt;com.oreilly.servlet.multipart"/>
+        <javaElement handleIdentifier="=webserver/&lt;Acme.Serve"/>
+        <file path="/webserver/deploy.xml"/>
+        <file path="/webserver/.project"/>
+        <javaElement handleIdentifier="=webserver/&lt;net.sf.sageplugins.webserver"/>
+        <javaElement handleIdentifier="=webserver/&lt;Acme"/>
+    </selectedElements>
+</jardesc>

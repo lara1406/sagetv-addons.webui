@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	dir="ltr">
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="sage_all.css" />
+<link rel="stylesheet" type="text/css" media="print"
+	href="sage_print.css" />
+<script language="JavaScript" src="sage.js"></script>
+<title>About SageTV Web Server</title>
+<style>
+a {
+	text-decoration:underline;
+}
+a:visited {
+	text-decoration:underline;
+}
+</style>
+</head>
+<body>
+<div id="title">
+<h1><a href="index.html" title="home"><img src="sagelogo.gif"
+	alt="SageTV logo" title="Home Screen" border="0" /></a>Sage Webserver</h1>
+</div>
+
+<div id="content">
+<p>The sage Web Server was written by nielm, jreichen and emok with
+hints from various people on the Forums!</p>
+
+<p>The WebRemote page was written by <a
+	href="http://forums.sage.tv/forums/member.php?u=3097">Wheemer</a> and <a
+	href="http://forums.sage.tv/forums/member.php?u=1050">ToonGal</a></p>
+<p>Favorites support (and other enhancements) by <a
+	href="http://forums.sage.tv/forums/member.php?u=2152">jreichen</a></p>
+<p>Transcoding support by <a
+	href="http://forums.sage.tv/forums/member.php?u=5781">emok</a></p>
+
+<p>The Menu Bar uses the <a
+	href="http://www.softcomplex.com/products/tigra_menu/" target="_blank">SoftComplex
+Tigra Menu v2.0</a></p>
+<p>The Recording Schedule RSS feed uses the LGPL <a
+	href="http://sourceforge.net/projects/jrss/" target="_blank">jrss
+RSS java classes </a></p>
+<p>The XML Import uses the <a href="http://www.servlets.com/cos/"
+	target="_blank">com.oreilly.servlet Package</a> <a
+	href="http://www.servlets.com/cos/license.html" target="_blank">(Licence)</a></p>
+
+<p>The latest version can be found at <a
+	href="http://tools.assembla.com/sageplugins/wiki/WebserverInstall">the
+Sage Plugins Wiki</a></p>
+
+<p>Support requests can be posted in the <a
+	href="http://forums.sage.tv/forums/showthread.php?t=8426&page=1&pp=20">SageTV
+Forum.</a></p>
+
+<h3>Licence</h3>
+<p>The Sage Web Server Plugin is licenced under the <a
+	href="Webserver_licence.txt">BSD licence</a>, which basically means
+that you can do what you like with them, so long as you give me credit,
+you get no warantee/guarantee of fitness for purpose, and cannot blame
+me if things go wrong!</p>
+<p>It uses a modified version of the <a href="http://tjws.sf.net">Tiny
+Java Web Server</a>, which is itself derived from the <a
+	href="http://www.acme.com/java/software/Package-Acme.Serve.html">Acme
+Java Web Server</a> <a href="acme_serve_licence.txt">(copyright notice).</a></p>
+<hr />
+
+
+<h3>Changelog</h3>
+
+<h4>V2.30 21 Mar 2011 For SageTV 7.1</h4>
+<pre>
+BUGFIXES:
+ * (jreichen) Fix header logo links to return to Home page
+ * (jreichen) Add system message type to system message id
+ * (jreichen) Add property to CSS file so a background image can be used if the user wants a custom one
+ENHANCEMENTS
+ * (jreichen) Support V7.1 Channel Logos
+ * (jreichen) Display show season and episode
+</pre>
+
+<h4>V2.29 14 Mar 2011 For SageTV 7.0</h4>
+<pre>
+BUGFIXES:
+ * (jreichen) An error "is not a valid directory on the server" was displayed on the XML Importer if the user didn't want to import from a directory of XML files and left the directory name blank
+ * (jreichen) Manual recording filter was not working on search page
+ * (jreichen) Favorite automatic conversion destination folder was required when Alternate Destination Folder was selected even if Automatic Conversion was not enabled
+ * (jreichen) Favorite automatic conversion setup failed with error "Must specify conversion destination folder" even when Alternate Destination Folder had a valid value
+ * (jreichen) Verify that Favorite automatic conversion Alternate Destination Folder exists and is writable
+ENHANCEMENTS
+ * (jreichen) Changed to robogeek's SageTV v7-style skin
+ * (jreichen) Store client, extender, and placeshifter descriptive names in Sage.properties.  Extenders.properties is no longer used.
+ * (jreichen) Edit client, extender, and placeshifter descriptive names from web interface (click on the context in the home page to go to the client/extender details page)
+</pre>
+
+<h4>V2.28 18 Jul 2010 For SageTV 7.0</h4>
+<pre>
+BUGFIXES:
+ * (jreichen) Fixed NullPointerException in auto conversion section of Favorite Details page
+</pre>
+
+<h4>V2.27 17 Jul 2010 For SageTV 7.0</h4>
+<pre>
+BUGFIXES:
+ * (jreichen) Fixed NullPointerException in RssServlet if media file doesn't have a mime type (defaults to text/plain)
+ * (jreichen) Fixed NullPointerException in XmlImporter if the specified directory is not a valid directory on the server
+ENHANCEMENTS
+ * (jreichen) Support for SageTV Plugin Manager
+ * (jreichen) View what's playing on SageTV Clients from the home page and control them from the web remote
+ * (jreichen) Add "Play in Client" command to Detailed Info page
+ * (jreichen) Only show "Play in SageTV"  and "Play in Extender" commands on Detailed Info page if show is currently airing 
+ * (jreichen) Favorite Automatic Conversions
+ * (jreichen) Increase maximum for Favorite Keep at Most from 15 to 63
+ * (jreichen) Extract war to temp directory in jetty/webapps
+ * (jreichen) Adopt conventions for /apps application
+ * (jreichen) Change command text from "Cancel Recording" to "Cancel Manual Recording" for clarity
+</pre>
+
+<h4>V2.26 28 Mar 2010 For SageTV 2.2-6.6</h4>
+<pre>
+BUGFIXES: 
+ * (jreichen) Fix link on detail page to play show in extender that is currently airing but not recording
+ * (jreichen) Fix Sage XML Generator incompatibility with Sage V5
+ * (jreichen) Clean up all missing links to conflict icons and incorrect tooltips
+ * (jreichen) Video conversions now allows entry of a new folder and filename when deleting original recording 
+ * (jreichen) Video conversions now allows entry of start time and duration when converting multiple recordings
+ * (jreichen) XML document and RSS feeds for 'Upcoming Movies' were empty.  Multiple categories in search URL were not preserved  
+ * (jreichen) Fix the Android's browser's handling of transcoding options on the Detailed Info screen
+ENHANCEMENTS
+ * (jreichen) Show the year field in airing list
+ * (jreichen) Add original airing date to the list of sorting options for recordings
+ * (jreichen) Add original airing date to the list of sorting options for search results
+ * (jreichen) Add system messages and system alert level to XML generator
+ * (jreichen) Set or cancel multiple manual recordings (doesn't check for conflicts)
+ * (deadend5001) Import XML files from folder
+</pre>
+
+<h4>V2.25 18 Sep 2009 For SageTV 2.2-6.6</h4>
+<pre>  
+ENHANCEMENTS
+ * (slugger, stuckless, jreichen) Run as an application on the Jetty web server plugin (deploy as a .war file)
+ * (jreichen) System Messages page and RSS feed (requires SageTV 6.5.17 or later)
+</pre>
+
+<h4>V2.24 9 Mar 2009 For SageTV 2.2-6.5</h4>
+<pre>
+BUGFIXES: 
+ * zipfile contains HTML pages this time
+ENHANCEMENTS
+ * ToonGal's updated icons for the web-remote
+ </pre>
+
+
+<h4>V2.23 24 Feb 2009 For SageTV 2.2-6.5</h4>
+<pre>
+NOTE:
+ * Requires Java JRE v1.6
+  
+BUGFIXES:
+ * Import allows multiple airings for null channels
+ * (jreichen) Set search string text box as the control with default focus on search page
+ * (jreichen) <a href="http://forums.sagetv.com/forums/showthread.php?p=270475&postcount=1913">The episode id is always the last 4 digits of the show id, regardless of the length of the show id</a>
+ * (jreichen) Fix errors that prevented VLC streaming from a Linux server.
+ * (jreichen) Add server-side buffering for VLC streaming to reduce premature end-of-file errors
+ * (jreichen) Recordings were not scheduled for a new favorite with a selected channel
+ * (jreichen) Favorite Options item was sometimes still displayed on details page after favorite was deleted 
+ * (jreichen) Conflicts page crashes if missed airing is a manual recording
+ * (jreichen) Conflict icon for missed manual recording not displayed in EPG, details, or search results
+ * (jreichen) Web server was assuming port 80 was the default port when generating HTTP and HTTPS URLs.  It should be port 80 for HTTP and port 443 for HTTPS
+ * (jreichen) RSS feed items had a problem in the URL and viewing them would display an error that it was an unknown AiringId
+ * (jreichen) Remove unnecessary parameters from RSS feed URL because of the limit on the URL length in iTunes subscriptions 
+ * (jreichen) In the EPG Channel View, handle the case where no channels are configured in SageTV or the URL has invalid channel IDs
+
+ENHANCEMENTS
+ * (jreichen) Custom CSS styles for show categories and subcategories
+ * (jreichen) Support for multi-channel favorites
+</pre>
+
+
+<h4>V2.22 21 Dec 2007 For SageTV 2.2-6.3</h4>
+<pre>
+BUGFIXES:
+ * MVP / HD Extender power off should now work!
+</pre>
+
+
+<h4>V2.21 21 Dec 2007 For SageTV 2.2-6.3</h4>
+<pre>
+BUGFIXES:
+ * Fix ReturnTo search results when deleting from detailed info
+ * RSS feeds can contain media files with size > 2GB (although the feedreader may have problems due to int overflow)
+
+ENHANCEMENTS
+ * Generate default filename for exported XML from detailed info
+ * Import function can now be used to fix file timestamps (eg after editing)
+ * Imported XML data no longer needs to have start time/duration (can be inferred from file)
+ * RSS feeds from search results now are automatically named (A custom name possible with the '&title=My%20Custom%20Name' argument)
+ * Ability to poweroff and reboot the STX-HD100 extender (untested!)
+ * Updated XML import/export to 1.3 DTD -- Airing/Mediafile durations no longer required
+ * fixed channel problem in Favourites manager
+</pre>
+
+<h4>V2.20 7 Oct 2007 For SageTV 2.2-6.2</h4>
+<pre>
+BUGFIXES:
+ * Fixed failure to start with corrupt throttles file
+ * Use playlist name as filename when exporting playlist
+ * Include MediaFile URL as Enclosure in RSS feeds (enables podcasting)
+ * Fix video conversion auto file-naming (was always using old filename+ext)
+</pre>
+
+<h4>V2.19 Sep 9 2007 For SageTV 2.2-6.2</h4>
+<pre>
+BUGFIXES:
+ * Video conversions: remember last format name/quality and display full format name
+ * Video conversions: fix page title
+ * Video conversions: Show status of replace original and view converted file info
+ * XML export: use different DTD URL
+ * Playlist export: indicate number/type of pl segments
+ * renamed conflictIcon.gif
+</pre>
+
+<h4>V2.18 Aug 13 2007 For SageTV 2.2-6.2</h4>
+<pre>
+BUGFIXES:
+ * Video conversions: clean up deleted files before display
+ * do not attempt to display 'convert' menu item if < v5.1
+ * fix MVP power off command 404
+ * fix MVP power off command on linux
+</pre>
+ 
+<h4>V2.17 Aug 8 2007 For SageTV 2.2-6.2</h4>
+<pre>
+BUGFIXES:
+ * Picture Detailed Info: restore pre V6 compatability
+ * Edit Show info: Restore pre SageTV v5.0 compatability (another attempt)
+ * remove width: auto CSS (triggers Firefox rendering bug)
+ * make detailed info work with JRE 1.4 again
+ * make 'all' items per page work.
+ * fix XML importing where showID, AiringID is blank
+ENHANCEMENTS
+ * use mayamaniac's improved tileable bkg image
+ * add css file for 'handheld' mediatype (default file just disables bkg image for the moment: enhancements welcome!)
+ * add experimental support for custom css ('theming')
+ 		to set, enter in address bar: javascript:SetCookie("custom_css","my_custom.css")
+ 		to clear,  enter in address bar: javascript:DeleteOptionsCookie("custom_css")
+ 		file must exist in webserver/webroot/sage directory
+ 		(please post any custom CSS files -- if there is enough positive feedback, I will make this option more user-friendly!)
+ * add mime.types file (with mp4)
+ * Show media library info on Home page, and include media library rescan function
+ * Add video conversion management. 
+       Individual Conversions can be started from detailed info, and grouped conversions from recordings lists 
+ * Add ability to power off or reboot an MVP from the webserver.
+ * Add ability to exit a placeshifter client from the webserver.
+</pre>
+
+
+<h4>V2.16 Jun 4 2007 For SageTV 2.2-6.1</h4>
+<pre>
+BUGFIXES 
+ * fix EPG views to italicize watched shows
+ * fix Home page not to exception when nothing scheduled
+ * Edit Show info: fix generated EPGID to not look like an Episode ID
+ * Edit Show info: keep Channel Info when re-creating airing
+ * Edit Show info: Catch and report 0-lengh airings
+ * Edit Show info: Restore pre 5.0 compatability
+ * Put a detailed Info link on all elements of airing cells
+ * use '&amp;nbsp;' for blank titles (so that they get a link)
+ * remove min-width CSS (triggers Firefox rendering bug)
+ * RSS: use time zone offset rather than timezone name (+0200 in place of CEST)
+ENHANCEMENTS
+ * create a reasonable-sized preview image when viewing Picture details.
+</pre>
+
+<h4>V2.15 May 2 2007 For SageTV 2.2-6.1</h4>
+<pre>
+BUGFIXES 
+ * Corrected property name in transcode.properties.
+ * Fixed intelligent suggestions grouping
+ * Fixed transcoding modes list
+ENHANCEMENTS
+ * Added past/future/TV files search links in search results
+ * Added ability to page results in all views (useful if you have a lot of recordings or a small screen)
+ * Better recordings management (added group selection, multi-file delete)
+ * More actions in search results for TV files (eg delete)
+ * Added Grouping in search results
+ * Import of Favorites, Airings and MediaFiles from exported XML files
+ * Better Edit Show info
+ </pre>
+<h4>V2.14 Mar 23 2007 For SageTV 2.2-6.1</h4>
+<pre>
+BUGFIXES 
+ * Transcoding now works on segmented files
+ * better logging for transcoder
+ * Quotes paths in transcode.properties
+ENHANCEMENTS
+ * added ToonGal's Full webremote (and ability to switch between them)
+ * added ability to name extenders using 'extenders.properties' file
+ * (paused) indication on Home screen for paused playback
+ * added link to search for file on Orb
+ * basic streamed DVD transcoding added (only title 1 with the default audio track)
+</pre>
+
+
+<h4>V2.13 Mar 20 2007 For SageTV 2.2-6.1</h4>
+<pre>
+BUGFIXES 
+ * v2.12 only worked with SageTV6, this version should restore backward compatability. 
+</pre>
+
+<h4>V2.12 Mar 20 2007 For SageTV 2.2-6.1</h4>
+<pre>
+ENHANCEMENTS 
+ * Windows installer package to make installation a breeze 
+ * UPnP port forwarding support 
+ * (jreichen) Next Scheduled Recording on Home page 
+ * (jreichen) Mark Conflicts in Guide, Search Results, and Detailed Info 
+ * (emok) Added transcoding of video files with VLC for low-bandwidth video streaming (see WebserverTranscode) 
+
+BUGFIXES 
+ * Fixed folder rendering bug on Opera 
+ * (jreichen) Fix file size on Search Results page (find media file associated with airing)
+</pre>
+
+<h4>V2.11 Dec 22 2006</h4>
+<pre>
+Jreichen's changes: 
+BUGFIXES: 
+Webserver: An extra directory named 'webserver\log' was created on Linux.  Log file names were 'log\AWS*'.  
+Fixed them by using / as separator character on Linux.
+Detailed Info: Workaround for NegativeArraySizeException thrown by HasAlbumArt. It still prints an exception to the console, but not to the web page.
+Detailed Info: Exact Title was not being used for Additional Airings
+Favorites: Fix Firefox tooltips.
+Favorites: Add padding tooltip.
+
+ENHANCEMENTS:
+EPG guides: Add episode id to guides
+Favorites: Show 'Default' in Favorites Manager for favorites with default recording quality.
+Search: Add Search by Filename
+
+nielm's changes:
+ENHANCEMENTS:
+MediaFileDownload: Estimate total size for currently recording streaming files, allows playing while recording and seeking
+</pre>
+
+<h4>V2.10 Oct 02 2006</h4>
+<pre>
+Jreichen's changes: 
+Detailed info
+* Fix Additional Airings to use Exact Title (so that CSI would not match CSI:Miami etc)
+</pre>
+
+<h4>V2.9 Oct 01 2006</h4>
+<pre>
+Jreichen's changes: 
+EPG views: 
+* ENHANCEMENT: Add HD and First Runs markers to EPG guides 
+* ENHANCEMENT: Add NEW EPG Channel View 
+* Default EPG Channel View to start at midnight 
+* BUGFIX Some font sizes on EPG Grid View and EPG Search pages were being reset when Firefox went into "quirks mode". It shouldn't be going into quirks mode based on the DOCTYPE declaration, and refreshes of the same page may change the mode. Possible bug. Firefox 1.5.0.6 Windows XP. 
+
+Search: 
+* ENHANCEMENT Add HDTV, FirstRun/ReRun? and Archived options to Search Criteria 
+* ENHANCEMENT Add RSS feed for search results 
+* BUGFIX Query string is already encoded. When clicking the Set button, the query string is encoded a second time and there are no results when the page refreshes. 
+
+Favorites: 
+* ENHANCEMENT Add columns for favorite properites to cells in FavoritesServlet?. 
+
+Detailed info: 
+* ENHANCEMENT Show scheduled encoder in detailed info page of scheduled recording. 
+* ENHANCEMENT Show 'year' and 'runtime' in detailed info (if data is present, eg for movies)
+
+Various fixes: 
+* BUGFIX Add nowrap property to markercell class 
+* ENHANCEMENT Add ratings marker columns to airing cell and detailed info. 
+* BUGFIX Fix exception written to web server log file when creating a manual recording. java.lang.IllegalStateException?: Already was returned as servlet output stream 
+* BUGFIX Change Mb -&gt; MB 
+
+Nielm's changes :
+* temporarily remove buggy 'keep EPGID feature'
+* ENHANCEMENT: Home page now displays number of resolved and unresolved conflicts
+* ENHANCEMENT: better generation of RSS urls
+* BUGFIX: epg links for currently recording shows now work
+</pre>
+
+<h4>V2.8 Apr 6 2006</h4>
+<pre>
+* BUGFIX: search pages are correct now
+* BUGFIX: Favorite priority setting now works again
+* BUGFIX: Changed action links into real buttons (avoid possible pre-caching problems)
+* ENHANCEMENT: Added num resolved conflicts to home page
+* ENHANCEMENT: IR suggestions RSS feed, Conflicts RSS feed
+* ENHANCEMENT: Removed authentication for RSS feeds 
+     -- (Record Schedule RSS feed path has been changed you will need to re-add the feed to your reader)
+* ENHANCEMENT: Added XML output for conflicts
+</pre>
+
+<h4>V2.7 March 23 2006</h4>
+<pre>
+Nielm's changes
+* NEW FEATURE: most pages that display information can now have xml output 
+	-- add xml=yes parameter on URL, or look for the [xml] icons
+    -- see http://www.sage-community.org/index.cgi/wiki/SageXmlInfo
+* ENHANCEMENT: allowed new favorites to be added with a default priority 
+    -- (allows adding faves from an external program)
+* ENHANCEMENT: Edit Show info allows keeping same EPGID, or specifying a known EPGID
+* ENHANCEMENT: version/last updated/validation links on every page
+* ENHANCEMENT: Recording Schedule RSS feed.
+* ENHANCEMENT: EpgList view: word-wrap titles, and only crop vertically 
+	-- (this may cause problems on browsers that do not support overflow-x and overflow-y properties)
+* BUGFIX: XHTML validation fixes for various pages.
+* BUGFIX: Favorite creation: check that at least one title/category/person/keyword is specified 
+* BUGFIX: command buttons no longer add '&amp;' characters to the URL
+Jreichen's changes:
+* ENHANCEMENT: Add/remove manual record status, remove archive status in detailed Info page
+* ENHANCEMENT: Add/remove archive status in Search results
+* ENHANCEMENT: Add Original Air Date in Detailed Info
+</pre>
+
+<h4>V2.6 Jan 20 2006</h4>
+<pre>
+* BUGFIX: fixed gzip encoding for browsers that do not support it (fixes media player)
+* BUGFIX: hopefully fixed home/detailed info/webremote pages for sage 2.2-4.0
+* BUGFIX: fixed display of marker icons for Airings.
+* BUGFIX: removed manual recs from partials filter in search
+</pre>
+
+<h4>V2.5 Jan 19 2006</h4>
+<pre>
+Nielm's changes:
+* BUGFIX: hopefully re-added compatibility for sage 2.2-4.0 versions (thumbnails will still not work)
+* BUGFIX: hopefully made HDTV icon work now
+* BUGFIX: hopefully fixed streaming video player for HTTPS
+* BUGFIX: Fixed 'Play in SageTV' button
+* BUGFIX: Fixed Manual Record/Set Padding in non-service mode/client webservers.
+* BUGFIX: Gb -&gt; GB, Mb -&gt; MB
+* BUGFIX: Got rid of annoying 'Capture Device' media files in library search
+* BUGFIX: music thumb only loaded once per album now
+* NEW FEATURE: Added experimental support for gzipping servlet output -- makes large pages much faster on slow internet links. 
+               Disable with property: nielm/webserver/enable_gzip_encoding=false
+* NEW FEATURE: find media file details by passing file name in path. 
+			   This works for any page that accepted the 'MediaFileId' argument, eg:
+			      http://server:8080/DetailedInfo?FileName=c:\path\to\file.mpg
+				  http://localhost:8080/sage/MediaFileCommand?command=WatchNow&amp;context=SAGETV_PROCESS_LOCAL_UI&amp;FileName=c:\path\to\file.mpg
+			   Note: Filename must exactly match name in sage's DB (ie using UNC paths etc)
+* ENHANCEMENT: Picture thumbnails are now extra-small in search results -- saves bandwidth
+* ENHANCEMENT: Improved handling of folders in Sage Recordings -- folders now open containing content and toggle open/closed.
+* NEW FEATURE: Added Intelligent Suggestions screen -- shows what would be recorded if Intellgent Recording was enabled (4.1+ only)
+
+Jreichen's changes:
+* NEW FEATURE: View Partial and Auto-Delete Recordings: Provide links to, and size of, partial and auto-delete recordings in the Home Screen
+* ENHANCEMENT: Added filters for partial and auto-delete recordings on the search page.
+* ENHANCEMENT: Enhanced Recording Quality Info in favorites and Detailed Info page
+* ENHANCEMENT: Favorite priority can now be set to 'above' or 'below' another favorite -- quicker than re-ordering with arrows
+</pre>
+
+<h4>V2.4 Jan 11 2006</h4>
+<pre>
+* For SageTV 4.1 and later only
+
+* BUGFIX: Removed 'null' menu items
+* BUGFIX: Channel logos default to enabled
+* BUGFIX: Fixed webremote and Sage command functionality for v4.1
+* ENHANCEMENT: Added now playing info for media extenders
+* ENHANCEMENT: Added WebRemote for media extenders (click the extender name in the Home page)
+* ENHANCEMENT: Added Show marker icons to show display (optional default=on)
+* ENHANCEMENT: Added File size indication to show display (optional default=on)
+* ENHANCEMENT: Added Episode ID to show display (optional - default=off)
+* ENHANCEMENT: Fallback menu for browsers that support JavaScript but not JavaScript DOM (eg Pocket IE)
+* BUGFIX: Added more protected paths for write:only user.
+* ENHANCEMENT: Added support for picture/album/mediafile thumbnails
+</pre>
+
+<h4>V2.3 Dec 9 2005</h4>
+<pre>
+* BUGFIX: Fixed 'Return to previous page' functionality for commands in Sage Recordings/Search/Record Schedule screens
+</pre>
+
+<h4>V2.2 Dec 8 2005</h4>
+<pre>
+* BUGFIX: Lots of i18n/charset handling fixes for parsing parameters in webserver code... 
+		  Should now handle non-latin charsets perfectly
+Due to above, the following are fixed:
+* BUGFIX: Favorites: adding a fave for a title with a '&amp;', 
+          adding a fave for a channel with a '&amp;', 
+          adding a fave with any special non-7-bitASCII characters
+* BUGFIX: Search: searching for anything with a '&amp;' or special characters
+* BUGFIX: Edit show info -- fixed problem when special (non-Latin-1) characters (such as Accented/Greek/Hebrew/Arabic)
+* ENHANCEMENT: improved favorite re-ordering by jumping to re-ordered favorite, numbering rows, and keeping changes out of browser history.
+</pre>
+
+<h4>V2.1 Dec 6 2005</h4>
+<pre>
+* BUGFIX: fixed media player page when no supported players installed 
+* BUGFIX: jump to channel in EPG views in IE...
+</pre>
+
+<h4>V2.0 Dec 6 2005</h4>
+<pre>
+* NEW FEATURE: Favorites Management -- Add/remove/re-priority favorites
+               Big thanks to jreichen from the Sage Forums for implementing this.
+* NEW FEATURE: Web-based media player
+               Click Watch Now on any recording in the detailed info screen
+               Or Listen for MP3 files...
+               Very simple for the moment... requires additional web-browser plugins for MPG and AVI playback
+               Best results using IE (Sorry. I hate browser-dependant stuff!)
+               No re-encoding support -- you download the original files...
+* BUGFIX:      fixed Sage mediafile download so that no password is required
+* BUGFIX:      fixed Sage mediafile + webserver normal file download to support HTTP Range requests
+               !!! Seeking in streaming files now possible with supported players !!!
+* BUGFIX:      webremote and about pages now have a menu bar!
+* BUGFIX:      changed TvTome search to TV.com
+* ENHANCEMENT: included ajuhawk's Sage Encoder support. 
+               set the property  "nielm/webserver/enableSageEncoderOpts=true" to enable
+* ENHANCEMENT: Detailed Information pages now have streaming and file-based playlist links.
+               This allows one-click access to files in external media players
+* ENHANCEMENT: Add'l Tracks by artist / Tracks on album buttons in detailed info
+* ENHANCEMENT: improved menu bar -- 
+               IMPORTANT: menu.properties is no longer in use
+               menubar definition can be edited in webserver/webroot/sage/menu_items.js
+* ENHANCEMENT: Added Sage Recordings and Media Library searches to menus.
+* ENHANCEMENT: Fallback main menu for non-Javascript browsers.
+* ENHANCEMENT: jump to a channel in EPG views
+* ENHANCEMENT: jump to options block in Sage recordings on [show options]
+</pre>
+
+<h4>V1.6 Jun 15 2005</h4>
+<pre>
+* BUGFIX: corrected caching of static files (affected mainly Opera, but should make all browsers quicker over slow networks)
+* BUGFIX: record options back for currently recording manual recordings.
+* NEW FEATURE: automatic download links for all media files -- no need to mess around with paths.properties etc
+               note that this means MP3s can be streamed into WMP, and JPGs viewed in browser
+               but for AVIs and MPGs, you have to download, or need a media player that supports 
+               HTTP streaming for AVIs and MPGs. The only one I know of is VideoLanClient.
+</pre>
+
+<h4>V1.5 May 25 2005</h4>
+<pre>
+* Hyperlinked search for people in detailed info page (both in EPG and in IMDB)
+* Hyperlinked TvTome search in detailed info
+* Corrected default Search options
+* Removed annoying Onclick javascript in EPG cells (allows open in new page)
+* Fixed bug where IE sometimes returned blank pages
+* Fix line breaks in detailed info
+* Add 'Recording' icon to search and EPG pages indicating a scheduled recording
+* Fixed broken Favicon
+* Catch socket errors in FileServlet (prevents too much logging when clients abort connections)
+* Improved DetailedInfoServlet and WebRemote to use javascript to send commands -- They should respond much faster, and no longer create multiple entries in history
+* Channel logos in detailed info.
+* Channel logos now on by default and automatic (it gets them from SageTV)
+* Added menu items to search for watched + Don't like shows.
+</pre>
+
+<h4>V1.4 May 1 2005</h4>
+<pre>
+* Fix force EPG update button
+* Workaround annoying Firefox EPG-Grid bug which means that pageup/down arrows don't get drawn sometimes
+</pre>
+
+<h4>V1.3 April 29 2005</h4>
+<pre>
+* fixed bug where clicking on search results fails if there is a media file for that airing.
+</pre>
+
+
+<h4>V1.2 April 29 2005</h4>
+<pre>
+Global:
+* Use 'all' CSS media type
+* Add timeout for pull-down menus
+* BUG: check for UI on SageCommands/PlaybackCommands
+* BUG: corrected spelling of Episiode
+* better display of Music/Picture file information.
+* highlight EPG cell focus (except in IE), sports, movies, news (using same criteria as sage)
+* clicking on EPG cell background (as well as text) goes to detailed info
+
+Timed record:
+* BUG: Fixed month selection in timed record
+
+Conflicts:
+* BUG: manual/favorite conflict confirm now works
+
+EPG grid/list:
+* lowlight airings in the past
+* highlight focus (except in IE), sports, movies, news
+* jump to options on [Show Options]
+
+Home:
+* Added Force EPG update button to Home screen (only appears if last update was more than 1 min ago)
+
+Detailed Info: 
+* Add FirstRun/ReRun to Detailed Info screen
+* Improved setting padding on manual records (no more entering -5 mins!)
+* Show AiringID, MediaFileID in detailed info
+* Add ParentalRating to DetailedInfo
+* include 'Archived' indication
+
+Search: Big re-work!
+* pages of results
+* no more grouping
+* Searching within other fields (such as people)
+* custom sorting
+* search for airings or mediafiles
+* fixed bug where Search does not cope well with categories with special characters
+
+Experimental new feature:
+* Edit EPG info for a show: Allows DB information to be added for video files
+</pre>
+
+
+<h4>v1.1 19 Nov 2004</h4>
+<pre>
+Bugfixes:
+* Better handling of invalid values in sort/filter/group options
+* Delete file when running in SageTVService now works
+</pre>
+
+<h4>V1.0 18 Nov 2004</h4>
+<pre>
+</pre>
+<hr />
+
+<h3><a name="todo">Todo list</a></h3>
+<pre>
+TODO: CSS refactor (layout/colors)
+TODO: popup detailed info pages
+TODO: Options page
+TODO: Improved authentication (users linked to netgroups)
+TODO: video/music/picture library
+TODO: fix mouse-over highlight for IE (some people apparantly use it :))
+TODO: Comskip marker + comskip trigger support 
+TODO: convert title fave into keyword fave
+</pre></div>
+<!-- start menu bar -->
+<script language="JavaScript">
+<!--//
+var MENU_ITEMS = null;
+//-->
+</script>
+<script language="JavaScript" src="menu_core.js"></script>
+<script language="JavaScript" src="menu_items.js"></script>
+<script language="JavaScript" src="menu_style.js"></script>
+<script language="JavaScript">
+<!--//
+if ( MENU_ITEMS==null ) { 
+   alert("Error in menu_items.js -- check syntax");
+} else {
+  doMenu(MENU_ITEMS, MENU_POS);
+}
+//-->
+</script>
+</body>
+</html>

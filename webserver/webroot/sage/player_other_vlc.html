@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+ <link rel="stylesheet"  type="text/css" media="all" href="sage_all.css"/>
+ <link rel="stylesheet"  type="text/css" media="print" href="sage_print.css"/>
+ <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"/>
+ <script type="text/javascript" src="sage.js"></script>
+ <script type="text/javascript" src="player.js"></script>
+ <title>Sage Media Player</title>
+<SCRIPT LANGUAGE = "JavaScript">
+
+var fntype="url"
+if ( url.fntype != null ) {
+    fntype=url.fntype;
+}
+
+var clipurl;
+if ( url.mediafileid != null ) {
+    clipurl=MakeMediaFilePlaylist(url.mediafileid,"m3u",fntype);
+} else if ( url.clipurl ) {
+   clipurl=MakeURLPlaylist(MakeAbsoluteURL(url.clipurl),"m3u");
+}
+</SCRIPT>
+</HEAD>
+<body>
+<div id="title">
+<h1><a href="Home" title="home"><img src="sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>Sage Media Player</h1>
+</div>
+<div id="content">
+<SCRIPT LANGUAGE="JavaScript">
+if ( url.title ){
+	document.write("<p align=center>"+HtmlIze(url.title)+"</p>");	
+}</script>	
+
+
+<SCRIPT LANGUAGE="JavaScript">
+		document.write('<embed type="application/x-vlc-plugin"');
+		document.write('		PLUGINSPAGE="http://www.videolan.org/vlc/"');
+		document.write('		name="vlc" id="vlc"');
+		document.write('		autoplay="yes" loop="no" width="640" height="480"');
+	 	document.write('        src="'+clipurl+'" />');
+</script>	
+	<br/>
+	
+	<DIV id="info" style="text-align:center">-:--:--/-:--:--</DIV>
+
+	<!-- 
+		should put a scrollbar here like in the IE version... 
+		could be done with images/DHTML/javascript
+		updated in the doUpdate() function
+		clicking it could call document.vlc.seek(x,0)
+	-->
+	
+	<br/>
+	<INPUT type="button" id="PlayOrPause" value="Play" onClick="doPlayOrPause();">
+	<INPUT type="button" value="Stop" onClick="document.vlc.stop();">
+	<INPUT type="button" value="Mute" onClick="document.vlc.mute();">
+	<INPUT type="button" value="Show" onClick="document.vlc.Visible = true;">
+	<INPUT type="button" value="Hide" onClick="document.vlc.Visible = false;;">
+	<INPUT type="button" value="FullScreen" onClick="document.vlc.fullscreen();">
+	<br/>
+	<INPUT type="button" value="2m REW" onClick="document.vlc.seek(document.vlc.get_time()-120,0);">
+	<INPUT type="button" value="10s REW" onClick="document.vlc.seek(document.vlc.get_time()-10,0);">
+	<INPUT type="button" value="10s FF" onClick="document.vlc.seek(10,1);">
+	<INPUT type="button" value="2m FF" onClick="document.vlc.seek(120,1);">
+	<br/>
+	<p>Double-click VLC window to go fullscreen if FullScreen button does not work.</p>
+<script language="JavaScript">
+    document.writeln('<p align="center"><a href="'+clipurl+'">Open in external media player</a></p>')
+	if ( browser != "Mozilla" ) {
+		document.write("<p>Warning: VLC plugin does not work very well with non-Mozilla browsers...<br/>Controls do not work at all in Opera!</p>");
+	}
+</script>
+	<p align=center><a href="http://www.videolan.org/vlc" title="Get Videolan"><img src=GetVLC_120.png></a></p>
+</div>
+<!--
+Mozilla VLC plugin commands
+
+play() : Start playing media in the plugin.
+pause() : Pause playback.
+stop() : Stop media playback.
+fullscreen() : Switch the video to full screen.
+set_volume(vol) : Set the volume. vol has to be an int in the 0-200 range.
+get_volume() : Get the current volume setting.
+mute() : Toggle volume muting.
+set_int_variable(var_name, value) : 
+set_bool_variable(var_name, value) : 
+set_str_variable(var_name, value) : 
+get_int_variable(var_name) : 
+get_bool_variable(var_name) : 
+get_str_variable(var_name) : 
+clear_playlist() : Clear the playlist.
+add_item(mrl>) : Append an item whose location is given by the Media Resource Locator to the playlist.
+next()
+previous()
+isplaying() : return true if the plugin is playing something.
+get_length() : Get the media's length in seconds.
+get_position() : Get the current position in the media in percent.
+get_time() : Get the current position in the media in seconds. 
+seek(seconds,is_relative) : If is_relative is true, seek relatively to current time, else seek from beginning of the stream. Seek time is specified in seconds.
+-->
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var sliderTimerId = 0;
+var sliderScrolling = false;
+
+function formatTime(timeVal)
+{
+    var timeHour = timeVal;
+    var timeSec = timeHour % 60;
+    if( timeSec < 10 )
+    timeSec = '0'+timeSec;
+    timeHour = (timeHour - timeSec)/60;
+    var timeMin = timeHour % 60;
+    if( timeMin < 10 )
+    timeMin = '0'+timeMin;
+    timeHour = (timeHour - timeMin)/60;
+    if( timeHour > 0 )
+    return timeHour+":"+timeMin+":"+timeSec;
+    else
+    return timeMin+":"+timeSec;
+};
+function onPlay()
+{
+    document.getElementById("PlayOrPause").value = "Pause";
+};
+function onPause()
+{
+    document.getElementById("PlayOrPause").value = " Play ";
+};
+function onStop()
+{
+    document.getElementById("info").innerText = "-:--:--/-:--:--";
+    document.getElementById("PlayOrPause").value = " Play ";
+};
+var liveFeedText = new Array("Live", "((Live))", "(( Live ))", "((  Live  ))");
+var liveFeedRoll = 0;
+
+function doUpdate()
+{
+    if( document.vlc.isplaying() )
+    {
+       if( document.vlc.get_length() > 0 )
+       {
+       	   if ( url.numsegments && url.numsegments>1){
+       	   }
+	           document.getElementById("info").innerHTML = formatTime(document.vlc.get_time())+"/"+formatTime(document.vlc.get_length());
+           document.getElementById("PlayOrPause").Enabled = true;
+       }
+       else {
+           // non-seekable "live" stream
+           liveFeedRoll = liveFeedRoll & 3;
+           document.getElementById("info").innerHTML = liveFeedText[liveFeedRoll++];
+       }
+       sliderTimerId = setTimeout("doUpdate()", 1000);
+    }
+    else
+    {
+        onStop();
+        sliderTimerId = 0;
+    }
+};
+function doGo(targetURL)
+{
+	document.vlc.clear_playlist();
+	document.vlc.add_item(targetURL);
+	document.vlc.play();
+	if( ! sliderTimerId )
+	{
+	       sliderTimerId = setTimeout("doUpdate()", 1000);
+	}
+	onPlay();
+};
+function doPlayOrPause()
+{
+    if( document.vlc.isplaying() )
+    {
+        document.vlc.pause();
+        onPause();
+    }
+    else
+    {
+        document.vlc.play();
+        onPlay();
+    }
+};
+document.vlc.play();
+sliderTimerId = setTimeout("doUpdate()", 5000);
+onPlay();
+//-->
+</SCRIPT>
+</body>
+</html>

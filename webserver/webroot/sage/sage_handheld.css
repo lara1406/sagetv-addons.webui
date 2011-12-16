@@ -1,0 +1,12 @@
+/* ---------------------------------------------------- */
+/* CSS for device with handheld mediatype .... 
+ * contributions welcome...
+*/
+
+body {
+	font-family:  Arial, Tahoma, "lucida console", sans-serif;
+	font-size: 10pt;
+	background-color: #0b3f6f;
+	color:#FFFFFF;
+	background-image: none;
+}

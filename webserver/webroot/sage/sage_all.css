@@ -1,0 +1,1050 @@
+/* ---------------------------------------------------- */
+/* Global settings */
+
+body {
+	font-family:  Arial, Tahoma, "lucida console", sans-serif;
+	font-size: 10pt;
+	background-color: #333;
+	color:#FFFFFF;
+    background-image: url('Background.jpg');
+	background-repeat: repeat;
+	background-position: top left;
+	background-attachment: fixed;
+}
+img {
+	border-style: none;
+}
+a {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+a:visited {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+a:hover {
+	color: #ffd800;
+	text-decoration:underline;
+}
+
+h1 {
+	text-align: center;
+}
+/* ---------------------------------------------------- */
+/* Title bar */
+div#title{
+	position:relative; 
+	margin-top:50px; 
+	height: 105px;
+	left:2%; 
+	width:96%;
+	white-space: nowrap;
+	overflow: hidden;
+	vertical-align: middle;
+	text-align: center;
+}
+	#title h1 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		vertical-align: middle;
+	}
+	#title h1 img#logoimg {
+		height: 59px;
+		vertical-align: middle;
+	}
+/* ---------------------------------------------------- */
+/* Main content */
+div#content{
+	position:relative; 
+	top:5px; 
+	left:2%; 
+	width:96%;
+}
+	/* ---------------------------------------------------- */
+	/* Detailed info for airing */
+	div#airdetailedinfo {
+		padding: 5px 5px 4px;
+		position:relative;  
+		margin-left:165px; 
+		border: 1px solid #fff;
+	}
+	div#airdetailedinfo img.infochannellogo{
+		width: 8em;
+		height: 6em;
+		float: right;
+	}
+	div#airdetailedinfo img.infothumb{
+		width: 10em;
+		float: right;
+	}
+	/* ---------------------------------------------------- */
+	/* Commands on Detailed info for airing */
+	div#commands{
+		padding: 5px 5px 5px 5px;
+		margin: 0px 0px 0px 0px;
+		position:absolute; 
+		top:0px; 
+		left:0px; 
+		width:150px;
+		border: 1px solid #fff;
+	}
+		#commands form {
+			display: inline;
+		}
+		#commands ul {
+			width: 140px;
+			margin: 0px 0px 0px 0px;
+			padding: 0px 0px 0px 0px;
+		} 
+		#commands ul li {
+	width: 140px;
+	white-space: nowrap;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #fff;
+	list-style-type: none;
+	text-indent: 0%;
+	display: block;
+	background-color: #333;
+	white-space: nowrap;
+	overflow: hidden;
+			}
+		#commands ul li a:hover {
+	background-color:#000;
+	font-weight: bold;
+		}
+		#commands ul li input {
+	font-family:  Arial, Tahoma, "lucida console", sans-serif;
+	font-size: 10pt;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	color: #FFFFFF;
+	background-color: #333;
+	border: none;
+		}
+		#commands ul li input:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	background-color: #000;
+	color: #ffd800;
+		}
+	/* ---------------------------------------------------- */
+	/* airings list with folders */
+	#exphideall {
+		text-align: center;
+	}
+	
+		div.airings {
+			white-space: nowrap;
+			vertical-align: middle;
+			width:100%;
+		}	
+		div.airings {
+			position: relative;
+			width: 90%;
+			left: 5%;
+		}
+		div.pagenav {
+			padding: 2px 0px 2px 0px;
+		}
+		div.pagenav table.pagerange {
+			font-size: 10pt;
+			font-weight: normal;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #ffffff;
+			padding: 1px;
+		}
+		div.pagenav table.pagerange tr {
+		}
+		div.pagenav table.pagerange td {
+	padding: 2px 4px 2px 4px;
+	border-style: solid;
+	border-width: 1px;
+	margin: 2px 0px 2px 0px;
+	border-color: #7f7f7f;
+	background-color: #333;
+		}
+		
+		div.pagenav table.pagerange td.pageinfo {
+	background-color: #000;
+		}
+		div.pagenav table.pagerange td.currpage {
+	background-color: #666;
+	font-weight: bold;
+		}
+		
+		div.airings  div.Details {
+			display: block;
+		}
+		div.airings table {
+			/* fix mozilla quirks mode */
+			font-size: 10pt;
+			font-weight: bold;
+		}
+		div.airings table.epgcell  {
+			width: 100%;
+			font-weight: bold;
+		}
+		div.airings .epgcell table {
+			width: 100%;
+			font-weight: bold;
+		}
+		div.airings .epgcellborder {
+			border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-width: 3px;
+		}
+		div.airings td td {
+			height: 2.5em;
+			border: none;
+		}
+		div.airings td.checkbox {
+			width: 20px;
+		}
+		div.airings td.watched {
+			font-style: italic;
+		}
+        div.airings img.UnresolvedConflictIndicator {
+            height: 1.5em;
+        }
+        div.airings img.ResolvedConflictIndicator {
+            height: 1.5em;
+        }
+		div.airings td.markercell {
+			white-space: nowrap;
+			width: 70px;
+		}
+        div.airings td.sysalertmarkercell {
+            /*white-space: nowrap;*/
+            text-align: center;
+        	width: 120px;
+            height: 40px;
+        }
+		div.airings td.datecell {
+			width: 120px;
+		}
+		div.airings td.datecell div {
+			text-align: center;
+			width: 120px;
+		}
+        div.airings td.seasonepisodecell {
+            width: 70px;
+        }
+        div.airings td.seasonepisodecell div {
+            text-align: center;
+            width: 70px;
+        }
+        div.airings td.filesizecell {
+			width: 70px;
+		}
+		div.airings td.filesizecell div {
+			text-align: center;
+			width: 70px;
+		}
+		div.airings td.channelcell {
+			width: 150px;
+		}		
+		div.airings td.channelcell div {
+			text-align: left;
+			width: 150px;
+			text-align: center;
+		}
+		div.airings td.channelcell img {
+			height:2.5em;
+			vertical-align: middle;
+		}
+		div.airings table.epgcell tr td table tr td.foldercell {
+			white-space: nowrap;
+			vertical-align: middle;
+		}
+		div.airings table.epgcell tr td table tr td.foldercell img {
+			vertical-align: middle;
+		}
+		div.airings a:hover {
+	color: #ffd800;
+#	background-color:#CCC;
+		}
+		div.airings td.titlecell {
+		}
+		div.airings td.titlecell div {
+			width:100%;
+		}
+		div.airings td.favruncell {
+			width: 30px;
+		}		
+		div.airings td.favruncell div {
+			width: 30px;
+			text-align: center;
+		}
+		div.airings td.favruncell img {
+			vertical-align: middle;
+		}
+		div.airings td.autodeletecell {
+			width: 30px;
+		}		
+		div.airings td.autodeletecell div {
+			width: 30px;
+			text-align: center;
+		}
+		div.airings td.autodeletecell img {
+			vertical-align: middle;
+		}
+		div.airings td.keepatmostcell {
+			width: 40px;
+		}		
+		div.airings td.keepatmostcell div {
+			width: 40px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		div.airings td.paddingcell {
+			width: 40px;
+		}		
+		div.airings td.paddingcell div {
+			width: 40px;
+			text-align: center;
+		}
+		div.airings td.ratingcell {
+			width: 40px;
+		}		
+		div.airings td.ratingcell div {
+			width: 40px;
+			text-align: center;
+		}
+		div.airings td.ratingcell img {
+			vertical-align: middle;
+		}
+		div.airings td.ratedcell {
+			width: 40px;
+		}		
+		div.airings td.ratedcell div {
+			width: 40px;
+			text-align: center;
+		}
+		div.airings td.ratedcell img {
+			vertical-align: middle;
+		}
+		div.airings td.dayhourcell {
+			width: 75px;
+		}		
+		div.airings td.dayhourcell div {
+			width: 75px;
+			text-align: center;
+		}
+		div.airings td.qualitycell {
+			width: 125px;
+		}		
+		div.airings td.qualitycell div {
+			width: 125px;
+			text-align: center;
+		}
+		div.airings td.favchannelcell {
+			width: 90px;
+		}		
+		/* use this rather than channelcell because the narrower
+		   column looks better in the favorites page */
+		div.airings td.favchannelcell div {
+			width: 90px;
+			text-align: center;
+		}
+		div.airings td.favchannelcell img {
+			height:2.5em;
+			vertical-align: middle;
+		}
+		div.airings td.favarrowscell {
+			width:20px;
+		}
+    /* ---------------------------------------------------- */
+    /* system message list */
+        div.alerts {
+            white-space: nowrap;
+            vertical-align: middle;
+            width:100%;
+        }   
+        div.alerts {
+            position: relative;
+            width: 90%;
+            left: 5%;
+        }
+        .alertcell div {
+            font-size: 8pt;
+            white-space:nowrap;
+            vertical-align:middle;
+            overflow:hidden;
+            padding: 2px 2px 2px 2px;
+            margin: 0px 0px 0px 0px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+        }
+        div.alerts .messagedetail {
+            /*border: 1px solid;*/
+            display: none;
+        }
+        div.alerts .messagedetail .leftpadding {
+            border: none;
+            width: 50px;
+            padding: 0px;
+        }
+        div.alerts .messagedetail .content {
+            border: 2px solid;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            padding: 10px;
+            white-space: normal; 
+            /*display: none;*/
+        }
+        div.alerts .messagedetail .rightpadding {
+            border: none;
+            width: 10px;
+            padding: 0px;
+        }
+        div.alerts .alertcell table {
+            width: 100%;
+            font-weight: bold;
+        }
+        div.alerts .alertcellborder {
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-width: 3px;
+            border-color: #FFFFFF;
+            border-style: solid;
+        }
+        div.alerts td.checkbox {
+            width: 20px;
+        }
+        div.alerts td.sysalertmarkercell {
+            width: 40px;
+        }
+        div.alerts td.sysalertmarkercell div {
+            width: 40px;
+            text-align: center;
+        }
+        div.alerts td.sysalertmarkercell img {
+            /*height: 2.5em;*/
+            vertical-align: middle;
+        }
+        div.alerts td.titlecell {
+        }
+        div.alerts td.titlecell div {
+            width:100%;
+        }
+        div.alerts td.countcell {
+            width: 70px;
+        }
+        div.alerts td.countcell div {
+            text-align: center;
+            width: 70px;
+        }
+        div.alerts td.datecell {
+            width: 150px;
+        }
+        div.alerts td.datecell div {
+            text-align: center;
+            width: 150px;
+        }
+        div.alerts a:hover {
+            color: #ffd800;
+            /*background-color:#0355a7;*/
+        }
+/*-------------------------------------------------- */
+/* Options block */
+div.options {
+	position: relative;
+	width: 88%;
+	left: 5%;
+	border: 1px solid #fff;
+	padding: 10px 10px 10px 10px;
+	margin-top:10px;
+	}
+	div.options h2 {
+		margin-top:0px;
+	}
+	div.options dl {
+		border: 1px solid #fff;
+	}
+	div.options form {
+		display: inline;
+	}
+	div.options td {
+		vertical-align: top;
+	}
+	div.options table {
+	    /* fix mozilla quirks mode */
+		font-size: 10pt;
+	}
+/*-------------------------------------------------- */
+/* conflicts block */
+div.conflict {
+	position: relative;
+	width: 88%;
+	left: 5%;
+	border: 1px solid #fff;
+	padding: 10px 10px 10px 10px;
+	margin-top:10px
+	}
+	div.conflict h3 {
+		margin-top:0px;
+		padding-left: 00px;
+	}
+	div.conflict h3 img {
+		margin: 3px 3px 3px 3px;
+		float: left;
+		vertical-align: middle;
+	}
+	div.conflict form {
+		display: inline;
+	}
+	div.conflict input {
+	font-family:  Arial, Tahoma, "lucida console", sans-serif;
+	font-size: 10pt;
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	/* IE hack */
+			overflow:visible;
+	text-align: left;
+	color: #FFFFFF;
+	border-color: #333;
+	border-style: outset;
+	border-width: 2px;
+	background-color: #333;
+	;
+		}
+	div.conflict input:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	background-color: #CCC;
+	border-color:  #CCC;
+	border-style: outset;
+	border-width: 2px;
+	color: #ffd800;
+		}
+
+/*-------------------------------------------------- */
+/* EPG grid */
+table.epggrid {
+	border-style: none;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	border-spacing: 0px;
+	border: 0px;
+	border-style:none;
+    /* fix mozilla quirks mode */
+	font-size: 10pt;
+	}
+	table.epggrid td.channelid {
+		width: 100px;
+	}
+	table.epggrid td.channelid div {
+		width: 100px;
+		text-align: center;
+		overflow:hidden;
+		white-space:nowrap;
+		position: relative;
+	}
+	table.epggrid td.channelid img {
+		height:2.2em;
+		vertical-align: middle;
+	}
+	table.epggrid td.channelid img.pageup {
+/*
+ *      Firefox bug workaround...
+		position: absolute;
+		left: 2px;
+		top: 0px;
+		z-index: 50;
+*/
+		height: 1em;
+		width: 1em;
+	}
+	table.epggrid td.channelid img.pagedown {
+/*
+ *      Firefox bug workaround...
+		position: absolute;
+		left: 2px;
+		bottom: 0px;
+		z-index: 50;
+*/
+		height: 1em;
+		width: 1em;
+	}
+	table.epggrid td.datecell div {
+		width: 100px;
+		text-align: center;
+		overflow:hidden;
+		white-space:nowrap;
+		position: relative;
+	}
+	table.epggrid td.datecell img {
+		height:1em;
+		vertical-align: middle;
+	}
+	table.epggrid td.datecell img.prevday {
+		position: absolute;
+		left:2px;
+	}
+	table.epggrid td.datecell img.nextday {
+		position: absolute;
+		right:2px;
+	}
+	table.epggrid td.timecell img {
+		height:1em;
+		vertical-align: middle;
+	}
+	table.epggrid td.timecell img.earlier {
+		float:left;
+	}
+	table.epggrid td.timecell img.later {
+		float:right;
+	}
+
+	table.epggrid td.datecell {
+		height:2.5em;
+		vertical-align:middle;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+	}
+	table.epggrid td.timecell {
+		height:2.5em;
+		vertical-align:middle;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+	}
+	table.epggrid td.channelid {
+		height:2.5em;
+		vertical-align:middle;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+	}
+	table.epggrid td.epgcell {
+		border-style: none;
+		border-width: 0px;
+		height:100%;
+		vertical-align:middle;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+	}	
+	table.epggrid td.epgcell td {
+		height:3em;
+	}	
+	table.epggrid td.epgcell td.epgmarker {
+		width: 10px;
+	}	
+/* generic EPG Cell attributes for all epgcell users */
+	.epgcell  table {
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-spacing: 0px;
+		border: 0px;
+		background: #666;
+		/* fix mozilla quirks mode */
+		font-size: 10pt;
+	}
+	.epgcell table tr {
+		height:100%;
+		width: 100%;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-spacing: 0px;
+		border: 0px;
+	}
+
+	.epgcell td {
+		height:100%;
+		width:100%;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-style: none;
+	}
+
+
+	.epgcell table.show_other {
+			background: #666;
+	}
+	.epgcell table.oldshow_other {
+			background: #021840;
+	}
+	.epgcell table.show_news {
+			background: #596627;
+	}
+	.epgcell table.oldshow_news {
+			background: #32443e;
+	}
+    .epgcell table.show_sports,
+    .epgcell table.show_sportsevent,
+    .epgcell table.show_sportsnonevent,
+    .epgcell table.show_sportstalk {
+			background: #12604a;
+	}
+    .epgcell table.oldshow_sports,
+    .epgcell table.oldshow_sportsevent,
+    .epgcell table.oldshow_sportsnonevent,
+    .epgcell table.oldshow_sportstalk {
+			background: #0b425d;
+	}
+	.epgcell table.show_movie {
+			background: #703c88;
+	}
+	.epgcell table.oldshow_movie {
+			background: #403580;
+	}
+	.epgcell table :hover {
+	color: #ffd800;
+	background: #000;
+	}
+	.epgcell table.show_other:hover {
+			background: #000;
+	}
+	.epgcell table.oldshow_other:hover {
+			background: #000;
+	}
+	.epgcell table.show_news:hover {
+			background: #000;
+	}
+	.epgcell table.oldshow_news:hover {
+			background: #000;
+	}
+    .epgcell table.show_sports:hover,
+    .epgcell table.show_sportsevent:hover,
+    .epgcell table.show_sportsnonevent:hover,
+    .epgcell table.show_sportstalk:hover {
+			background: #000;
+	}
+    .epgcell table.oldshow_sports:hover,
+    .epgcell table.oldshow_sportsevent:hover,
+    .epgcell table.oldshow_sportsnonevent:hover,
+    .epgcell table.oldshow_sportstalk:hover {
+			background: #000;
+	}
+	.epgcell table.show_movie:hover {
+			background: #000;
+	}
+	.epgcell table.oldshow_movie:hover {
+			background: #000;
+	}
+	
+	.epgcell .showfavorite {
+		border-color: #FFFFFF;
+		border-style: solid;
+		border-width: 2px;
+	}
+	.epgcell .showrecording {
+		border-color: #FFd800;
+		border-style: solid;
+		border-width: 2px;
+	}
+	.epgcell .showdontlike {
+		border-color: #000000;
+		border-style: solid;
+		border-width: 2px;
+	}
+	.epgcell .showmanrec {
+		border-color: #cc0000;
+		border-style: solid;
+		border-width: 2px;
+	}
+	.epgcell .showother {
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+	}
+		
+	.epgcell div {
+		font-size: 8pt;
+		white-space:nowrap;
+		vertical-align:middle;
+		overflow:hidden;
+		padding: 2px 2px 2px 2px;
+		margin: 0px 0px 0px 0px;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+	}
+	.epgcell img.hd {
+		width: 8px;
+		height: 8px;
+	}
+	.epgcell img.firstrun {
+		width: 8px;
+		height: 8px;
+	}
+	.epgcell div img.RecordingIndicator {
+	}
+    .epgcell img.UnresolvedConflictIndicator {
+        height: 1.5em;
+    }
+    .epgcell img.ResolvedConflictIndicator {
+        height: 1.5em;
+    }
+	.epgcell div.watched {
+		font-style: italic; 
+	}
+/*-------------------------------------------------- */
+/* EPG list */
+table.epglist {
+	border-style: none;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	border-spacing: 0px;
+	border: 0px;
+	border-style:none;
+	}
+	table.epglist table {
+		border-style: none;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-spacing: 0px;
+		border: 0px;
+		border-style:none;
+	}
+
+	table.epglist td.channelid {
+		height: 2.5em;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+	}
+	table.epglist td.channelid div {
+		text-align: center;
+		overflow:hidden;
+		white-space:nowrap;
+		position: relative;
+		height: 2.5em;
+	}
+	table.epglist td.channelid img {
+		height:2.5em;
+		vertical-align: middle;
+	}
+	table.epglist td.channelid img.pageleft {
+		position: absolute;
+		height:1em;
+		left:2px;
+		top:1.5em;
+	}
+	table.epglist td.channelid img.pageright {
+		position: absolute;
+		height:1em;
+		right:2px;
+		top:1.5em;
+	}
+	table.epglist td.datecell{
+		height:2.5em;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;
+	}
+	table.epglist td.datecell div {
+		width:80px;
+		height:2.5em;
+		text-align: center;
+		overflow:hidden;
+		white-space:nowrap;
+		position: relative;
+	}
+	table.epglist td.datecell img {
+		height:1em;
+		vertical-align: middle;
+	}
+	table.epglist td.datecell img.prevday {
+		position: absolute;
+		left:2px;
+		top:1.5em;
+	}
+	table.epglist td.datecell img.nextday {
+		position: absolute;
+		right:2px;
+		top:1.5em;
+	}
+	table.epglist td.timecell img {
+		height:1em;
+		vertical-align: middle;
+	}
+	table.epglist td.timecell {
+		width:80px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #7f7f7f;		
+	}
+	table.epglist td.timecell div {
+		position: relative;
+		text-align: center;
+		width:80px;
+	}
+	table.epglist td.timecell img.earlier {
+		position: absolute;
+		height:1em;
+		left:2px;
+		top:2px;
+	}
+	table.epglist td.timecell img.later {
+		position: absolute;
+		height:1em;
+		left:2px;
+		bottom:2px;
+	}
+	table.epglist td {
+		vertical-align:top;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+	}
+	table.epglist div {
+		font-size: 8pt;
+		vertical-align:top;
+		overflow:hidden;
+		padding: 2px 2px 2px 2px;
+		margin: 0px 0px 0px 0px;
+	}
+
+	table.epglist td table {
+		width: 100%;
+		border-style: none;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+		border-spacing: 0px;
+		border: 0px;
+		border-style:none;
+	}
+	table.epglist .epgcell div {
+		overflow-x: visible;
+		overflow-y: hidden;
+		white-space: normal;
+	}
+	
+/*-------------------------------------------------- */
+/* Upper menu bar */
+
+		
+	.m0l0mouti {
+		font-size: 14px;
+		font-weight: normal;
+		text-align: center;
+		vertical-align: middle;
+		color : #ffffff;
+		padding: 4px;
+		text-decoration: none;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	.m0l0mouto {
+	background-color: #000;
+	border : 1px solid #ffffff;
+	margin: 0px;
+	}	
+	
+	.m0l0moveri {
+		font-size: 14px;
+		font-weight: normal;
+		text-align: center;
+		vertical-align: middle;
+		color : #ffd800;
+		padding: 4px;
+		text-decoration: underline;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.m0l0movero {
+	background-color: #666;
+	border : 1px solid #ffffff;
+	margin: 0px;
+	}	
+	
+	.m0l0mdowni {
+		font-size: 14px;
+		font-weight: normal;
+		text-align: center;	
+		vertical-align: middle;	
+		color : #ffd800;
+		padding: 4px;
+		text-decoration: none;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	
+	.m0l0mdowno {
+	background-color: #999;
+	border : 1px solid #ffffff;
+	margin: 0px;
+	}	
+			
+		
+	.m0l1mouti {
+		font-size: 14px;
+		font-weight: normal;
+		text-align: left;
+		vertical-align: middle;
+		color : #ffffff;
+		padding: 4px;
+		text-decoration: none;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	.m0l1mouto {
+	background-color: #333;
+	border : 1px solid #ffffff;
+	border-top-style: none;
+	margin: 0px;
+	}	
+	
+	.m0l1moveri {
+		font-size: 14px;
+		font-weight: normal;
+		text-align: left;
+		vertical-align: middle;
+		color : #ffd800;
+		padding: 4px;
+		text-decoration: underline;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.m0l1movero {
+	background-color: #666;
+	border : 1px solid #ffffff;
+	border-top-style: none;
+	margin: 0px;
+	}	
+	
+	.m0l1mdowni {
+		font-size: 14px;
+		font-weight: normal;
+		text-align: left;	
+		vertical-align: middle;	
+		color : #ffd800;
+		padding: 4px;
+		text-decoration: underline;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	
+	.m0l1mdowno {
+	background-color: #999;
+	border : 1px solid #ffffff;
+	border-top-style: none;
+	margin: 0px;
+	}	
+/*-------------------------------------------------- */
+	table.DateTimeEdit {
+		border: none;
+	}
+	table.DateTimeEdit td {
+		border: none;
+		text-align: center;
+	}

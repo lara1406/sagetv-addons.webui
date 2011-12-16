@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+ <link rel="stylesheet"  type="text/css" media="all" href="sage_all.css"/>
+ <link rel="stylesheet"  type="text/css" media="print" href="sage_print.css"/>
+ <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"/>
+ <script type="text/javascript" src="sage.js"></script>
+ <script type="text/javascript" src="player.js"></script>
+ <title>Sage Media Player</title>
+<SCRIPT LANGUAGE = "JavaScript">
+
+var fntype="url"
+if ( url.fntype != null ) { 
+    fntype=url.fntype;
+}
+
+var clipurl;
+if ( url.mediafileid != null ) {
+	clipurl=MakeMediaFilePlaylist(url.mediafileid,"m3u",fntype);
+} else if ( url.clipurl ) {
+   clipurl=MakeURLPlaylist(MakeAbsoluteURL(url.clipurl),"m3u");
+}
+
+
+</SCRIPT>
+</HEAD>
+<body>
+<div id="title">
+<h1><a href="Home" title="home"><img src="sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>Sage Media Player</h1>
+</div>
+<div id="content">
+
+<SCRIPT LANGUAGE="JavaScript">
+if ( url.title ){
+	document.write("<p align=center>"+HtmlIze(decodeURIComponent(url.title))+"</p>");	
+}
+
+if ( clipurl ) {
+	//document.write('<p>Playing '+clipurl+'</p>');
+		with (document) {
+writeln('<OBJECT ID="MediaPlayer1" ');
+writeln('        CLASSID="CLSID:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" ');
+writeln('        CODEBASE="http://www.apple.com/qtactivex/qtplugin.cab" ');
+writeln('        STANDBY="Loading QuickTime Player components..." ');
+writeln('        TYPE="application/x-oleobject" ');
+writeln('        width="640" ');
+writeln('        height="480">');
+writeln('	<param name="SRC" value="'+clipurl+'">');
+writeln('	<param name="AUTOPLAY" value="true">');
+writeln('	<param name="CONTROLLER" value="true">');
+writeln('	<param name="BGCOLOR" value="darkblue">');
+writeln('<embed type="video/quicktime" ');
+writeln('       pluginspage="http://www.apple.com/quicktime/download/" ');
+writeln('       src="'+clipurl+'" ');
+writeln('       name="MediaPlayer1" ');
+writeln('       width="640" ');
+writeln('       height="480"');
+writeln('       AUTOPLAY="true" ');
+writeln('       CONTROLLER="true"');
+writeln('       bgcolor="darkblue"></embed>');
+writeln('</OBJECT>');
+writeln('<p align="center"><a href="'+clipurl+'">Open in external media player</a></p>')
+	}
+}
+
+</script></div></body></html>

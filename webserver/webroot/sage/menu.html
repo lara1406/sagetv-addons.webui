@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+ <link rel="stylesheet"  type="text/css" media="all" href="sage_all.css"/>
+ <link rel="stylesheet"  type="text/css" media="print" href="sage_print.css"/>
+ <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon">
+ <script type="text/javascript" src="sage.js"></script>
+<title>SageTV Web Interface</title>
+</head>
+<body>
+<div id="title">
+
+<h1><a href="menu.html" title="home"><img src="sagelogo.gif" alt="SageTV logo" title="Main Menu" border="0"/></a>Main Menu</h1>
+</div>
+<!-- start menu bar -->
+<script language="JavaScript">
+<!--//
+var MENU_ITEMS = null;
+//-->
+</script>
+<script language="JavaScript" src="menu_core.js"></script>
+<script language="JavaScript" src="menu_items.js"></script>
+<script language="JavaScript" src="menu_style.js"></script>
+<script language="JavaScript">
+<!--//
+if ( MENU_ITEMS==null ) { 
+   alert("Error in menu_items.js -- check syntax");
+} else {
+  doMenu(MENU_ITEMS, MENU_POS);
+  if ( document.body && document.body.style && document.getElementById ) {
+  	document.write('<div id="content">');
+  	printMenuList(MENU_ITEMS,"<h3>","</h3>");
+ 	document.write('</div>');
+  }
+}
+//-->
+</script><noscript>
+<UL>
+<LI><h3>SageTV</h3></LI>
+<UL>
+<LI><A href="Home" title="Go to the SageTV Home page, with system information">Home</A></LI>
+<LI><A href="Recordings" title="View the list of recorded TV files">Sage Recordings</A></LI>
+<LI><A href="Search?searchType=TVFiles&sort1=title_asc&sort2=airdate_asc" title="Search the recorded TV files">Search Recorded TV files</A></LI>
+<LI><A href="webremote.html?context=SAGETV_PROCESS_LOCAL_UI&contextname=Local%20SageTV" target="webremote" title="Control SageTV from a web browser">Web Remote (Local Sage)</A></LI>
+<LI><A href="about.html" title="Show licence, version info and credits">About</A></LI>
+</UL>
+<LI><h3>Schedule Recordings</h3></LI>
+<UL>
+<LI><A href="RecordingSchedule" title="Show the list of recordings scheduled to occur in the future">Upcoming Recordings</A></LI>
+<LI><A href="IRSuggestions" title="Show the list of Intelligent Recordings scheduled to occur in the future">Intelligent Suggestions</A></LI>
+<LI><A href="Favorites" title="View/Edit the Favorites defined in Sage">Favorites Manager</A></LI>
+<LI><A href="TimedRecord" title="Set up a recording to occur on a specific channel at a specific time">Timed Recording</A></LI>
+<LI><A href="Conflicts" title="View the list of shows that will not be recorded due to conflicts with other scheduled recordings">Recording Conflicts</A></LI>
+</UL>
+<LI><h3>Program Guide</h3></LI>
+<UL>
+<LI><A href="EpgList" title="Show the Program Guide in list format">EPG List view</A></LI>
+<LI><A href="EpgGrid" title="Show the Program Guide in Grid format">EPG Grid view</A></LI>
+<LI><A href="Search" title="Search the Program Guide">Search EPG</A></LI>
+<LI><A href="EpgGrid?starthr=18" title="Show the EPG Grid view for today at 18:00h">Today PrimeTime</A></LI>
+<LI><A href="EpgGrid?starthr=18&startdate=1" title="Show the EPG Grid view for tomorrow at 18:00h">Tomorrow PrimeTime</A></LI>
+<LI><A href="Search?TimeRange=48&Categories=film&Categories=movie&Categories=Movie&SearchString=" title="Search the EPG for movies occuring in the next 48 hrs">Upcoming movies</A></LI>
+<LI><A href="Search?TimeRange=48&favorite=set&SearchString=" title="Search the EPG for favorites occuring in the next 48 hrs">Upcoming Favorites</A></LI>
+<LI><A href="Search?SearchString=&searchType=Airings&TimeRange=-999&watched=set&sort1=airdate_desc&sort2=none" title="Search the Sage DB for all shows that have been marked as watched">Watched Shows</A></LI>
+<LI><A href="Search?SearchString=&searchType=Airings&TimeRange=-999&dontlike=set&sort1=title_asc&sort2=airdate_asc" title="Search the Sage DB for all shows that have been marked as Don't Like">Don't like Shows</A></LI>
+</UL>
+<LI><h3>Media Library</h3></LI>
+<UL>
+<LI><A href="Search?searchType=MediaFiles&DVD=on&sort1=title_asc&sort2=none" title="Search the Media Library for imported DVDs">Search DVDs</A></LI>
+<LI><A href="Search?searchType=MediaFiles&Video=on&sort1=title_asc&sort2=none" title="Search the Media Library for Video Files">Search Imported Videos</A></LI>
+<LI><A href="Search?searchType=MediaFiles&Music=on&search_fields=episode&sort1=episode_asc&sort2=none" title="Search the Media Library for Music Files matching the track title">Search Music by track Title</A></LI>
+<LI><A href="Search?searchType=MediaFiles&Music=on&search_fields=people&sort1=people_asc&sort2=episode_asc" title="Search the Media Library for Music Files matching the Artist Name">Search Music by Artist</A></LI>
+<LI><A href="Search?searchType=MediaFiles&Music=on&search_fields=title&sort1=title_asc&sort2=episode_asc" title="Search the Media Library for Music Files matching the Album Name">Search Music by Album</A></LI>
+<LI><A href="Search?searchType=MediaFiles&Music=on&search_fields=category&sort1=title_asc&sort2=episode_asc" title="Search the Media Library for Music Files matching the Category">Search Music by Genre</A></LI>
+<LI><A href="Search?searchType=MediaFiles&Picture=on&sort1=title_asc&sort2=none" title="Search the Media Library for Picture Files">Search Picture Files</A></LI>
+<LI><A href="PlaylistGenerator?Command=list" title="Export playlists from SageTV">Export Playlists</A></LI>
+</UL>
+</UL>
+<hr/>
+</noscript>
+</body>
+</html>

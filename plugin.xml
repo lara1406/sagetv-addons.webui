@@ -1,0 +1,119 @@
+<!-- TODO wiki -->
+<SageTVPlugin>
+  <Name>SageTV Web Interface</Name>
+  <Identifier>Web</Identifier>
+  <Description>Manage SageTV activity, media files, and playlists from desktop web browsers.</Description>
+  <Author>nielm, jreichen, Slugger</Author>
+  <CreationDate>2004.11.18</CreationDate>
+  <ModificationDate>@@last-modified@@</ModificationDate>
+  <Version>@@plugin-impl-version@@</Version>
+  <Desktop>false</Desktop>
+  <ResourcePath>web</ResourcePath>
+  <Webpage title="Web Interface Wiki">http://tools.assembla.com/sageplugins/wiki/WebServer</Webpage>
+  <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
+  <ReleaseNotes>
+    <![CDATA[
+Version 2.31
+1. Move source code to sagetv-addons project at Google Code
+2. Various build modifications to support new project home
+3. mc2xmlepg: Add support to modify tvdb series ids used by this plugin
+4. SREv4: Add support to modify monitor overrides
+
+Version 2.30
+1. Support V7.1 Channel Logos
+2. Fix header logo links to return to Home page
+3. Add system message level to system message id
+4. Display show season and episode
+5. Add property to CSS file so a background image can be used if the user wants a custom one
+ 
+Version 2.29
+1. An error "is not a valid directory on the server" was displayed on the XML Importer if the user didn't want to import from a directory of XML files and left the directory name blank
+2. Manual recording filter was not working on search page
+3. Favorite automatic conversion destination folder was required when Alternate Destination Folder was selected even if Automatic Conversion was not enabled
+4. Favorite automatic conversion setup failed with error "Must specify conversion destination folder" even when Alternate Destination Folder had a valid value
+5. Verify that Favorite automatic conversion Alternate Destination Folder exists and is writable
+6. Changed to robogeek's SageTV v7-style skin
+7. Store client, extender, and placeshifter descriptive names in Sage.properties.  Extenders.properties is no longer used.
+8. Edit client, extender, and placeshifter descriptive names from web interface (click on the context in the home page to go to the client/extender details page)
+ 
+Version 2.28
+1. Fixed NullPointerException in auto conversion section of Favorite Details page
+ 
+Version 2.27
+1. View what's playing on SageTV Clients from the home page and control them from the web remote
+2. Add "Play in Client" command to Detailed Info page
+3. Only show "Play in SageTV"  and "Play in Extender" commands on Detailed Info page if show is currently airing 
+4. Support for SageTV Plugin Manager
+5. Favorite Automatic Conversions
+6. Increase maximum for Favorite Keep at Most from 15 to 63
+7. Fixed NullPointerException in RssServlet if media file doesn't have a mime type (defaults to text/plain)
+8. Fixed NullPointerException in XmlImporter if the specified directory is not a valid directory on the server
+9. Extract war to temp directory in jetty/webapps
+10. Adopt conventions for /apps application
+11. Change command text from "Cancel Recording" to "Cancel Manual Recording" for clarity
+    ]]>
+  </ReleaseNotes>
+  <Dependency>
+    <Core/>
+    <MinVersion>7.1.9</MinVersion>
+  </Dependency>
+  <Dependency>
+    <JVM/>
+    <MinVersion>1.5</MinVersion>
+  </Dependency>
+  <Dependency>
+    <Plugin>sageutls</Plugin>
+    <MinVersion>1.4.2</MinVersion>
+  </Dependency>
+  <Dependency>
+    <Plugin>sagexmlinfo</Plugin>
+    <MinVersion>1.4</MinVersion>
+  </Dependency>
+  <Dependency>
+    <Plugin>Jetty</Plugin>
+    <MinVersion>2.0.1</MinVersion>
+  </Dependency>
+  <Dependency>
+  	<Plugin>groovy</Plugin>
+  	<MinVersion>1.7.10</MinVersion>
+  </Dependency>
+  <Dependency>
+  	<Plugin>sagex-api</Plugin>
+  	<MinVersion>7.1.9</MinVersion>
+  </Dependency>
+  <Dependency>
+  	<Plugin>salicense</Plugin>
+  	<MinVersion>1.1.0</MinVersion>
+  </Dependency>
+  <PluginType>Standard</PluginType>
+  <Package>
+    <PackageType>JAR</PackageType>
+    <!--Location>http://download.sage.tv/plugins/jreichen/web/nielm-websrv-properties-file.zip</Location-->
+    <Location>@@download-url-location@@/nielm-websrv-jar-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <MD5>@@jar-file-checksum@@</MD5>
+  </Package>
+  <Package>
+    <PackageType>System</PackageType>
+    <!--Location>http://download.sage.tv/plugins/jreichen/web/nielm-websrv-properties-file.zip</Location-->
+    <Location>@@download-url-location@@/nielm-websrv-properties-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <MD5>@@properties-file-checksum@@</MD5>
+  </Package>
+  <Package>
+    <PackageType>System</PackageType>
+    <Location>@@download-url-location@@/nielm-websrv-user-properties-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <MD5>@@user-properties-file-checksum@@</MD5>
+    <Overwrite>false</Overwrite>
+  </Package>
+  <Package>
+    <PackageType>System</PackageType>
+    <Location>@@download-url-location@@/nielm-websrv-war-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <MD5>@@war-file-checksum@@</MD5>
+  </Package>
+  <!-- context file must be installed after the war file -->
+  <Package>
+    <PackageType>System</PackageType>
+    <Location>@@download-url-location@@/nielm-websrv-context-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <MD5>@@context-file-checksum@@</MD5>
+  </Package>
+  <ImplementationClass></ImplementationClass>
+</SageTVPlugin>

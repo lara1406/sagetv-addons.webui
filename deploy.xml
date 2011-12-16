@@ -1,0 +1,71 @@
+<project name="Deploy SageTV web server for testing" default="deploy sageutils and webserver" basedir=".">
+	
+    <property name="tgt.dir" value="C:/Program Files/SageTV/SageTV"/>
+    <property name="webserver.src.dir" value="bin"/>
+    <property name="sageutils.src.dir" value="../sageutils/bin"/>
+    <property name="sagetv.executable" value="${tgt.dir}/SageTVClient.exe"/>
+    <property name="sendmessage.executable" value="${tgt.dir}/SendMessage.exe"/>
+    <property name="sagetv.homepage" value="http://localhost:8080/sage/Home"/>
+
+    <target name="deploy webserver">
+
+        <patternset id="webserver.files">
+            <include name="Acme/**/*" />
+            <include name="JARs/servlet.jar" /> 
+            <include name="net/sf/sageplugins/webserver/**/*" /> 
+            <include name="viecili/jrss/generator/**/*" /> 
+            <include name="webserver/**/*" /> 
+        </patternset>
+
+        <copy todir="${tgt.dir}">
+            <fileset dir="${webserver.src.dir}">
+                <patternset refid="webserver.files"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="deploy sageutils">
+
+        <patternset id="sageutils.files">
+            <include name="net/sf/sageplugins/sageutils/**/*" /> 
+        </patternset>
+
+        <copy todir="${tgt.dir}">
+            <fileset dir="${sageutils.src.dir}">
+                <patternset refid="sageutils.files"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="deploy sageutils and webserver" depends="deploy sageutils, deploy webserver"/>
+
+    <target name="redeploy" depends="stop SageTV locally, deploy sageutils and webserver, start SageTV locally (console not available)"/>
+
+	<target name="start SageTV locally (console not available)">
+        <exec executable="${sagetv.executable}"/>
+    </target>
+
+    <target name="stop SageTV locally">
+        <exec executable="${sendmessage.executable}" os="Windows 2000, Windows XP, Windows 2003">
+            <arg line="-C SageClientApp -N SageWin -M 16 -W 0 -L 0"/>
+        </exec>
+    </target>
+
+    <target name="open local webserver home page">
+        <exec executable="cmd.exe" spawn="true" os="Windows 2000,Windows NT,Windows XP">
+            <arg line="/C start ${sagetv.homepage}" />
+        </exec>
+    </target>
+
+    <target name="clean all" description="clean up" >
+        <delete includeEmptyDirs="true">
+            <fileset dir="${tgt.dir}">
+                <patternset refid="webserver.files"/>
+                <patternset refid="sageutils.files"/>
+            </fileset>
+        </delete>
+    </target>
+
+</project>

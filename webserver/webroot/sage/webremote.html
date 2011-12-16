@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Program:  SageTV Web Remote -->
+<!-- Written by:  ToonGal (based on Wheemer) -->
+<!-- Last update: 3:36 AM 10/7/2006 -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+ <link rel="stylesheet"  type="text/css" media="all" href="sage_all.css"/>
+ <link rel="stylesheet"  type="text/css" media="print" href="sage_print.css"/>
+<script language="javascript">
+//==============================================================================
+// Parse URL into object-map
+//==============================================================================
+var url = new Object();
+{ 
+	var qs = location.search.substring(1);
+	var nv = qs.split('&');
+	for(i = 0; i < nv.length; i++)
+	{
+	  eq = nv[i].indexOf('=');
+	  url[nv[i].substring(0,eq).toLowerCase().replace("nol_","")] = decodeURIComponent(nv[i].substring(eq + 1)).replace("+", " ");
+	}
+}
+function DoCommand(command) {
+   CmdImage=new Image();
+   /* test */
+   CmdImage.onload=new Function('CmdImage=null;');
+   CmdImage.onerror=new Function('window.location="SageCommand?returnto=webremote'+escape(location.search)+'&command='+command+'&context='+url.context+'";');
+   CmdImage.src="SageCommand?RetImage=yes&nocache="+new Date().getTime()+"&command="+command+"&context="+url.context;
+   return false;
+}
+</script>
+<title>SageTV Web Remote </title>
+</head>
+<body>
+<div id="title">
+<h1><a href="index.html" title="home"><img src="sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>Web Remote
+<script language="javascript">
+if ( url.contextname != null ) {
+document.write("for "+url.contextname);
+} else if ( url.context ) {
+document.write("at "+url.context);
+} else {
+document.write("</h1>Error: No UI context specified");
+}
+</script>
+<noscript>
+for Local SageTV
+</noscript>
+</h1>
+
+</div>
+<div id="content">
+<center>
+<script language="javascript">
+document.write("<a href='webremote_compact.html' onclick='document.location=location.href.replace(\"webremote.html\",\"webremote_compact.html\");return false')>Switch to compact web-remote</a>" )
+</script>
+<noscript>
+<a href="webremote_compact.html">Switch to compact web-remote</a>
+</noscript>
+<table>
+
+<tr>
+<td></td>
+<td><a onclick="return DoCommand('Power')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Power&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Power"><img src="webremote/power.gif" /></a></td>
+<td><a onclick="return DoCommand('Home')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Home&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Home"><img src="webremote/home.gif" /></a></td>
+<td><a onclick="return DoCommand('Full%20Screen')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Full%20Screen&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Full Screen"><img src="webremote/fullscreen.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Num%201')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%201&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="One"><img src="webremote/one.gif" /></a></td>
+<td><a onclick="return DoCommand('Num%202')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%202&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Two"><img src="webremote/two.gif" /></a></td>
+<td><a onclick="return DoCommand('Num%203')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%203&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Three"><img src="webremote/three.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Skip%20Bkwd/Page%20Left')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Skip%20Bkwd/Page%20Left&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Skip-"><img src="webremote/rewind.gif" /></a></td>
+<td><a onclick="return DoCommand('Play')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Play&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Play"><img src="webremote/play.gif" /></a></td>
+<td><a onclick="return DoCommand('Skip%20Fwd/Page%20Right')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Skip%20Fwd/Page%20Right&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Skip+"><img src="webremote/fastforward.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Volume%20UP')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Volume%20UP&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Vol+"><img src="webremote/volup.gif" /></a></td>
+<td><a onclick="return DoCommand('Channel%20Up/Page%20Up')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Channel%20Up/Page%20Up&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="CH+"><img src="webremote/chup.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Back')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Back&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Back"><img src="webremote/back.gif" /></a></td>
+<td><a onclick="return DoCommand('UP')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=UP&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Up"><img src="webremote/up.gif" /></a></td>
+<td><a onclick="return DoCommand('Forward')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Forward&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Forward"><img src="webremote/forward.gif" /></a></td>
+</tr>
+
+<tr>
+<td></td>
+<td><a onclick="return DoCommand('Info')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Info&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Info"><img src="webremote/info.gif" /></a></td>
+<td><a onclick="return DoCommand('TV')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=TV&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Live TV"><img src="webremote/livetv.gif" /></a></td>
+<td><a onclick="return DoCommand('Setup')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Setup&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Setup"><img src="webremote/setup.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Num%204')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%204&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Four"><img src="webremote/four.gif" /></a></td>
+<td><a onclick="return DoCommand('Num%205')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%205&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Five"><img src="webremote/five.gif" /></a></td>
+<td><a onclick="return DoCommand('Num%206')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%206&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Six"><img src="webremote/six.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Record')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Record&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Record"><img src="webremote/record.gif" /></a></td>
+<td><a onclick="return DoCommand('Pause')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Pause&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Pause"><img src="webremote/pause.gif" /></a></td>
+<td><a onclick="return DoCommand('Delete')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Delete&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Delete"><img src="webremote/delete.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Mute')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Mute&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Mute"><img src="webremote/mute.gif" /></a></td>
+<td><a onclick="return DoCommand('Previous%20Channel')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Previous%20Channel&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Previous CH"><img src="webremote/last.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Left')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Left&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Left"><img src="webremote/left.gif" /></a></td>
+<td><a onclick="return DoCommand('Select')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Select&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Select"><img src="webremote/enter.gif" /></a></td>
+<td><a onclick="return DoCommand('Right')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Right&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Right"><img src="webremote/right.gif" /></a></td>
+</tr>
+
+<tr>
+<td></td>
+<td><a onclick="return DoCommand('Guide')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Guide&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Guide"><img src="webremote/guide.gif" /></a></td>
+<td><a onclick="return DoCommand('SageTV%20Recordings')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=SageTV%20Recordings&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="SageTV Recordings"><img src="webremote/sagetvrecordings.gif" /></a></td>
+<td><a onclick="return DoCommand('Recording%20Schedule')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Recording%20Schedule&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Recording Schedule"><img src="webremote/recordingschedule.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Num%207')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%207&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Seven"><img src="webremote/seven.gif" /></a></td>
+<td><a onclick="return DoCommand('Num%208')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%208&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Eight"><img src="webremote/eight.gif" /></a></td>
+<td><a onclick="return DoCommand('Num%209')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%209&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Nine"><img src="webremote/nine.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Skip%20Bkwd%20%232')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Skip%20Bkwd%20%232&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Skip2-"><img src="webremote/fastrewind2.gif" /></a></td>
+<td><a onclick="return DoCommand('Stop')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Stop&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Stop"><img src="webremote/stop.gif" /></a></td>
+<td><a onclick="return DoCommand('Skip%20Fwd%20%232')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Skip%20Fwd%20%232&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Skip2+"><img src="webremote/fastforward2.gif" /></a></td>
+<td></td>
+<td><a onclick="return DoCommand('Volume%20Down')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Volume%20Down&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Vol-"><img src="webremote/voldn.gif" /></a></td>
+<td><a onclick="return DoCommand('Channel%20Down/Page%20Down')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Channel%20Down/Page%20Down&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="CH-"><img src="webremote/chdn.gif" /></a></td>
+<td></td>
+<td></td>
+<td><a onclick="return DoCommand('Down')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Down&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Down"><img src="webremote/down.gif" /></a></td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td><a onclick="return DoCommand('Video%20Library')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Video%20Library&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Video Library"><img src="webremote/videolibrary.gif" /></a></td>
+<td><a onclick="return DoCommand('Picture%20Library')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Picture%20Library&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Picture Library"><img src="webremote/picturelibrary.gif" /></a></td>
+<td><a onclick="return DoCommand('Music%20Jukebox')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Music%20Jukebox&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Music Jukebox"><img src="webremote/musicjukebox.gif" /></a></td>
+<td></td>
+<td></td>
+<td><a onclick="return DoCommand('Num%200')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Num%200&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Zero"><img src="webremote/zero.gif" /></a></td>
+<td></td>
+<td></td>
+<td><a onclick="return DoCommand('Custom4')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Custom4&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Comskip-"><img src="webremote/custom4.gif" /></a></td>
+<td><a onclick="return DoCommand('Time%20Scroll')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Time%20Scroll&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Time Scroll"><img src="webremote/timescroll.gif" /></a></td>
+<td><a onclick="return DoCommand('Custom5')" href="SageCommand?context=SAGETV_PROCESS_LOCAL_UI&command=Custom5&returnto=webremote.html%3Fcontext%3DSAGETV_PROCESS_LOCAL_UI%26contextname%3DLocal%2520SageTV" title="Comskip+"><img src="webremote/custom5.gif" /></a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+</center>
+</div>
+</body></html>

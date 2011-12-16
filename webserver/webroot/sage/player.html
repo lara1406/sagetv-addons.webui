@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+ <link rel="stylesheet"  type="text/css" media="all" href="sage_all.css" />
+ <link rel="stylesheet"  type="text/css" media="print" href="sage_print.css" />
+ <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+ <script type="text/javascript" src="sage.js"></script>
+ <script type="text/javascript" src="player.js"></script>
+<style type="text/css">
+ div#content a {
+	text-decoration:underline;
+ }
+</style>
+ <title>Sage Media Player</title>
+<SCRIPT LANGUAGE = "JavaScript">
+<!--
+//==============================================================================
+// Define known media players
+//==============================================================================
+
+var players= {
+                'WMP': {
+                    'key' : 'WMP',
+                    'name': 'Windows Media Player',
+                    'comment': null,
+                    'url': 'player_wmp.html',
+                    'browserurl': null,
+                    'icon': 'icon_wmp.gif',
+                    'srcaddr' : 'http://www.microsoft.com/windows/windowsmedia/mp10/default.aspx'
+                    },
+                'VLC' : { 
+                    'key' : 'VLC',
+                    'name': 'VideoLan Client',
+                    'comment': 'Works best in IE,<br/>Ok in Mozilla<br/>badly or not at all in Opera<br/>untested elsewhere',
+                    'ieurl': 'player_ie_vlc.html',
+                    'url': 'player_other_vlc.html',
+                    'browserurl': { 
+                    		'Internet Explorer' : 'player_ie_vlc.html'
+                    },
+                    'icon': 'icon_vlc.gif',
+                    'srcaddr' : 'http://www.videolan.org/vlc/'
+                  },
+//                'REAL' : {
+//                    'key' : 'REAL',
+//                    'name': 'Real Player',
+//                    'comment': '',
+//                    'url': '???',
+//                    'srcaddr' : 'http://www.real.com/'
+//                },
+                  'QT' : {
+                      'key' : 'QT',
+                      'name': 'QuickTime',
+                      'comment': '',
+                      'url': 'player_qt.html',
+                      'browserurl': null,
+                      'icon': 'icon_qt.gif',
+                      'srcaddr' : 'http://www.apple.com/quicktime/'
+                   }
+            };
+
+//==============================================================================
+// define known file types and media player handlers
+// define which can handle streaming (URL) and which can handle direct file access
+//==============================================================================
+var filetypes = { 'url' : {
+	                    'mp3': [ 'WMP', 'QT', 'VLC' ],
+	                    'avi': [ 'VLC' ],
+	                    'mpg': [ 'VLC' ],
+	                    'ogg': [ 'VLC' ],
+	                    'asf': [ 'WMP' ],
+	                    'wmv': [ 'WMP' ],
+	                    'wma': [ 'WMP' ]
+	               },
+	               'filepath' : {
+						'mp3': [ 'WMP', 'QT', 'VLC' ],
+	                    'avi': [ 'WMP', 'VLC' ],
+	                    'mpg': [ 'WMP', 'VLC' ],
+	                    'ogg': [ 'VLC', 'WMP' ],
+	                    'asf': [ 'WMP' ],
+	                    'wmv': [ 'WMP' ],
+	                    'wma': [ 'WMP' ],
+	                    'dvd': [ 'WMP' ]
+	               }
+	             }
+	               	
+//==============================================================================
+
+
+var fntype="url"
+if ( url.fntype != null ) {
+    fntype=url.fntype;
+}
+var clipurl;
+if ( url.mediafileid != null ) {
+    clipurl=MakeMediaFilePlaylist(url.mediafileid,"m3u",fntype);
+} else if ( url.clipurl ) {
+   clipurl=MakeURLPlaylist(MakeAbsoluteURL(url.clipurl),"m3u");
+}
+
+//==============================================================================
+// Detect available players on non-IE browsers
+//==============================================================================
+  var playerString="";
+  function setPlayerString(p){
+      playerString=p;
+  }
+   
+  // detect for non MSIE 
+  if (browser!="msie" || OS!="Windows" )
+  {
+      playerString="";
+      numPlugins = navigator.plugins.length;
+      for (i= 0; i<numPlugins; i++)
+      {
+          currentPlugin = navigator.plugins[i];          
+          if (currentPlugin.name.substring(0,10)=="RealPlayer")
+          {
+              v="REAL"+",";
+          }
+          if (currentPlugin.name.substring(0,20)=="Windows Media Player")
+          {
+              playerString+="WMP"+",";
+          }
+          if (currentPlugin.name.substring(0,9)=="QuickTime")
+          {
+              playerString+="QT"+",";
+          }
+          if (currentPlugin.name.substring(0,14)=="VLC Multimedia")
+          {
+              playerString+="VLC"+",";
+          }
+      }//end for
+    }//end if 
+
+-->
+</script>
+
+<!-- ======================================================================== -->
+<!-- IE only player detection with VBScript -->
+<!-- ======================================================================== -->
+<script language="VBscript">
+  Dim playerString
+      On Error Resume Next
+      if ((NOT IsNull(CreateObject("IERJCtl.IERJCtl.1")))) then
+        playerString = playerString & "REAL"+","
+      end if
+      If ((NOT IsNull(CreateObject("MediaPlayer.MediaPlayer.1")))) Then
+        playerString = playerString & "WMP"+","
+        playerString = playerString & "WMP-AX"+","
+      End If
+      If ((NOT IsNull(CreateObject("QuickTime.QuickTime.1")))) Then
+        playerString = playerString & "QT"+","
+      End If
+      If ((NOT IsNull(CreateObject("VideoLAN.VLCPlugin.1")))) Then
+        playerString = playerString & "VLC"+","
+      End If
+      call SetSessionCookie("MediaPlayers", playerString)
+      call setPlayerString(playerString)  
+  </script>
+
+</HEAD>
+<body>
+<div id="title">
+<h1><a href="Home" title="home"><img src="sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>Sage Media Player</h1>
+</div>
+<div id="content">
+
+<script language = "JavaScript">
+
+//alert(playerString);
+//==============================================================================
+// bring to front
+//==============================================================================
+window.focus();
+
+if ( url.title ){
+	document.write("<p align=center>"+HtmlIze(url.title)+"</p>");	
+}
+
+//==============================================================================
+// auto forward browser depending on which file type/player
+//==============================================================================
+    
+function PrintPlayerSelector(installedplayers) {
+    document.writeln('<p align="center">Please select media player:<br/>');
+    document.writeln('<input type="checkbox" id="remember">Remember this choice</input></p>');
+    document.writeln('<table align="center"><tr>');
+    for ( k=0; k< installedplayers.length; k++ ) {
+        thisplayer=installedplayers[k];
+        document.writeln('<td align="center" valign="top">');
+        document.writeln('<a href="javascript:DoPlay(\''+thisplayer.key+'\')">');
+        document.writeln(HtmlIze(thisplayer.name)+"<br/>")
+        if ( thisplayer.icon ) {
+            document.writeln('<img src="'+thisplayer.icon+'"/><br/>');
+        }
+        document.writeln("</a>");
+        if ( thisplayer.comment ) {
+            document.writeln(thisplayer.comment);
+        }
+        document.writeln("</td>");
+    }
+    document.writeln("</tr></table>");
+}
+function DoPlay(key) {
+    cb=document.getElementById("remember")
+    if ( cb && cb.checked ) {
+        defaultPlayers[fileext+"_"+fntype]=key;
+        SetDefaultPlayers();
+    }
+    if ( players[key].browserurl != null 
+    	&& players[key].browserurl[browser] != null ) {
+        document.location=location.href.replace("player.html",players[key].browserurl[browser]);
+    } else { 
+        document.location=location.href.replace("player.html",players[key].url);
+    }
+}
+
+// get list of default players from cookie
+var defaultPlayers=new Object();
+cookie=GetCookie("defaultPlayers");
+if ( cookie ) {
+    list=GetCookie("defaultPlayers").split(",");
+    for(i = 0; i < list.length; i++)
+    {
+    eq = list[i].indexOf('=');
+    defaultPlayers[list[i].substring(0,eq).toLowerCase()] = decodeURIComponent(list[i].substring(eq + 1));
+    }
+}
+
+function SetDefaultPlayers() {
+    cookiestring="";
+    for(key in defaultPlayers) {
+        if ( cookiestring != "" ) {
+            cookiestring=cookiestring+",";
+        }
+        cookiestring=cookiestring+key+"="+defaultPlayers[key];
+    }
+    SetCookie("defaultPlayers",cookiestring);
+    //alert("defaultPlayers="+cookiestring);
+}
+
+
+if ( url.clipurl || url.mediafileid ) {
+    
+    playerlist=filetypes[fntype][fileext];
+    if ( playerlist ) {
+        // check for installed players
+        j=0;
+        installedplayers=[];
+        for ( i=0; i< playerlist.length; i++ ) {
+            if ( playerString.indexOf(playerlist[i]) != -1 
+                  && players[playerlist[i]] != null ) {
+                installedplayers[j]=players[playerlist[i]];
+                j++
+            }
+        }
+        if ( installedplayers.length == 0 ) {
+            document.write("<p align='center'>You do not have any installed players that can play back "+fileext+" files</p>");
+            document.write("<p align='center'>Supported players are: </p>");
+		    document.writeln('<table align="center"><tr>');
+		   // alert(playerlist);
+		    for ( k=0; k< playerlist.length; k++ ) {
+        		thisplayer=players[playerlist[k]];
+        		//alert(thisplayer);
+        		if ( thisplayer) {
+	        		document.writeln('<td align="center" valign="top">');
+	        		if ( thisplayer.srcaddr )
+		        		document.writeln('<a href="'+thisplayer.srcaddr+'">');
+	        		document.writeln(HtmlIze(thisplayer.name)+"<br/>")
+	        		if ( thisplayer.icon ) {
+			            document.writeln('<img src="'+thisplayer.icon+'"/><br/>');
+			        }
+			        if ( thisplayer.srcaddr )
+			        	document.writeln("</a>");
+			        if ( thisplayer.comment ) {
+			            document.writeln(thisplayer.comment);
+			        }	        
+			        document.writeln("</td>");
+			    }
+		    }
+		    document.writeln("</tr></table>");
+		    document.writeln('<p align="center"><a href="'+clipurl+'">Open in external media player</a></p>')
+        } else if ( installedplayers.length == 1 ) {
+            // only one player -- auto-forward
+            document.write("Player will start shortly");
+            DoPlay(installedplayers[0].key);
+        } else {
+            // multiple players -- check cookie 
+            if ( defaultPlayers[fileext+"_"+fntype] != null ) {
+                DoPlay(defaultPlayers[fileext+"_"+fntype]);
+            } else {
+                document.write("<p align='center'>Multiple players can play back "+fileext+" files</p>");
+                PrintPlayerSelector(installedplayers);
+            }
+        }
+    } else {
+        //unknown filetype -- check cookie
+        if ( defaultPlayers[fileext+"_"+fntype] != null ) {
+                DoPlay(defaultPlayers[fileext+"_"+fntype]);
+        } else {
+            document.write("<p align='center'>I dont known which player can play back "+fileext+" files</p>");
+            // suggest all installed players
+            j=0;
+            installedplayers=new Array();
+            for ( playerkey in players ) {
+                //alert(playerkey);
+                if ( playerString.indexOf(playerkey)  != null ) {
+                    installedplayers[j]=players[playerkey];
+                    j++;
+                }
+            }
+            PrintPlayerSelector(installedplayers);
+        }
+    }
+} else {
+	document.write("no 'clipurl' or 'MediaFileId' argument in URL");
+}
+</script>
+<noscript>
+	Javascript needs to be enabled for mediaplayer, sorry
+</noscript>
+</div>
+</body>
+</html>
+
+

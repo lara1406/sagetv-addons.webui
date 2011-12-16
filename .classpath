@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="SAGE_JAR"/>
+	<classpathentry kind="var" path="SAGELIB/nielm_sageutls.jar"/>
+	<classpathentry kind="var" path="SAGELIB/nielm_sagexmlinfo.jar"/>
+	<classpathentry kind="var" path="SAGELIB/servlet.jar"/>
+	<classpathentry kind="var" path="SAGELIB/sagex-api.jar"/>
+	<classpathentry kind="var" path="SAGELIB/salicense.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

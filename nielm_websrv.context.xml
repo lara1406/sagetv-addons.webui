@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<!--
+      Copyright 2009 Battams, Derek
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+       $Id$
+-->
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+   <Set name="contextPath">/sage</Set>
+   <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps/nielm_sagewebserver.war</Set>
+   <Set name="tempDirectory">
+     <SystemProperty name="jetty.home" default="."/>/webapps/nielm_sagewebserver
+   </Set>
+   <Set name="defaultsDescriptor">
+     <SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml
+   </Set>
+   <Set name="extractWAR">true</Set>
+   <Set name="copyWebDir">true</Set>
+
+   <Call name="setAttribute">
+     <Arg>pluginid</Arg>
+     <Arg>web</Arg>
+   </Call>
+   <Call name="setAttribute">
+     <Arg>webpage</Arg>
+     <Arg>/Home</Arg>
+   </Call>
+
+   <Set name="mimeTypes">
+      <New class="sagex.jetty.content.MimeTypes">
+         <Set name="location">webserver/mime.types</Set>
+      </New>
+   </Set>
+   <Get name="securityHandler">
+    <Set name="userRealm">
+      <New class="org.mortbay.jetty.security.HashUserRealm">
+        <Set name="name">SageTV Web Interface</Set>
+        <Set name="config"><SystemProperty name="jetty.home" default="."/>/etc/realm.properties</Set>
+      </New>
+    </Set>
+    <Set name="checkWelcomeFiles">true</Set>
+    <Set name="constraintMappings">
+      <Array type="org.mortbay.jetty.security.ConstraintMapping">
+        <Item>
+          <New class="org.mortbay.jetty.security.ConstraintMapping">
+            <Set name="constraint">
+              <New class="org.mortbay.jetty.security.Constraint">
+                <Set name="name">BASIC</Set>
+                <Set name="roles">
+                  <Array type="java.lang.String">
+                    <Item>user</Item>
+                    <Item>admin</Item>
+                    <Item>moderator</Item>
+                  </Array>
+                </Set>
+                <Set name="authenticate">true</Set>
+                <!-- Uncomment line below to force connection to SSL port -->
+                <!-- <Set name="dataConstraint">2</Set> -->
+              </New>
+            </Set>
+            <Set name="pathSpec">/*</Set>
+          </New>
+        </Item>
+        <Item>
+          <!--
+             - Authentication is not required for resources that are requested by
+             - clients that don't handle authentication such as media players and
+             - RSS readers.
+            -->
+          <New class="org.mortbay.jetty.security.ConstraintMapping">
+            <Set name="constraint">
+              <New class="org.mortbay.jetty.security.Constraint">
+                <Set name="authenticate">false</Set>
+                <!-- Uncomment line below to force connection to SSL port -->
+                <!-- <Set name="dataConstraint">2</Set> -->
+              </New>
+            </Set>
+            <Set name="pathSpec">/public/*</Set>
+          </New>
+        </Item>
+      </Array>
+    </Set>
+  </Get>
+</Configure>
+

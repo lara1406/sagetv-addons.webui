@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+ <link rel="stylesheet"  type="text/css" media="all" href="sage_all.css"/>
+ <link rel="stylesheet"  type="text/css" media="print" href="sage_print.css"/>
+ <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"/>
+ <script type="text/javascript" src="sage.js"></script>
+ <script type="text/javascript" src="player.js"></script>
+ <title>Sage Media Player</title>
+<SCRIPT LANGUAGE = "JavaScript">
+
+var fntype="url"
+if ( url.fntype != null ) {
+    fntype=url.fntype;
+}
+
+var clipurl;
+if ( url.mediafileid != null ) {
+        clipurl=MakeMediaFilePlaylist(url.mediafileid,"m3u",fntype);
+} else if ( url.clipurl ) {
+   clipurl=MakeURLPlaylist(MakeAbsoluteURL(url.clipurl),"m3u");
+}
+</SCRIPT>
+</HEAD>
+<body>
+<div id="title">
+<h1><a href="Home" title="home"><img src="sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>Sage Media Player</h1>
+</div>
+<div id="content">
+
+<SCRIPT LANGUAGE="JavaScript">
+if ( url.title ){
+	document.write("<p align=center>"+HtmlIze(url.title)+"</p>");	
+}</script>	
+
+<TABLE>
+<TR><TD colspan="2">
+<!--
+Insert VideoLAN.VLCPlugin.1 activex control
+-->
+<OBJECT classid="clsid:E23FE9C6-778E-49D4-B537-38FCDE4887D8" codebase="axvlc.cab"
+        width="640" height="480" id="vlc" events="True">
+<param name="src" value="" />
+<param name="showdisplay" value="True" />
+<param name="loop" value="False" />
+<param name="autoplay" value="true" />
+</OBJECT>
+</TD></TR>
+<TR><TD>
+<!--
+Insert MSComctlLib.Slider.2 activex control
+-->
+<OBJECT classid="clsid:F08DF954-8592-11D1-B16A-00C0F0283628"
+        width="540" height="20" id="slider" events="True">
+<param name="TickStyle" value="3" />
+<param name="Min" value="0" />
+<param name="Max" value="0" />
+<param name="Value" value="0" />
+<param name="Enabled" value="False" />
+</OBJECT>
+</TD><TD width="15%">
+<DIV id="info" style="text-align:center">-:--:--/-:--:--</DIV>
+</TD></TR>
+<TR><TD colspan="2">
+<INPUT type=button id="PlayOrPause" value=" Play " onClick='doPlayOrPause()'>
+<INPUT type=button value="Stop" onClick='document.vlc.stop();'>
+<INPUT type=button value="Slower " onClick='document.vlc.playSlower();'>
+<INPUT type=button value="Faster" onClick='document.vlc.playFaster();'>
+<INPUT type=button value="Mute" onClick='document.vlc.toggleMute();'>
+<INPUT type=button value="Full Screen" onClick='document.vlc.fullscreen();'>
+<INPUT type=button value="Version" onClick='alert(document.vlc.VersionInfo);'>
+<br/>
+<INPUT type="button" value="2m REW" onClick="document.vlc.shuttle(-120);">
+<INPUT type="button" value="10s REW" onClick="document.vlc.shuttle(-10);">
+<INPUT type="button" value="10s FF" onClick="document.vlc.shuttle(10);">
+<INPUT type="button" value="2m FF" onClick="document.vlc.shuttle(120);">
+<br/>
+<p>Double-click VLC window to go fullscreen if FullScreen button does not work.</p>
+</TD></TR>
+</TABLE>
+<script language="JavaScript">
+        document.writeln('<p align="center"><a href="'+clipurl+'">Open in external media player</a></p>')
+</script>
+<p align=center><a href="http://www.videolan.org/vlc" title="Get Videolan"><img src=GetVLC_120.png></a></p>
+</div>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var sliderTimerId = 0;
+var sliderScrolling = false;
+
+function formatTime(timeVal)
+{
+    var timeHour = timeVal;
+    var timeSec = timeHour % 60;
+    if( timeSec < 10 )
+    timeSec = '0'+timeSec;
+    timeHour = (timeHour - timeSec)/60;
+    var timeMin = timeHour % 60;
+    if( timeMin < 10 )
+    timeMin = '0'+timeMin;
+    timeHour = (timeHour - timeMin)/60;
+    if( timeHour > 0 )
+    return timeHour+":"+timeMin+":"+timeSec;
+    else
+    return timeMin+":"+timeSec;
+};
+function onPlay()
+{
+    document.getElementById("PlayOrPause").value = "Pause";
+};
+function onPause()
+{
+    document.getElementById("PlayOrPause").value = " Play ";
+};
+function onStop()
+{
+    if( slider.Enabled )
+    {
+        slider.Value = slider.Min;
+        slider.Enabled = false;
+    }
+    info.innerText = "-:--:--/-:--:--";
+    document.getElementById("PlayOrPause").value = " Play ";
+};
+var liveFeedText = new Array("Live", "((Live))", "(( Live ))", "((  Live  ))");
+var liveFeedRoll = 0;
+
+function doUpdate()
+{
+    if( vlc.Playing )
+    {
+        if( ! sliderScrolling )
+        {
+            if( vlc.Length > 0 )
+            {
+                // seekable stream
+                slider.Enabled = true;
+                slider.Max = vlc.Length;
+                slider.Value = vlc.Time;
+                if ( url.numsegments && url.numsegments>1 ){
+					// todo playlist position
+                }
+                info.innerText = formatTime(vlc.Time)+"/"+formatTime(vlc.Length);
+                document.getElementById("PlayOrPause").Enabled = true; 
+            }
+            else {
+                // non-seekable "live" stream
+                if( slider.Enabled )
+                {
+                    slider.Value = slider.Min;
+                    slider.Enabled = false;
+                }
+                liveFeedRoll = liveFeedRoll & 3;
+                info.innerText = liveFeedText[liveFeedRoll++];
+            }
+        }
+        sliderTimerId = setTimeout("doUpdate()", 1000);
+    }
+    else
+    {
+        onStop();
+        sliderTimerId = 0;
+    }
+};
+
+function doPlayOrPause()
+{
+    if( document.vlc.playing )
+    {
+        document.vlc.pause();
+    }
+    else
+    {
+        document.vlc.play();
+    }
+};
+function vlc::play()
+{
+    if( ! sliderTimerId )
+    {
+        sliderTimerId = setTimeout("doUpdate()", 1000);
+    }
+    onPlay();
+};
+function vlc::pause()
+{
+    if( sliderTimerId )
+    {
+        clearTimeout(sliderTimerId)
+        sliderTimerId = 0;
+    }
+    onPause();
+};
+function vlc::stop()
+{
+    if( sliderTimerId )
+    {
+        clearTimeout(sliderTimerId)
+        sliderTimerId = 0;
+    }
+    onStop();
+};
+function slider::Scroll()
+{
+    slider.Text = formatTime(slider.Value);
+    info.innerText = slider.Text+"/"+formatTime(vlc.Length);
+    if( vlc.Time != slider.Value )
+    {
+        vlc.Time = slider.Value;
+    }
+};
+function slider::Change()
+{
+    if( sliderScrolling )
+    {
+        sliderScrolling = false;
+    }
+    else if( vlc.Time != slider.Value )
+    {
+        vlc.Time = slider.Value;
+    }
+};
+
+// play content...
+if ( clipurl ) {
+	document.vlc.addTarget(clipurl, null, 4, -666);
+	document.vlc.play();
+	if( ! sliderTimerId )
+	{
+       sliderTimerId = setTimeout("doUpdate()", 1000);
+	}
+	onPlay();
+}
+//-->
+</SCRIPT>
+</div>
+</body>
+</html>

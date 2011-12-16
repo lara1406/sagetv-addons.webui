@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<!--
+/*
+ *      Copyright 2009 Battams, Derek
+ *       
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ */
+-->
+<web-app>
+
+  <display-name>SageTV Web Interface</display-name>
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.HomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/HomeServlet</url-pattern>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CommandServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.CommandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommandServlet</servlet-name>
+    <url-pattern>/SageCommand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RecordingsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.RecordingsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecordingsServlet</servlet-name>
+    <url-pattern>/Recordings</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RecordingScheduleServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.RecordingScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecordingScheduleServlet</servlet-name>
+    <url-pattern>/RecordingSchedule</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DetailedInfoServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.DetailedInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailedInfoServlet</servlet-name>
+    <url-pattern>/DetailedInfo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AiringCommandServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.AiringCommandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AiringCommandServlet</servlet-name>
+    <url-pattern>/AiringCommand</url-pattern>
+    <url-pattern>/MediaFileCommand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/Search</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ManualRecordServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ManualRecordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManualRecordServlet</servlet-name>
+    <url-pattern>/ManualRecord</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TimedRecordServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.TimedRecordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TimedRecordServlet</servlet-name>
+    <url-pattern>/TimedRecord</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SetOptionsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.SetOptionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetOptionsServlet</servlet-name>
+    <url-pattern>/SetOptions</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ConflictsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ConflictsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConflictsServlet</servlet-name>
+    <url-pattern>/Conflicts</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ResolveConflictServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ResolveConflictServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResolveConflictServlet</servlet-name>
+    <url-pattern>/ResolveConflict</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EpgGridServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.EpgGridServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EpgGridServlet</servlet-name>
+    <url-pattern>/EpgGrid</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EpgListServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.EpgListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EpgListServlet</servlet-name>
+    <url-pattern>/EpgList</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EpgChannelServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.EpgChannelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EpgChannelServlet</servlet-name>
+    <url-pattern>/EpgChannel</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GlobalCommandServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.GlobalCommandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GlobalCommandServlet</servlet-name>
+    <url-pattern>/GlobalCommand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditShowInfoServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.EditShowInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditShowInfoServlet</servlet-name>
+    <url-pattern>/EditShowInfo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ChannelLogoServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ChannelLogoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChannelLogoServlet</servlet-name>
+    <url-pattern>/ChannelLogo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MediaFileServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.MediaFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MediaFileServlet</servlet-name>
+    <url-pattern>/MediaFile</url-pattern>
+    <url-pattern>/public/MediaFile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PlaylistGeneratorServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.PlaylistGeneratorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlaylistGeneratorServlet</servlet-name>
+    <url-pattern>/PlaylistGenerator</url-pattern>
+    <url-pattern>/public/PlaylistGenerator</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>FavoritesServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.FavoritesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavoritesServlet</servlet-name>
+    <url-pattern>/Favorites</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>FavoriteDetailsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.FavoriteDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavoriteDetailsServlet</servlet-name>
+    <url-pattern>/FavoriteDetails</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>FavoriteCommandServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.FavoriteCommandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavoriteCommandServlet</servlet-name>
+    <url-pattern>/FavoriteCommand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MediaFileThumbnailServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.MediaFileThumbnailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MediaFileThumbnailServlet</servlet-name>
+    <url-pattern>/MediaFileThumbnail</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>IRSuggestionsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.IRSuggestionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IRSuggestionsServlet</servlet-name>
+    <url-pattern>/IRSuggestions</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>XmlImporterServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.XmlImporterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>XmlImporterServlet</servlet-name>
+    <url-pattern>/XmlImporter</url-pattern>
+    <url-pattern>/XMLImporter</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ExtenderCommandServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ExtenderCommandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExtenderCommandServlet</servlet-name>
+    <url-pattern>/ExtenderCommand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ExtenderDetailsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ExtenderDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExtenderDetailsServlet</servlet-name>
+    <url-pattern>/ExtenderDetails</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TranscodeJobsServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.TranscodeJobsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TranscodeJobsServlet</servlet-name>
+    <url-pattern>/TranscodeJobs</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>FavoritesServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.FavoritesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavoritesServlet</servlet-name>
+    <url-pattern>/Favorites</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MediaFileTranscodeServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.MediaFileTranscodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MediaFileTranscodeServlet</servlet-name>
+    <url-pattern>/public/MediaFileTranscode</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ResizedImageServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.ResizedImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResizedImageServlet</servlet-name>
+    <url-pattern>/public/ResizedImage</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RssServlet</servlet-name>
+    <servlet-class>net.sf.sageplugins.webserver.RssServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RssServlet</servlet-name>
+    <url-pattern>/public/Rss/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+     <servlet-name>SystemMessagesServlet</servlet-name>
+     <servlet-class>net.sf.sageplugins.webserver.SystemMessagesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>SystemMessagesServlet</servlet-name>
+     <url-pattern>/SystemMessages</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+     <servlet-name>SystemMessagesCommandServlet</servlet-name>
+     <servlet-class>net.sf.sageplugins.webserver.SystemMessagesCommandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>SystemMessagesCommandServlet</servlet-name>
+     <url-pattern>/SystemMessagesCommand</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>Groovy</servlet-name>
+	<servlet-class>groovy.servlet.GroovyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>Groovy</servlet-name>
+	<url-pattern>*.groovy</url-pattern>
+  </servlet-mapping>
+</web-app>
