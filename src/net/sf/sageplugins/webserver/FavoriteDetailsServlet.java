@@ -259,13 +259,10 @@ public class FavoriteDetailsServlet extends SageServlet {
 		    // Keyword - updateable for new or existing favorite
 		    // New Favorite: Keyword will be non-null if it is the type being added
 		    // Existing Favorite: Keyword must be non-null and not "" if it's a Keyword favorite
-		    if (((isNew) && (keyword != null)) ||
-		            ((!isNew) && (keyword != null) && (keyword.trim().length() > 0))) {
-		        out.println("        <dt><b>Keyword:</b></dt>");
-		        out.println("        <dd>");
-		        out.println("            <input type=\"text\" size=\"30\" name=\"keyword\" value=\"" + Translate.encode(keyword) + "\"/>&nbsp;");
-		        out.println("        </dd>");
-		    }
+	        out.println("        <dt><b>Keyword:</b></dt>");
+	        out.println("        <dd>");
+	        out.println("            <input type=\"text\" size=\"30\" name=\"keyword\" value=\"" + (keyword != null ? Translate.encode(keyword) : "") + "\"/>&nbsp;");
+	        out.println("        </dd>");
 		    
 		    // Person (Actor) - read-only if favorite exists
 		    // New Favorite: Person will be non-null if it is the type being added

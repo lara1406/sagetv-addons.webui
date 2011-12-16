@@ -16,8 +16,8 @@
 Version 2.31
 1. Move source code to sagetv-addons project at Google Code
 2. Various build modifications to support new project home
-3. mc2xmlepg: Add support to modify tvdb series ids used by this plugin
-4. SREv4: Add support to modify monitor overrides
+3. Add support to modify tvdb series ids used by mc2xmlepg plugin
+4. Enhancements/fixes to Favorites Editor
 
 Version 2.30
 1. Support V7.1 Channel Logos
@@ -88,31 +88,29 @@ Version 2.27
   <PluginType>Standard</PluginType>
   <Package>
     <PackageType>JAR</PackageType>
-    <!--Location>http://download.sage.tv/plugins/jreichen/web/nielm-websrv-properties-file.zip</Location-->
-    <Location>@@download-url-location@@/nielm-websrv-jar-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <Location>@@download-url-location@@/nielm-websrv-jar-file-@@plugin-impl-version@@.@@build-num@@.zip</Location>
     <MD5>@@jar-file-checksum@@</MD5>
   </Package>
   <Package>
     <PackageType>System</PackageType>
-    <!--Location>http://download.sage.tv/plugins/jreichen/web/nielm-websrv-properties-file.zip</Location-->
-    <Location>@@download-url-location@@/nielm-websrv-properties-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <Location>@@download-url-location@@/nielm-websrv-properties-file-@@plugin-impl-version@@.@@build-num@@.zip</Location>
     <MD5>@@properties-file-checksum@@</MD5>
   </Package>
   <Package>
     <PackageType>System</PackageType>
-    <Location>@@download-url-location@@/nielm-websrv-user-properties-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
-    <MD5>@@user-properties-file-checksum@@</MD5>
+    <Location>@@download-url-location@@/nielm-websrv-user-file-@@plugin-impl-version@@.@@build-num@@.zip</Location>
+    <MD5>@@user-file-checksum@@</MD5>
     <Overwrite>false</Overwrite>
   </Package>
   <Package>
     <PackageType>System</PackageType>
-    <Location>@@download-url-location@@/nielm-websrv-war-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <Location>@@download-url-location@@/nielm-websrv-war-file-@@plugin-impl-version@@.@@build-num@@.zip</Location>
     <MD5>@@war-file-checksum@@</MD5>
   </Package>
   <!-- context file must be installed after the war file -->
   <Package>
     <PackageType>System</PackageType>
-    <Location>@@download-url-location@@/nielm-websrv-context-file-@@plugin-impl-version@@.zip@@download-url-params@@</Location>
+    <Location>@@download-url-location@@/nielm-websrv-context-file-@@plugin-impl-version@@.@@build-num@@.zip</Location>
     <MD5>@@context-file-checksum@@</MD5>
   </Package>
   <ImplementationClass></ImplementationClass>

@@ -1,4 +1,7 @@
 <project name="Nielm's SageTV Web Interface for Jetty" default="dist" basedir=".">
+  <!-- Import svn tasks -->
+  <taskdef resource="org/tigris/subversion/svnant/svnantlib.xml" />
+
   <!-- set global properties for this build -->
   <property file="build.properties"/>
   <property name="plugin.version" value="2.31"/>
@@ -13,12 +16,7 @@
     </fileset>
     <pathelement path="${sage.jar}" />
   </path>
-  <condition property="filename.suffix" value="-${build.number}" else="">
-    <isset property="build.number"/>
-  </condition>
-
-  <!--property name="download.url.location" value="http://download.sage.tv/plugins/jreichen/web"/-->
-  <property name="download.url.location" value="http://downloads.sourceforge.net/project/sageplugins/webserver/v${plugin.version}/plugin"/>
+  <property name="download.url.location" value="http://sagetv-addons.googlecode.com/files"/>
   <property name="download.url.params" value=""/>
   
   <target name="init" depends="clean">
@@ -29,16 +27,22 @@
     <mkdir dir="${build}/classes"/>
     <mkdir dir="${build}/jar"/>
     <mkdir dir="${build}/war"/>
-    <!--mkdir dir="${build}/zip"/>
-    <mkdir dir="${build}/zip/jetty"/>
-    <mkdir dir="${build}/zip/jetty/contexts"/>
-    <mkdir dir="${build}/zip/jetty/webapps"/-->
     <mkdir dir="${build}/packages"/>
     <mkdir dir="${build}/packages/context"/>
     <mkdir dir="${build}/packages/properties"/>
     <mkdir dir="${build}/packages/war"/>
     <mkdir dir="${build}/packages/warfiles"/>
     <mkdir dir="${dist}"/>
+  	
+    <svn javahl="true">
+            <wcVersion path="." />
+    </svn>
+    <property name="pkg.context.name" value="nielm-websrv-context-file-${plugin.version}.${revision.max-with-flags}.zip" />
+  	<property name="pkg.jar.name" value="nielm-websrv-jar-file-${plugin.version}.${revision.max-with-flags}.zip" />
+  	<property name="pkg.props.name" value="nielm-websrv-properties-file-${plugin.version}.${revision.max-with-flags}.zip" />
+  	<property name="pkg.user.name" value="nielm-websrv-user-file-${plugin.version}.${revision.max-with-flags}.zip" />
+  	<property name="pkg.war.name" value="nielm-websrv-war-file-${plugin.version}.${revision.max-with-flags}.zip" />
+  	<property name="pkg.plugin.name" value="nielm-websrv-plugin-${plugin.version}.${revision.max-with-flags}.zip" />
   </target>
 
   <target name="compile" depends="init"
@@ -103,7 +107,7 @@
       <include name="**/*.xml"/>
     </fixcrlf>
 
-    <zip destfile="${build}/packages/nielm-websrv-context-file-${plugin.version}.zip">
+    <zip destfile="${build}/packages/${pkg.context.name}">
       <zipfileset prefix="jetty/contexts" dir="${build}/packages/context"/>
     </zip>
   </target>
@@ -122,14 +126,14 @@
       <include name="**/*.*"/>
     </fixcrlf>
 
-    <zip destfile="${build}/packages/nielm-websrv-properties-file-${plugin.version}.zip">
+    <zip destfile="${build}/packages/${pkg.props.name}">
       <zipfileset prefix="webserver" dir="${build}/packages/properties">
         <include name="readme.txt"/>
         <include name="transcode.properties"/>
       </zipfileset>
     </zip>
 
-    <zip destfile="${build}/packages/nielm-websrv-user-properties-file-${plugin.version}.zip">
+    <zip destfile="${build}/packages/${pkg.user.name}">
       <zipfileset prefix="webserver" dir="${build}/packages/properties">
         <include name="extenders.properties"/>
         <include name="paths.properties"/>
@@ -176,10 +180,10 @@
       </manifest>
     </war>
 
-    <zip destfile="${build}/packages/nielm-websrv-war-file-${plugin.version}.zip">
+    <zip destfile="${build}/packages/${pkg.war.name}">
       <zipfileset dir="${build}/packages/war" prefix="jetty/webapps" />
     </zip>
-    <zip destfile="${build}/packages/nielm-websrv-jar-file-${plugin.version}.zip">
+    <zip destfile="${build}/packages/${pkg.jar.name}">
       <zipfileset dir="${build}/jar" prefix="" />
     </zip>
   </target>
@@ -193,27 +197,26 @@
       <format property="last.modified" pattern="yyyy.MM.dd" />
     </tstamp>
 
-  	<checksum file="${build}/packages/nielm-websrv-jar-file-${plugin.version}.zip" property="md5.jar-file"/>
-    <checksum file="${build}/packages/nielm-websrv-context-file-${plugin.version}.zip" property="md5.context-file"/>
-    <checksum file="${build}/packages/nielm-websrv-properties-file-${plugin.version}.zip" property="md5.properties-file"/>
-    <checksum file="${build}/packages/nielm-websrv-user-properties-file-${plugin.version}.zip" property="md5.userproperties-file"/>
-    <checksum file="${build}/packages/nielm-websrv-war-file-${plugin.version}.zip" property="md5.war-file"/>
+  	<checksum file="${build}/packages/${pkg.jar.name}" property="md5.jar-file"/>
+    <checksum file="${build}/packages/${pkg.context.name}" property="md5.context-file"/>
+    <checksum file="${build}/packages/${pkg.props.name}" property="md5.properties-file"/>
+    <checksum file="${build}/packages/${pkg.user.name}" property="md5.userproperties-file"/>
+    <checksum file="${build}/packages/${pkg.war.name}" property="md5.war-file"/>
 
     <replace file="${build}/packages/plugin-${plugin.version}.xml" summary="yes">
       <replacefilter token="@@jar-file-checksum@@"             value="${md5.jar-file}"/>
       <replacefilter token="@@context-file-checksum@@"         value="${md5.context-file}"/>
       <replacefilter token="@@properties-file-checksum@@"      value="${md5.properties-file}"/>
-      <replacefilter token="@@user-properties-file-checksum@@" value="${md5.userproperties-file}"/>
+      <replacefilter token="@@user-file-checksum@@" value="${md5.userproperties-file}"/>
       <replacefilter token="@@war-file-checksum@@"             value="${md5.war-file}"/>
       <replacefilter token="@@last-modified@@"                 value="${last.modified}"/>
       <replacefilter token="@@download-url-location@@"         value="${download.url.location}"/>
-      <replacefilter token="@@download-url-params@@"           value="${download.url.params}"/>
+      <replacefilter token="@@build-num@@"                     value="${revision.max-with-flags}"/>
       <replacefilter token="@@plugin-version@@"                value="${plugin.version}"/>
-      <replacefilter token="@@build-number@@"                  value="${build.number}"/>
       <replacefilter token="@@plugin-impl-version@@"           value="${plugin.version}"/>
     </replace>
 
-    <zip basedir="${build}/packages" destfile="${dist}/nielm-websrv-plugin-${plugin.version}.zip">
+    <zip basedir="${build}/packages" destfile="${dist}/${pkg.plugin.name}">
        <include name="*.zip"/>
        <include name="*.xml"/>
     </zip>
@@ -221,6 +224,20 @@
   </target>
 
   <target name="dist" depends="zip-jetty,dist-plugin"/>
+
+  <target name="deliver" depends="dist">
+	<available file="${gc.upload.settings}" property="gc.upload.enable" />
+	<fail message="${gc.upload.settings} file does not exist!" unless="gc.upload.enable" />
+	<property file="${gc.upload.settings}" />
+	<fail message="gc.username must be defined in ${gc.upload.settings}" unless="gc.username" />
+	<fail message="gc.password must be defined in ${gc.upload.settings}" unless="gc.password" />
+	<taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" name="gcupload" />
+	<gcupload username="${gc.username}" password="${gc.password}" projectname="sagetv-addons" filename="${build}/packages/${pkg.context.name}" targetfilename="${pkg.context.name}" summary="nielm web interface app context file" labels="QA-Snapshot,Type-Plugin,OpSys-All" />
+	<gcupload username="${gc.username}" password="${gc.password}" projectname="sagetv-addons" filename="${build}/packages/${pkg.jar.name}" targetfilename="${pkg.jar.name}" summary="nielm web interface jar file" labels="QA-Snapshot,Type-Plugin,OpSys-All" />
+  	<gcupload username="${gc.username}" password="${gc.password}" projectname="sagetv-addons" filename="${build}/packages/${pkg.props.name}" targetfilename="${pkg.props.name}" summary="nielm web interface properties files" labels="QA-Snapshot,Type-Plugin,OpSys-All" />
+  	<gcupload username="${gc.username}" password="${gc.password}" projectname="sagetv-addons" filename="${build}/packages/${pkg.user.name}" targetfilename="${pkg.user.name}" summary="nielm web interface user files" labels="QA-Snapshot,Type-Plugin,OpSys-All" />
+  	<gcupload username="${gc.username}" password="${gc.password}" projectname="sagetv-addons" filename="${build}/packages/${pkg.war.name}" targetfilename="${pkg.war.name}" summary="nielm web interface war file" labels="QA-Snapshot,Type-Plugin,OpSys-All" />
+  </target>
 
   <target name="clean"
         description="clean up" >
