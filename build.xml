@@ -9,9 +9,9 @@
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
   <property name="sage.jar" value="C:\Program Files\SageTV\SageTV\Sage.jar" />
-  <property name="libs" location="X:\" />
+  <property name="sage.libs" location="X:\" />
   <path id="bld.jars">
-    <fileset dir="${libs}">
+    <fileset dir="${sage.libs}">
       <include name="*.jar" />
     </fileset>
     <pathelement path="${sage.jar}" />
