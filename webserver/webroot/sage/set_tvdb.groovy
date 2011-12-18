@@ -34,4 +34,4 @@ if(!src) {
 		return
 }
 Mc2XmlEpgUtils.setTvdbId(src, params['tvdb'].toInteger())
-response.sendRedirect("/sage/DetailedInfo?AiringId=${AiringAPI.GetAiringID(src)}")
+response.sendRedirect("DetailedInfo?AiringId=${AiringAPI.GetAiringID(src)}")

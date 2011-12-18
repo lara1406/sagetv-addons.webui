@@ -357,4 +357,17 @@
 	<servlet-name>Groovy</servlet-name>
 	<url-pattern>*.groovy</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>GspHandler</servlet-name>
+	<servlet-class>groovy.servlet.TemplateServlet</servlet-class>
+	<init-param>
+		<param-name>template.engine</param-name>
+		<param-value>net.sf.sageplugins.webserver.groovy.templates.IncludeTemplateEngine</param-value>
+	</init-param>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>GspHandler</servlet-name>
+	<url-pattern>*.gsp</url-pattern>
+  </servlet-mapping>
 </web-app>

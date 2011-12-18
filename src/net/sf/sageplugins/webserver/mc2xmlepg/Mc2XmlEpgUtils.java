@@ -30,7 +30,7 @@ public class Mc2XmlEpgUtils {
 		String extId = ShowAPI.GetShowExternalID(airing);
 		if(!extId.startsWith("EP")) return;
 		int tvdbId = getTvdbId(airing);
-		w.println(String.format("<p>TVDB ID: <form method=\"POST\" action=\"groovy/set_tvdb.groovy\" enctype=\"application/x-www-form-urlencoded\"><input type=\"hidden\" name=\"a\" value=\"%d\"/><input type=\"text\" size=\"2\" value=\"%d\" name=\"tvdb\"/><input type=\"submit\" name=\"submit\" value=\"Edit\"/></form></p>", AiringAPI.GetAiringID(airing), tvdbId));
+		w.println(String.format("<p>TVDB ID: <form method=\"POST\" action=\"set_tvdb.groovy\" enctype=\"application/x-www-form-urlencoded\"><input type=\"hidden\" name=\"a\" value=\"%d\"/><input type=\"text\" size=\"2\" value=\"%d\" name=\"tvdb\"/><input type=\"submit\" name=\"submit\" value=\"Edit\"/></form></p>", AiringAPI.GetAiringID(airing), tvdbId));
 	}
 	
 	static public int getTvdbId(Object airing) {

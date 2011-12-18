@@ -1,4 +1,3 @@
-<!-- TODO wiki -->
 <SageTVPlugin>
   <Name>SageTV Web Interface</Name>
   <Identifier>Web</Identifier>
@@ -6,19 +5,23 @@
   <Author>nielm, jreichen, Slugger</Author>
   <CreationDate>2004.11.18</CreationDate>
   <ModificationDate>@@last-modified@@</ModificationDate>
-  <Version>@@plugin-impl-version@@</Version>
+  <Version>@@plugin-impl-version@@.@@build-num@@</Version>
   <Desktop>false</Desktop>
-  <ResourcePath>web</ResourcePath>
+  <ResourcePath>webserver</ResourcePath>
   <Webpage title="Web Interface Wiki">http://tools.assembla.com/sageplugins/wiki/WebServer</Webpage>
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.32
+1. Add support for GSP processing; provide base GSP templates for easy (new) page creation
+2. Reluctantly rearrange Groovlet and GSP file locations to maintain legacy file layout structure
+ 
 Version 2.31
 1. Move source code to sagetv-addons project at Google Code
 2. Various build modifications to support new project home
 3. Add support to modify tvdb series ids used by mc2xmlepg plugin
 4. Enhancements/fixes to Favorites Editor
-
+ 
 Version 2.30
 1. Support V7.1 Channel Logos
 2. Fix header logo links to return to Home page

@@ -4,7 +4,7 @@
 
   <!-- set global properties for this build -->
   <property file="build.properties"/>
-  <property name="plugin.version" value="2.31"/>
+  <property name="plugin.version" value="2.32"/>
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
@@ -129,6 +129,10 @@
     <zip destfile="${build}/packages/${pkg.props.name}">
       <zipfileset prefix="webserver" dir="${build}/packages/properties">
         <include name="readme.txt"/>
+        <include name="transcode.properties"/>
+      </zipfileset>
+      <zipfileset prefix="webserver" dir="webserver/templates">
+        <include name="*.gsp"/>
         <include name="transcode.properties"/>
       </zipfileset>
     </zip>

@@ -37,14 +37,14 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.code.sagetvaddons.license.License;
-
 import net.sf.sageplugins.sageutils.SageApi;
 import net.sf.sageplugins.sageutils.Translate;
 import net.sf.sageplugins.webserver.mc2xmlepg.Mc2XmlEpgUtils;
 import net.sf.sageplugins.webserver.utils.PluginUtils;
 import sagex.api.AiringAPI;
+import sagex.api.ShowAPI;
 
+import com.google.code.sagetvaddons.license.License;
 
 /**
  * @author Owner
@@ -502,6 +502,16 @@ public class DetailedInfoServlet extends SageServlet {
     		getAndDisplay(out,"","GetShowMisc",airing);
     		getAndDisplay(out,"Language: ","GetShowLanguage",airing);
     		getAndDisplay(out,"Show ID: ","GetShowExternalID",airing);
+    		if(!AiringAPI.IsNotManualOrFavorite(airing.sageAiring) && PluginUtils.isServerPluginInstalled("sre")) {
+        		String showId = ShowAPI.GetShowExternalID(airing.sageAiring);
+        		if(showId != null && showId.length() > 0) {
+        			com.google.code.sagetvaddons.sre.engine.DataStore ds = com.google.code.sagetvaddons.sre.engine.DataStore.getInstance();
+        			out.print("<p>SRE Status: " + com.google.code.sagetvaddons.sre.engine.MonitorStatus.getToolTip(ds.getMonitorStatusByObj(airing.sageAiring).toString()) + String.format(" &lt;<a href=\"sre4.groovy?a=edit&id=%1$d\">Edit</a> | <a href=\"sre4.groovy?a=delete&id=%1$d\">Delete</a>&gt;</p>", AiringAPI.GetAiringID(airing.sageAiring)));
+        			com.google.code.sagetvaddons.sre.engine.AiringOverride o = ds.getOverrideByObj(airing.sageAiring);
+        			if(o != null)
+        				out.print(String.format("<p>SRE Override:<ul><li><b>Title:</b> %s</li><li><b>Episode:</b> %s</li></ul></p>", o.getTitle(), o.getSubtitle()));
+        		}
+    		}
     		getAndDisplayRole(out,"Starring: ","Actor;LeadActor;Actress;LeadActress",airing);
     		getAndDisplayRole(out,"Co-Starring: ","Supporting Actor;Supporting Actress",airing);
     		getAndDisplayRole(out,"Guest Stars: ","Guest;Guest Star",airing);
@@ -558,7 +568,7 @@ public class DetailedInfoServlet extends SageServlet {
                 out.println("<p>"+"Internal details: "+"MediaFileID="+Integer.toString(airing.id)); 
     			out.println(", AiringID="+SageApi.Api("GetAiringID",SageApi.Api("GetMediaFileAiring",airing.sageAiring)).toString()+"</p>");
     			if(PluginUtils.isServerPluginInstalled("mc2xmlepg") && License.isLicensed("mc2xmlepg").isLicensed())
-    				Mc2XmlEpgUtils.writeInputForm(out, AiringAPI.GetAiringForID(airing.id));
+    				Mc2XmlEpgUtils.writeInputForm(out, airing.sageAiring);
     			if ( ! SageApi.booleanApi("IsClient",null)&& isVideoFile){
     				out.println("<p><a href=\"EditShowInfo?MediaFileId="+Integer.toString(airing.id)+"\">[Edit Show Info]</a> ");
                     out.println("<p><a href=\"XmlImporter?MediaFileId="+Integer.toString(airing.id)+"\">[Import XML Show Info]</a></p>");
@@ -581,7 +591,7 @@ public class DetailedInfoServlet extends SageServlet {
                 }
                 out.println("<p>"+"Internal details: "+"AiringID="+Integer.toString(airing.id)+"</p>");
     			if(PluginUtils.isServerPluginInstalled("mc2xmlepg") && License.isLicensed("mc2xmlepg").isLicensed())
-    				Mc2XmlEpgUtils.writeInputForm(out, AiringAPI.GetAiringForID(airing.id));
+    				Mc2XmlEpgUtils.writeInputForm(out, airing.sageAiring);
     		}
 
             // Record Options

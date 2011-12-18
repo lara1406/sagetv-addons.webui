@@ -8,5 +8,7 @@
 	<classpathentry kind="var" path="SAGELIB/servlet.jar"/>
 	<classpathentry kind="var" path="SAGELIB/sagex-api.jar"/>
 	<classpathentry kind="var" path="SAGELIB/salicense.jar"/>
+	<classpathentry kind="var" path="SAGELIB/groovy-all-1.7.10.jar"/>
+	<classpathentry kind="var" path="SAGELIB/sre.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
