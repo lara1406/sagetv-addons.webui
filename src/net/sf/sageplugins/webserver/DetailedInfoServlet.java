@@ -42,6 +42,7 @@ import net.sf.sageplugins.sageutils.Translate;
 import net.sf.sageplugins.webserver.mc2xmlepg.Mc2XmlEpgUtils;
 import net.sf.sageplugins.webserver.utils.PluginUtils;
 import sagex.api.AiringAPI;
+import sagex.api.Global;
 import sagex.api.ShowAPI;
 
 import com.google.code.sagetvaddons.license.License;
@@ -502,7 +503,7 @@ public class DetailedInfoServlet extends SageServlet {
     		getAndDisplay(out,"","GetShowMisc",airing);
     		getAndDisplay(out,"Language: ","GetShowLanguage",airing);
     		getAndDisplay(out,"Show ID: ","GetShowExternalID",airing);
-    		if(!AiringAPI.IsNotManualOrFavorite(airing.sageAiring) && PluginUtils.isServerPluginInstalled("sre")) {
+    		if(!AiringAPI.IsNotManualOrFavorite(airing.sageAiring) && PluginUtils.isServerPluginInstalled("sre", "4\\..+") && (!Global.IsClient() || PluginUtils.isClientPluginInstalled("sre", "4\\..+"))) {
         		String showId = ShowAPI.GetShowExternalID(airing.sageAiring);
         		if(showId != null && showId.length() > 0) {
         			com.google.code.sagetvaddons.sre.engine.DataStore ds = com.google.code.sagetvaddons.sre.engine.DataStore.getInstance();

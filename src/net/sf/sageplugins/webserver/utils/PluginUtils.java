@@ -20,10 +20,28 @@ import sagex.api.PluginAPI;
 public class PluginUtils {
 
 	static public boolean isServerPluginInstalled(String id) {
+		return isServerPluginInstalled(id, null);
+	}
+	
+	static public boolean isServerPluginInstalled(String id, String minVerRegex) {
 		if(id == null) return false;
-		for(Object p : PluginAPI.GetInstalledPlugins())
+		return isPluginInstalled(PluginAPI.GetInstalledPlugins(), id, minVerRegex);
+	}
+	
+	static public boolean isClientPluginInstalled(String id) {
+		return isClientPluginInstalled(id, null);
+	}
+	
+	static public boolean isClientPluginInstalled(String id, String minVerRegex) {
+		if(id == null) return false;
+		return isPluginInstalled(PluginAPI.GetInstalledClientPlugins(), id, minVerRegex);
+	}
+	
+	static private boolean isPluginInstalled(Object[] list, String id, String minVerRegex) {
+		if(id == null) return false;
+		for(Object p : list)
 			if(PluginAPI.GetPluginIdentifier(p).toLowerCase().equals(id.toLowerCase()))
-				return true;
+				return minVerRegex != null && minVerRegex.length() > 0 ? PluginAPI.GetPluginVersion(p).matches(minVerRegex) : true;
 		return false;
 	}
 	

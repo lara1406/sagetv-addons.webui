@@ -13,8 +13,9 @@
   <ReleaseNotes>
     <![CDATA[
 Version 2.32
-1. Add support for GSP processing; provide base GSP templates for easy (new) page creation
-2. Reluctantly rearrange Groovlet and GSP file locations to maintain legacy file layout structure
+1. Add support for viewing and editing SRE monitoring data via the web UI (SREv4 only)
+2. Add support for GSP processing; provide base GSP templates for easy (new) page creation
+3. Reluctantly rearrange Groovlet and GSP file locations to maintain legacy file layout structure
  
 Version 2.31
 1. Move source code to sagetv-addons project at Google Code
