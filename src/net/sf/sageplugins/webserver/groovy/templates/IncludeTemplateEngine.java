@@ -175,7 +175,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                             groovySection(reader, sw);
                         }
                     }
-                    continue; // at least '<' is consumed … read next chars.
+                    continue; // at least '<' is consumed ... read next chars.
                 }
                 if (c == '$') {
                     reader.mark(1);
@@ -188,7 +188,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         sw.write("${");
                         processGSstring(reader, sw);
                     }
-                    continue; // at least '$' is consumed … read next chars.
+                    continue; // at least '$' is consumed ... read next chars.
                 }
                 if (c == '\"') {
                     sw.write('\\');

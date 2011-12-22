@@ -131,7 +131,7 @@
         <include name="readme.txt"/>
         <include name="transcode.properties"/>
       </zipfileset>
-      <zipfileset prefix="webserver" dir="webserver/templates">
+      <zipfileset prefix="webserver/templates" dir="webserver/templates">
         <include name="*.gsp"/>
         <include name="transcode.properties"/>
       </zipfileset>

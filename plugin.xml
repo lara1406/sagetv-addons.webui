@@ -12,6 +12,10 @@
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.33
+1. Add support for groovy and GSP processing from plugin resource path
+2. SREv4: Web UI updates to support new GSP policies
+ 
 Version 2.32
 1. Add support for viewing and editing SRE monitoring data via the web UI (SREv4 only)
 2. Add support for GSP processing; provide base GSP templates for easy (new) page creation
