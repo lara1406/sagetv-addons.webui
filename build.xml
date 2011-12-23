@@ -56,9 +56,9 @@
       <fileset dir="${build}/classes" />
       <manifest>
         <attribute name="Specification-Title" value="SageTV Web Interface"/>
-        <attribute name="Specification-Version" value="${plugin.version}"/>
+        <attribute name="Specification-Version" value="${plugin.version}.${revision.max-with-flags}"/>
         <attribute name="Implementation-Title" value="SageTV Web Interface"/>
-        <attribute name="Implementation-Version" value="${plugin.version}"/>
+        <attribute name="Implementation-Version" value="${plugin.version}.${revision.max-with-flags}"/>
       </manifest>
     </jar>
   </target>
