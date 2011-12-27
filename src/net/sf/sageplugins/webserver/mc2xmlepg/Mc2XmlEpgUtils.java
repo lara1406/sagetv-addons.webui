@@ -30,7 +30,8 @@ public class Mc2XmlEpgUtils {
 		String extId = ShowAPI.GetShowExternalID(airing);
 		if(!extId.startsWith("EP")) return;
 		int tvdbId = getTvdbId(airing);
-		w.println(String.format("<p>TVDB ID: <form method=\"POST\" action=\"set_tvdb.groovy\" enctype=\"application/x-www-form-urlencoded\"><input type=\"hidden\" name=\"a\" value=\"%d\"/><input type=\"text\" size=\"2\" value=\"%d\" name=\"tvdb\"/><input type=\"submit\" name=\"submit\" value=\"Edit\"/></form></p>", AiringAPI.GetAiringID(airing), tvdbId));
+		if(tvdbId != -2)
+			w.println(String.format("<p>TVDB ID: <form method=\"POST\" action=\"set_tvdb.groovy\" enctype=\"application/x-www-form-urlencoded\"><input type=\"hidden\" name=\"a\" value=\"%d\"/><input type=\"text\" size=\"2\" value=\"%d\" name=\"tvdb\"/><input type=\"submit\" name=\"submit\" value=\"Edit\"/></form></p>", AiringAPI.GetAiringID(airing), tvdbId));
 	}
 	
 	static public int getTvdbId(Object airing) {
@@ -40,7 +41,12 @@ public class Mc2XmlEpgUtils {
 		Object info = ShowAPI.GetShowSeriesInfo(airing);
 		if(info == null) {
 			Object record = UserRecordAPI.GetUserRecord(STORE_NAME, STORE_KEY);
-			String seriesId = Integer.toString(Integer.parseInt(extId.substring(2, extId.length() - 4)));
+			String seriesId;
+			try {
+				seriesId = Integer.toString(Integer.parseInt(extId.substring(2, extId.length() - 4)));
+			} catch(Exception e) {
+				return -2;
+			}
 			String val = UserRecordAPI.GetUserRecordData(record, seriesId);
 			if(val != null && val.length() > 0)
 				tvdbId = Integer.parseInt(val);

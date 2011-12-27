@@ -15,6 +15,9 @@
 Version 2.33
 1. Add support for groovy and GSP processing from plugin resource path
 2. SREv4: Web UI updates to support new GSP policies
+3. Add media file metadata editor
+4. Add favourite properties editor
+5. Issue 317: tvdb id editor did not handle custom show ids properly
  
 Version 2.32
 1. Add support for viewing and editing SRE monitoring data via the web UI (SREv4 only)
