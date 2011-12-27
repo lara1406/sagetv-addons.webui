@@ -18,6 +18,7 @@ Version 2.33
 3. Add media file metadata editor
 4. Add favourite properties editor
 5. Issue 317: tvdb id editor did not handle custom show ids properly
+6. Issue 320: Add SREv4 status icons where appropriate
  
 Version 2.32
 1. Add support for viewing and editing SRE monitoring data via the web UI (SREv4 only)
