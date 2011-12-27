@@ -791,7 +791,8 @@ public class FavoriteDetailsServlet extends SageServlet {
 		        out.println("            (No Commands)");        
 		        out.println("        </li>");
 		    }
-		    
+		    if(favorite != null && favorite.getID() > 0)
+		    	out.println("<li><a href=\"props_edit.groovy?type=fav&id=" + favorite.getID() + "\">Edit Properties</a></li>");
 		    out.println("    </ul>");
 		    out.println("</div>");//commands
 		    

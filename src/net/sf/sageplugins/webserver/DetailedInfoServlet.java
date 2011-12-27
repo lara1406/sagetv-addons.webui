@@ -43,6 +43,7 @@ import net.sf.sageplugins.webserver.mc2xmlepg.Mc2XmlEpgUtils;
 import net.sf.sageplugins.webserver.utils.PluginUtils;
 import sagex.api.AiringAPI;
 import sagex.api.Global;
+import sagex.api.MediaFileAPI;
 import sagex.api.ShowAPI;
 
 import com.google.code.sagetvaddons.license.License;
@@ -832,6 +833,7 @@ public class DetailedInfoServlet extends SageServlet {
     		out.println("<ul>");
     		
     		if ( airing.idType==Airing.ID_TYPE_MEDIAFILE ) {
+                out.println("<li><a href=\"props_edit.groovy?type=mf&id=" + MediaFileAPI.GetMediaFileID(airing.sageAiring) + "\">Edit Metadata</a></li>\n");
                 if (isMusicFile ){
                     String title=null;
                     String track=airing.getEpisode();
@@ -1050,8 +1052,7 @@ public class DetailedInfoServlet extends SageServlet {
                 if ( SageApi.booleanApi("IsDontLike",new Object[]{airing.sageAiring}))
                     addAction(req,out,"ClearDontLike","Clear Don't Like",airing);
                 else
-                    addAction(req,out,"SetDontLike","Set Don't Like",airing);
-        
+                    addAction(req,out,"SetDontLike","Set Don't Like",airing);        
             }
 
             if (isMusicFile) {
