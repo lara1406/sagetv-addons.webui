@@ -75,6 +75,13 @@ var MENU_ITEMS = [
 			}
 		],		
 		[
+			'UserRecord Editor',
+			'ur.groovy',
+			{
+				'title' :'Edit UserRecord objects'
+			}
+		],		
+		[
 			'Import XML file',
 			'XMLImporter',
 			{
