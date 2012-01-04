@@ -1,5 +1,5 @@
 /*
-*      Copyright 2011 Battams, Derek
+*      Copyright 2011-2012 Battams, Derek
 *      
 *      This is a modified version of the code; original code by nielm, et al.
 *
@@ -337,7 +337,7 @@ public class DetailedInfoServlet extends SageServlet {
                     out.print  ("<img src=\"MarkerArchived.gif\" alt=\"Archived File\"/>");
                 if ( SageApi.booleanApi("IsDontLike",new Object[]{airing.sageAiring}) )
                     out.print  ("<img src=\"MarkerDontLike.gif\" alt=\"Dont Like\"/>");
-                if(PluginUtils.isServerPluginInstalled("sre", "4\\..+") && (!Global.IsClient() || PluginUtils.isClientPluginInstalled("sre", "4\\..+"))) {
+                if(AiringAPI.GetScheduleEndTime(airing.sageAiring) >= System.currentTimeMillis() && PluginUtils.isServerPluginInstalled("sre", "4\\..+") && (!Global.IsClient() || PluginUtils.isClientPluginInstalled("sre", "4\\..+"))) {
                 	com.google.code.sagetvaddons.sre.engine.DataStore ds = com.google.code.sagetvaddons.sre.engine.DataStore.getInstance();
                 	com.google.code.sagetvaddons.sre.engine.MonitorStatus status = ds.getMonitorStatusByObj(airing.sageAiring);
                 	out.print(String.format("<img src=\"sre4/%s.png\" alt=\"%s\" />", status.toString(), com.google.code.sagetvaddons.sre.engine.MonitorStatus.getToolTip(status.toString())));

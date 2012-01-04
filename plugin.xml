@@ -20,6 +20,7 @@ Version 2.33
 5. Issue 317: tvdb id editor did not handle custom show ids properly
 6. Issue 320: Add SREv4 status icons where appropriate
 7. Add UserRecord editor
+8. Add Plugin Manager
  
 Version 2.32
 1. Add support for viewing and editing SRE monitoring data via the web UI (SREv4 only)
@@ -100,6 +101,10 @@ Version 2.27
   </Dependency>
   <Dependency>
   	<Plugin>commons-lang</Plugin>
+  	<MinVersion>1.0</MinVersion>
+  </Dependency>
+  <Dependency>
+  	<Plugin>json</Plugin>
   	<MinVersion>1.0</MinVersion>
   </Dependency>
   <PluginType>Standard</PluginType>

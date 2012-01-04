@@ -1,5 +1,5 @@
 /*
-*      Copyright 2011 Battams, Derek
+*      Copyright 2011-2012 Battams, Derek
 *
 *       Licensed under the Apache License, Version 2.0 (the "License");
 *       you may not use this file except in compliance with the License.
@@ -14,6 +14,9 @@
 *       limitations under the License.
 */
 import sagex.api.*
+import org.json.JSONArray
+
+private final def UR_KEY_REGEX = ~/^UserRecord\[store=.*, key=(.*), props=.*$/
 
 request.setAttribute('pageTitle', 'UserRecord Editor')
 switch(params['a']) {
@@ -28,8 +31,18 @@ switch(params['a']) {
                 UserRecordAPI.SetUserRecordData(record, k, !params["null_$k"] ? params[k] : null)
         response.sendRedirect("ur.groovy?a=edit&name=${params['name']}&key=${params['key']}")
         break
+    case 'qry':
+		def vals = []
+		UserRecordAPI.GetAllUserRecords(params['name']).each {
+        	if(it.toString() ==~ UR_KEY_REGEX)
+                	vals << UR_KEY_REGEX.matcher(it.toString())[0][1]
+		}
+		out << new JSONArray(vals)
+		break
     case 'select':
     default:
+		request.setAttribute('scripts', ['jquery.min.js'])
         request.setAttribute('stores', UserRecordAPI.GetAllUserStores())
         request.getRequestDispatcher('ur_grab.gsp').forward(request, response)
 }
+
