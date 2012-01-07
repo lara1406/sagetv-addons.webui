@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.sageplugins.sageutils.SageApi;
 import net.sf.sageplugins.sageutils.Translate;
 import net.sf.sageplugins.webserver.utils.PluginUtils;
+import sagex.api.AiringAPI;
 import sagex.api.Global;
 
 /**
@@ -373,7 +374,7 @@ public class Airing {
                 out.print  ("<img src=\"MarkerWatched.gif\" alt=\"Watched\"/>");
             else
                 out.print  ("<img src=\"Markerblank.gif\" alt=\"\"/>");
-            if(PluginUtils.isServerPluginInstalled("sre", "4\\..+") && (!Global.IsClient() || PluginUtils.isClientPluginInstalled("sre", "4\\..+"))) {
+            if(!AiringAPI.IsNotManualOrFavorite(sageAiring) && AiringAPI.GetScheduleEndTime(sageAiring) >= System.currentTimeMillis() && PluginUtils.isServerPluginInstalled("sre", "4\\..+") && (!Global.IsClient() || PluginUtils.isClientPluginInstalled("sre", "4\\..+"))) {
             	com.google.code.sagetvaddons.sre.engine.DataStore ds = com.google.code.sagetvaddons.sre.engine.DataStore.getInstance();
             	com.google.code.sagetvaddons.sre.engine.MonitorStatus status = ds.getMonitorStatusByObj(sageAiring);
             	out.print(String.format("<img src=\"sre4/%s.png\" alt=\"%s\" />", status.toString(), com.google.code.sagetvaddons.sre.engine.MonitorStatus.getToolTip(status.toString())));
