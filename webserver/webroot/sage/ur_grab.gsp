@@ -26,7 +26,7 @@
 				url: url,
 				dataType: 'json',
 				success: function() {
-					var html = '';
+					var html = '<option value="">-- Select --</option>';
 					for(var i = 0; i < arguments[0].length; ++i) {
 						html += '<option value="' + \$('<div/>').text(arguments[0][i]).html() + '">' + \$('<div/>').text(arguments[0][i]).html() + '</option>';
 					}
@@ -44,6 +44,7 @@
 	<input type="hidden" name="a" value="edit" />
 	<div>
 		<b>Store:</b> <select name="name" id="name">
+			<option value="">-- Select --</option>
 		<% for(String s : request.getAttribute('stores')) { %>
 			<option value="${StringEscapeUtils.escapeHtml(s)}">${StringEscapeUtils.escapeHtml(s)}</option>
 		<% } %>
