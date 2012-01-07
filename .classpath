@@ -10,5 +10,6 @@
 	<classpathentry kind="var" path="SAGELIB/groovy-all-1.7.10.jar"/>
 	<classpathentry kind="var" path="SAGELIB/sre.jar"/>
 	<classpathentry kind="var" path="SAGELIB/sagex-api.jar"/>
+	<classpathentry kind="var" path="SAGELIB/gtools.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

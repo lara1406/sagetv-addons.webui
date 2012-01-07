@@ -1,63 +1,31 @@
 package net.sf.sageplugins.webserver;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.sageplugins.sageutils.SageApi;
 
+import com.google.code.sagetvaddons.groovy.api.GlobalHelpers;
+
 
 public class ExtenderCommandServlet extends SageServlet {
 
     static public boolean isExtender(String uicontext) {
-        try {
-            return ((Boolean)SageApi.ApiUI(uicontext, "IsRemoteUI")).booleanValue()
-            && !((Boolean)SageApi.ApiUI(uicontext, "IsDesktopUI")).booleanValue();
-        } catch (InvocationTargetException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
-        return false;
+    	return GlobalHelpers.isMacAddrExtender(uicontext);
     }
 
     static public boolean isPlaceshifter(String uicontext) {
-        try {
-            return ((Boolean)SageApi.ApiUI(uicontext, "IsRemoteUI")).booleanValue()
-            && ((Boolean)SageApi.ApiUI(uicontext, "IsDesktopUI")).booleanValue();
-        } catch (InvocationTargetException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
-        return false;
+    	return GlobalHelpers.isMacAddrPlaceshifter(uicontext);
     }
     
 	static public boolean isMvp(String uicontext){
-	    try {
-	        return isExtender(uicontext) &&
-		        SageApi.ApiUI(uicontext, "GetAudioOutputOptions")==null;
-        } catch (InvocationTargetException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
-        return false;
+		return GlobalHelpers.isMacAddrMediaMVP(uicontext);
 	}
 
     static public boolean isHDExtender(String uicontext){
-        try {
-            return isExtender(uicontext) &&
-                SageApi.ApiUI(uicontext, "GetAudioOutputOptions")!=null;
-        } catch (InvocationTargetException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
-        return false;
+    	return GlobalHelpers.isMacAddrExtender(uicontext) && !GlobalHelpers.isMacAddrMediaMVP(uicontext);
     }
 	/**
 	 * 
@@ -201,172 +169,25 @@ public class ExtenderCommandServlet extends SageServlet {
 		}
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		if ( args.length!=2){
-			System.out.println("Usage: MvpPowerServlet [IPaddr|UIContextMACAddress] [poweroff|reboot]");
-			return;
-		}
-		Object ret;
-		if ( args[1].equalsIgnoreCase("poweroff"))
-			ret=mvpPowerOff(args[0]);
-		else if ( args[1].equalsIgnoreCase("reboot"))
-			ret=mvpReboot(args[0]);
-		else {
-			System.out.println("Usage: MvpPowerServlet [IPaddr|UIContextMACAddress] [poweroff|reboot]");
-			return;
-		}
-		if (ret instanceof String) {
-			String error = (String) ret;
-			System.out.println("Failed: "+error);
-		} else {
-			System.out.println("Success");
-		}
-		
-
-	}
 	public static Object mvpReboot(String uiContext){
-		return mvpCommand(uiContext, "killall miniclient;sleep 1;reboot");
+		GlobalHelpers.rebootExtenderMacAddr(uiContext);
+		return true;
 	}
 	
 	public static Object mvpPowerOff(String uiContext){
-		return mvpCommand(uiContext, "killall miniclient");
+		try {
+			GlobalHelpers.powerOffExtenderMacAddr(uiContext);
+			return true;
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 
 	public static Object stxPowerOff(String uiContext){
-        return mvpCommand(uiContext, "poweroff");
-    }
-    public static Object stxReboot(String uiContext){
-        return mvpCommand(uiContext, "reboot");
+        return mvpPowerOff(uiContext);
     }
 	
-	private static Object mvpCommand(String uiContext,String command){
-		// check Mac or IP
-		if ( uiContext.matches("(\\d{1,3}\\.){3}\\d{1,3}")){
-			try {
-				InetAddress ipaddr=InetAddress.getByName(uiContext);
-				return mvpCommand(ipaddr,command);
-			} catch (java.net.UnknownHostException e){}
-		}
-		// assume Mac
-		uiContext=uiContext.toLowerCase().replaceAll("[^a-f0-9]", "");
-		if ( uiContext.length()!=12){
-			return "Invalid Mac address: cleaned should be 12 chars: "+uiContext;
-		}
-		final Process p;
-		try {
-			// Windows arp output 
-			// c:\ arp -a
-			//
-			// Interface: 192.168.0.3 --- 0x9
-			//  Internet Address      Physical Address      Type
-			//  192.168.0.1           00-0f-b5-af-0d-48     dynamic
-			//  192.168.0.50          00-11-2f-ea-21-02     dynamic
-			
-			// Linux arp output:
-			// $arp -an
-			// ? (192.168.0.1)           00:0f:b5:af:0d:48
-			// ? (192.168.0.50)          00:11:2f:ea:21:02
-			
-			if ( true || SageApi.booleanApi("IsWindowsOs", null)) {
-				p=Runtime.getRuntime().exec("arp -a");
-			} else {
-				p=Runtime.getRuntime().exec("arp -an");
-			}
-			
-			try {
-				Thread errGobbler=new Thread() {
-					public void run() {
-						BufferedReader in = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-						String line;
-						try {
-							while((line=in.readLine())!=null){
-								System.out.println("Arp: stderr: "+line);
-							}
-							in.close();	
-						} catch (IOException e){}
-					}
-				};
-				errGobbler.start();
-				String line;
-				InetAddress addr=null;
-				BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-				try {
-					Pattern pat=Pattern.compile("^.*?(([0-9]{1,3}.){3}[0-9]{1,3}).+?(([0-9a-f]{2}[:\\-.]){5}[0-9a-f]{2}).*$",Pattern.CASE_INSENSITIVE);
-					while((line=in.readLine())!=null){
-						System.out.println("Arp: stdout: "+line);
-						java.util.regex.Matcher m=pat.matcher(line);
-						if ( m.matches()){
-							if ( m.group(3).toLowerCase().replaceAll("[^a-f0-9]", "")
-									.equals(uiContext))
-							{
-								try {
-									addr=InetAddress.getByName(m.group(1));
-								} catch (java.net.UnknownHostException e){
-									System.out.println("arp "+e);
-								}
-							}
-						}
-					}
-					in.close();
-					if ( addr!=null)
-						return mvpCommand(addr,command);
-				} catch (IOException e){}
-			}
-			finally {
-				try {
-					System.out.println("arp exited with "+p.exitValue());
-				}catch (IllegalThreadStateException e){
-					System.out.println("Terminating ARP");
-					p.destroy();
-					p.getOutputStream().close(); // close stdin
-				}
-			}
-			return "Could not determine IP address for UI Context"; 
-			
-		}
-		catch (Exception e) {
-			System.out.println("Getting IP for MAC " +e);
-		}
-		return "Could not determine IP address for UI Context - Arp failed";
-		
-	}
-	static Object mvpCommand(InetAddress ipaddr, String command){
-		System.out.println("powering off extender at "+ipaddr);
-		
-		PrintWriter out =null;
-		BufferedReader in =null;
-		java.net.Socket sock =null;
-		try {
-			sock = new java.net.Socket(ipaddr,23);
-			out = new PrintWriter(sock.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-            out.println("root");
-            out.println();
-            out.println(command);
-            out.println("exit");
-            String line;
-            while ((line=in.readLine())!=null){
-            	System.out.println("Extender: "+line);
-            }
-		} catch (Exception e){
-			e.printStackTrace();
-			return "Failed to connect to extender at "+ipaddr.getHostAddress()+" -- "+e;
-			
-		} finally {
-			try {
-				if ( out!=null)
-					out.close();
-				if ( in != null)
-					in.close();
-				if ( sock != null)
-					sock.close();
-			} catch (Exception e){}
-		}
-		
-		return Boolean.TRUE;
-	}
-
+    public static Object stxReboot(String uiContext){
+        return mvpReboot(uiContext);
+    }	
 }
