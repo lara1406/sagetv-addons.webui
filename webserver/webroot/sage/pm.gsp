@@ -19,6 +19,7 @@
 */
 
 import sagex.api.*
+PluginAPI.RefreshAvailablePlugins()
 def result = request.getAttribute('result')
 if(result != null) {
 	if(result.class == Boolean) {
