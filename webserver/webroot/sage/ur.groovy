@@ -16,7 +16,7 @@
 import sagex.api.*
 import org.json.JSONArray
 
-private final def UR_KEY_REGEX = ~/^UserRecord\[store=.*, key=(.*), props=.*$/
+final def UR_KEY_REGEX = ~/^UserRecord\[store=.*, key=(.*), props=.*$/
 
 request.setAttribute('pageTitle', 'UserRecord Editor')
 switch(params['a']) {
