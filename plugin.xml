@@ -12,6 +12,9 @@
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.35
+1. Fixes to support Groovy 2.0
+ 
 Version 2.34
 1. Increase min version of sagetv-addons license plugin required to allow client installs
 2. Issue 334: Refresh plugin manifest from server on each load of the Plugin Manager web UI
@@ -96,7 +99,7 @@ Version 2.27
   </Dependency>
   <Dependency>
   	<Plugin>groovy</Plugin>
-  	<MinVersion>1.7.10</MinVersion>
+  	<MinVersion>2.0.5</MinVersion>
   </Dependency>
   <Dependency>
   	<Plugin>sagex-api</Plugin>

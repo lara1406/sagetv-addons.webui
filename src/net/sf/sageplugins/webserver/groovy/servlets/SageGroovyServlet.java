@@ -16,40 +16,48 @@
 package net.sf.sageplugins.webserver.groovy.servlets;
 
 import groovy.servlet.GroovyServlet;
-import groovy.util.ResourceException;
+import groovy.util.GroovyScriptEngine;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
+
+import javax.servlet.http.HttpServletRequest;
 
 public final class SageGroovyServlet extends GroovyServlet {
 
 	static private final long serialVersionUID = 1L;
 	
-	// Majority of this code copied from Groovy 1.8.4 src; slight mods to support purpose
 	@Override
-	public URLConnection getResourceConnection(String name) throws ResourceException {        
+	protected GroovyScriptEngine createGroovyScriptEngine() {
+		File warRoot = new File(getServletContext().getRealPath("/"));
+		String[] roots = new String[] {
+			warRoot.getAbsolutePath(),
+			new File(warRoot, "/WEB-INF/groovy").getAbsolutePath(),
+			new File("webserver/groovy").getAbsolutePath()
+		};
 		try {
-			URLConnection c = super.getResourceConnection(name);
-			return c;
-		} catch(ResourceException e) {
-	        while (name.startsWith(ServletHelpers.SCRIPT_DIR.getAbsolutePath())) name = name.substring(ServletHelpers.SCRIPT_DIR.getAbsolutePath().length());
-	        name = name.replaceAll("\\\\", "/");
-
-	        //remove the leading / as we are trying with a leading / now
-	        if (name.startsWith("/")) name = name.substring(1);
-	        
-			File script = new File(ServletHelpers.SCRIPT_DIR, name);
-			if(script.canRead()) {
-				try {
-					URL url = new URL("file", "", script.getAbsolutePath());
-					return url.openConnection();
-				} catch(IOException x) {
-					throw new ResourceException("IOError", x);
-				}
-			} else
-				throw new ResourceException(String.format("Script not found! [%s]", script.getAbsolutePath()));
+			return new GroovyScriptEngine(roots);
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
+
+	@Override
+	protected String getScriptUri(HttpServletRequest req) {
+		return req.getServletPath().substring(1);
+	}
+
+	@Override
+	protected File getScriptUriAsFile(HttpServletRequest req) {
+		File warRoot = new File(getServletContext().getRealPath("/"));
+		String scriptUri = getScriptUri(req);
+		for(File root : new File[] { warRoot, new File(warRoot, "/WEB-INF/groovy"), new File("webserver/groovy") }) {
+			File src = new File(root, scriptUri);
+			if(src.exists())
+				return src;
+		}
+		return null;
+	}
 }
+
