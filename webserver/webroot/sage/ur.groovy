@@ -41,7 +41,6 @@ switch(params['a']) {
 		break
     case 'select':
     default:
-		request.setAttribute('scripts', ['jquery.min.js'])
         request.setAttribute('stores', UserRecordAPI.GetAllUserStores())
         request.getRequestDispatcher('ur_grab.gsp').forward(request, response)
 }
