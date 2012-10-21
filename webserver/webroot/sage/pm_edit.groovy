@@ -110,7 +110,11 @@ def getOpts(def plugin) {
 			case 'Multichoice':
 			case 'Choice':
 				vals['html'] = new StringBuilder("<select name=\"$it\"" + (type == 'Multichoice' ? 'multiple="multiple"' : '') + '>')
-				PluginAPI.GetPluginConfigOptions(plugin, it).each {	vals['html'].append("<option value=\"$it\">$it</option>\n") }
+				def curVal = PluginAPI.GetPluginConfigValue(plugin, it)
+				PluginAPI.GetPluginConfigOptions(plugin, it).each {
+					def selTxt = curVal == it ? 'selected="selected"' : ''
+					vals['html'].append("<option value=\"$it\" $selTxt>$it</option>\n")
+				}
 				vals['html'].append('</select>\n')
 				vals['html'] = vals['html'].toString()
 				break

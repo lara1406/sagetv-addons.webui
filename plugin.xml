@@ -12,6 +12,10 @@
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.36
+1. Fix Plugin Manager bug where list options were not defaulting to the current value
+2. Use new jQuery based menu; allows for user injected custom additions
+ 
 Version 2.35
 1. Fixes to support Groovy 2.0
  
