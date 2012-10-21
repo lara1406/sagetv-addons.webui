@@ -25,12 +25,35 @@
                 <link rel="stylesheet"  type="text/css" media="print" href="/sage/sage_print.css"/>
                 <link rel="stylesheet"  type="text/css" media="handheld" href="/sage/sage_handheld.css"/>
                 <link rel="Shortcut Icon" href="/sage/favicon.ico" type="image/x-icon"/>
+                <link rel="stylesheet" type="text/css" href="/sage/ddsmoothmenu.css" />
+				<link rel="stylesheet" type="text/css" href="/sage/ddsmoothmenu-v.css" />
+
+				<script type="text/javascript" src="/sage/jquery.min.js"></script>
+				<script type="text/javascript" src="/sage/ddsmoothmenu.js">
+					/***********************************************
+					* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+					* This notice MUST stay intact for legal use
+					* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+					***********************************************/
+				</script>
+
+				<script type="text/javascript">
+					ddsmoothmenu.init({
+						mainmenuid: "smoothmenu1", //menu DIV id
+						orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+						classname: 'ddsmoothmenu', //class added to menu's outer DIV
+						//customtheme: ["#1c5a80", "#18374a"],
+						contentsource: ["menuContainer", "/sage/menu.groovy"]
+					})
+				</script>
+                
                 <script type="text/javascript" src="/sage/sage.js"></script>
                 <% for(def url : request.getAttribute('scripts')) { %>
                 	<script type="text/javascript" src="$url"></script>
                 <% } %>
         </head>
         <body>
+        		<div id="menuContainer"></div>
                 <div id="title">
                         <h1><a href="/sage/index.html" title="home"><img id="logoimg" src="/sage/sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>${request.getAttribute('pageTitle') ?: ''}</h1>
                 </div>

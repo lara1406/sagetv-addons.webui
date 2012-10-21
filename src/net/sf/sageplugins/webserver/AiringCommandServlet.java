@@ -461,13 +461,13 @@ public class AiringCommandServlet extends SageServlet {
 		    xhtmlHeaders(out);
 		    out.println("<head>");
 		    jsCssImport(req, out);
+			printMenu(out);
 		    out.println("<title>InternalCommand</title></head>");
 		    out.println("<body>");
 		    printTitle(out,"");
 		    out.println("<div id=\"content\">");
 		    out.print("Applied command: "+command+" on "+Integer.toString(airings.size())+" airings");
 		    out.println("</div>");
-		    printMenu(req,out);
 		    out.println("</body></html>");
 		    out.close();
 		} 
@@ -489,6 +489,7 @@ public class AiringCommandServlet extends SageServlet {
 				xhtmlHeaders(out);
 				out.println("<head>");
 				jsCssImport(req, out);
+				printMenu(out);
 				if (airings.size() == 1) {
 				    out.println("<title>Convert Media File</title></head>");
 				} else {
@@ -609,7 +610,6 @@ public class AiringCommandServlet extends SageServlet {
 		        out.println("</form>");
 				out.println("</div>");//content
                 printFooter(req,out);
-				printMenu(out);
 				out.println("</body></html>");
 				out.close();
 
@@ -710,6 +710,7 @@ public class AiringCommandServlet extends SageServlet {
 				xhtmlHeaders(out);
 				out.println("<head>");
 				jsCssImport(req, out);
+				printMenu(out);
 				out.println("<title>Convert Media File(s)</title></head>");
 				out.println("<body>");
 			    printTitle(out,"Converting Media File(s)");
@@ -747,7 +748,6 @@ public class AiringCommandServlet extends SageServlet {
 				SageApi.Api("SetProperty",new Object[]{"transcoder/last_format_quality/"+formatArr[0], transcodeMode});
 				
 				out.println("</div>");//content
-				printMenu(out);
 				out.println("</body></html>");
 				out.close();
 			}

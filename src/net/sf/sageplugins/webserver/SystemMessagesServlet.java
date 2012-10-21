@@ -46,6 +46,7 @@ public class SystemMessagesServlet extends SageServlet {
 			xhtmlHeaders(out);
 			out.println("<head>");
 			jsCssImport(req, out);
+			printMenu(out);
             String rssurl = GetRssUrl(req, "SystemMessages");
 			out.println("<title>System Messages</title>");
 			if (SystemMessageApi.isSupported())
@@ -57,7 +58,7 @@ public class SystemMessagesServlet extends SageServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-            out.println("<div id=\"title\">");
+            out.println("<div id=\"menuContainer\"></div><div id=\"title\">");
             out.println("   <h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>System Messages");
             if (SystemMessageApi.isSupported())
             {
@@ -172,7 +173,6 @@ public class SystemMessagesServlet extends SageServlet {
 			}		    
 			printFooter(req,out);
 			out.println("</div>");//content
-			printMenu(out);
 			out.println("</body></html>");
 			out.close();
 		} catch (Throwable e) {

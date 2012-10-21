@@ -116,6 +116,7 @@ public class HomeServlet extends SageServlet {
 		    xhtmlHeaders(out);
 		    out.println("<head>");
 		    jsCssImport(req, out);
+			printMenu(out);
 		    out.println("<title>SageTV Web Interface</title>");
 		    out.println("</head>");
 		    out.println("<body>");
@@ -580,7 +581,6 @@ public class HomeServlet extends SageServlet {
 		    out.println("<p><a href=\"GlobalCommand?command=UpdateMediaLibrary\" title=\"Click this to rescan the imported media directories\">[Rescan Media Library]</a></p>");		    
 		    printFooter(req,out);
 		    out.println("</div>");
-		    printMenu(out);
 		    out.println("</body></html>");
 		    out.close();
         } catch (Throwable e) {

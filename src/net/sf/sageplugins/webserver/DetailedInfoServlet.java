@@ -151,6 +151,7 @@ public class DetailedInfoServlet extends SageServlet {
     		xhtmlHeaders(out);
     		out.println("<head>");
     		jsCssImport(req, out);
+    		printMenu(out);
     
             out.println("<title>"+"Detailed Information for "+Translate.encode(airing.getTitle())+"</title>"); 
     		out.println("</head>");
@@ -1151,7 +1152,6 @@ public class DetailedInfoServlet extends SageServlet {
     
             printFooter(req,out);
             out.println("</div>");//content
-    		printMenu(out);
     		out.println("</body></html>");
     		out.close();
         } catch (Throwable e) {

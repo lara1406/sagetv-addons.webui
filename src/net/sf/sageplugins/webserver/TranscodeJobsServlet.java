@@ -29,6 +29,7 @@ public class TranscodeJobsServlet extends SageServlet {
 			xhtmlHeaders(out);
 			out.println("<head>");
 			jsCssImport(req, out);
+			printMenu(out);
 			out.println("<title>Video Conversions</title>");
 			out.println("</head>");
 			out.println("<body>");
@@ -195,7 +196,6 @@ public class TranscodeJobsServlet extends SageServlet {
 			}		    
 			printFooter(req,out);
 			out.println("</div>");//content
-			printMenu(out);
 			out.println("</body></html>");
 			out.close();
 		} catch (Throwable e) {

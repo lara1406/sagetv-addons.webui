@@ -156,25 +156,19 @@ public abstract class SageServlet extends HttpServlet {
     }
     
     static protected void printMenu(PrintWriter out){
-        out.println(
-                "<!-- start menu bar -->\r\n" +
-                "<script language=\"JavaScript\" type=\"text/javascript\">\r\n" +
-                "<!--//\r\n" +
-                "var MENU_ITEMS = null;\r\n" +
-                "//-->\r\n" +
-                "</script>\r\n" +
-                "<script language=\"JavaScript\" type=\"text/javascript\" src=\"menu_core.js\"></script>\r\n" +
-                "<script language=\"JavaScript\" type=\"text/javascript\" src=\"menu_items.js\"></script>\r\n" +
-                "<script language=\"JavaScript\" type=\"text/javascript\" src=\"menu_style.js\"></script>\r\n" +
-                "<script language=\"JavaScript\" type=\"text/javascript\">\r\n" +
-                "<!--//\r\n" +
-                "if ( MENU_ITEMS==null ) { \r\n" +
-                "   alert(\"Error in menu_items.js - check syntax\");\r\n" +
-                "} else {\r\n"+
-                "  doMenu(MENU_ITEMS, MENU_POS);\r\n" +
-                "}\r\n" +
-                "//-->\r\n" +
-        "</script>");
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/sage/ddsmoothmenu.css\" />\n");
+    	sb.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/sage/ddsmoothmenu-v.css\" />\n");
+    	sb.append("<script type=\"text/javascript\" src=\"/sage/jquery.min.js\"></script>\n");
+    	sb.append("<script type=\"text/javascript\" src=\"/sage/ddsmoothmenu.js\"></script>\n");
+    	sb.append("<script type=\"text/javascript\">\n");
+    	sb.append("ddsmoothmenu.init({\n");
+    	sb.append("mainmenuid: \"smoothmenu1\", //menu DIV id\n");
+    	sb.append("orientation: 'h',\n");
+    	sb.append("classname: 'ddsmoothmenu',\n");
+    	sb.append("contentsource: [\"menuContainer\", \"/sage/menu.groovy\"]\n");
+    	sb.append("})</script>\n");
+    	out.print(sb.toString());
     }
 
     /**
@@ -197,13 +191,14 @@ public abstract class SageServlet extends HttpServlet {
                 "</p>");
     }
     static protected void printTitle(PrintWriter out, String screenname) {
+    	out.println("<div id=\"menuContainer\"></div>");
         out.println("<div id=\"title\">");
         out.println("<h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>"+screenname+"</h1>");
         out.println("</div>");
         
     }
     static protected void printTitleWithXml(PrintWriter out, String screenname,HttpServletRequest req) {
-        out.println("<div id=\"title\">"+
+        out.println("<div id=\"menuContainer\"></div>\n<div id=\"title\">"+
                     "<h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>"+screenname+"\r\n"+
                     "<a href=\""+GetXmlUrl(req)+"\" title=\"Return page in XML\"><img src=\"xml_button.png\" alt=\"[XML]\"/></a>\r\n" +
                     "</h1></div>");

@@ -54,6 +54,7 @@ public class ExtenderCommandServlet extends SageServlet {
 	            xhtmlHeaders(out);
 	            out.println("<head>");
 	            jsCssImport(req, out);
+	            printMenu(out);
 	            out.println("<title>Command confirmation required</title></head>");
 	            out.println("<body>");
 	            printTitle(out,"Confirmation required:");
@@ -72,7 +73,6 @@ public class ExtenderCommandServlet extends SageServlet {
 	            out.println("<input type=\"submit\" name=\"confirm\" value=\"no\"/>");
 	            out.println("</form>");
 	            out.println("</div>");
-	            printMenu(out);
 	            out.println("</body></html>");
 	            out.close();
 	            return;

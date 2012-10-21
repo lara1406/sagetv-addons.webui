@@ -72,6 +72,7 @@ public class IRSuggestionsServlet extends SageServlet {
 		    xhtmlHeaders(out);
 		    out.println("<head>");
 		    jsCssImport(req, out);
+		    printMenu(out);
 		    out.println("<title>Sage Intelligent Suggestions</title>");
             String rssurl=GetRssUrl(req, "IRSuggestions");
             out.println("<link rel=\"alternate\" type=\"application/rss+xml\""
@@ -80,7 +81,7 @@ public class IRSuggestionsServlet extends SageServlet {
 		    out.println("</head>");
 		    out.println("<body>");
 		    
-            out.println("<div id=\"title\">"+
+            out.println("<div id=\"menuContainer\"></div><div id=\"title\">"+
                     "<h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>Sage Intelligent Suggestions\r\n"+
                     "<a href=\""+GetXmlUrl(req)+"\" title=\"Return page in XML\"><img src=\"xml_button.png\" alt=\"[XML]\"/></a>\r\n" +
                     "<a href=\""+rssurl+"\" title=\"RSS feed for this page\"><img src=\"rss_button.png\" alt=\"[RSS]\"/></a>\r\n" +

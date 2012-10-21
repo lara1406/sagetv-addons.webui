@@ -1,0 +1,53 @@
+<div id="smoothmenu1" class="ddsmoothmenu">
+	<ul id="menuRoot">
+		<li id="menuSagetv"><a href="#">SageTV</a>
+			<ul>
+				<li><a href="/sage/Home">Home</a></li>
+				<li><a href="/sage/Recordings">Recordings</a></li>
+				<li><a href="/sage/Search?searchType=TVFiles&amp;sort1=title_asc&amp;sort2=airdate_asc">Search Recorded TV</a></li>
+				<li><a href="/sage/webremote.html?context=SAGETV_PROCESS_LOCAL_UI&amp;contextname=Local%20SageTV">Web Remote</a></li>
+				<li><a href="/sage/TranscodeJobs">Video Conversions</a></li>
+				<li><a href="/sage/SystemMessages">System Messages</a></li>
+				<li><a href="/sage/pm.gsp">Plugin Manager</a></li>
+				<li><a href="/sage/ur.groovy">UserRecord Editor</a></li>
+				<li><a href="/sage/XMLImporter">Import XML File</a></li>
+				<li><a href="/sage/about.html">About</a></li>
+			</ul>
+		</li>
+		<li id="menuRecSched"><a href="#">Schedule Recordings</a>
+			<ul>
+				<li><a href="/sage/RecordingSchedule">Upcoming Recordings</a></li>
+				<li><a href="/sage/IRSuggestions">Intelligent Suggestions</a></li>
+				<li><a href="/sage/Favorites">Favorites Manager</a></li>
+				<li><a href="/sage/TimedRecord">Timed Recording</a></li>
+				<li><a href="/sage/Conflicts">Recording Conflicts</a></li>
+			</ul>
+		</li>
+		<li id="menuGuide"><a href="#">Program Guide</a>
+			<ul>
+				<li><a href="/sage/EpgList">EPG List View</a></li>
+				<li><a href="/sage/EpgGrid">EPG Grid View</a></li>
+				<li><a href="/sage/EpgChannel">EPG Channel View</a></li>
+				<li><a href="/sage/Search">Search EPG</a></li>
+				<li><a href="/sage/EpgGrid?starthr=18">Today's Primetime</a></li>
+				<li><a href="/sage/EpgGrid?starthr=18&amp;startdate=1">Tomorrow's Primetime</a></li>
+				<li><a href="/sage/Search?TimeRange=48&amp;Categories=film&amp;Categories=movie&amp;Categories=Movie&amp;SearchString=">Upcoming Movies</a></li>
+				<li><a href="/sage/Search?TimeRange=48&amp;favorite=set&amp;SearchString=">Upcoming Favorites</a></li>
+				<li><a href="/sage/Search?SearchString=&amp;searchType=Airings&amp;grouping=GetAiringTitle&amp;TimeRange=-1&amp;watched=set&amp;sort1=airdate_desc&amp;sort2=none">Watched Shows</a></li>
+				<li><a href="/sage/Search?SearchString=&amp;searchType=Airings&amp;grouping=GetAiringTitle&amp;TimeRange=-1&amp;dontlike=set&amp;sort1=title_asc&amp;sort2=airdate_asc">Don't Like Shows</a></li>
+			</ul>
+		</li>
+		<li id="menuLib"><a href="#">Media Library</a>
+			<ul>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;DVD=on&amp;sort1=title_asc&amp;sort2=none">Search DVDs</a></li>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;Video=on&amp;sort1=title_asc&amp;sort2=none">Search Imported Videos</a></li>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;Music=on&amp;search_fields=episode&amp;sort1=episode_asc&amp;sort2=none">Search Music by Track Title</a></li>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;Music=on&amp;grouping=GetAiringTitle&amp;search_fields=people&amp;sort1=people_asc&amp;sort2=episode_asc">Search Music by Artist</a></li>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;Music=on&amp;grouping=GetAiringTitle&amp;search_fields=title&amp;sort1=title_asc&amp;sort2=episode_asc">Search Music by Album</a></li>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;Music=on&amp;grouping=GetAiringTitle&amp;search_fields=category&amp;sort1=title_asc&amp;sort2=episode_asc">Search Music by Genre</a></li>
+				<li><a href="/sage/Search?searchType=MediaFiles&amp;Picture=on&amp;sort1=title_asc&amp;sort2=none">Search Picture Files</a></li>
+				<li><a href="/sage/PlaylistGenerator?Command=list">Export Playlists</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>

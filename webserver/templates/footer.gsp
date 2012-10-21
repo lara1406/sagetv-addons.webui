@@ -26,21 +26,6 @@ import net.sf.sageplugins.webserver.Version
 
                         <a href="http://jigsaw.w3.org/css-validator/"><img  src="valid-css.gif"  alt="Valid CSS2!" height="31" width="88" /></a>
                         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZPBAK9WRNH2BQ"><img src="//www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
-</p>
                 </div>
-                <!-- start menu bar -->
-                <script language="JavaScript" type="text/javascript"><!--//     var MENU_ITEMS = null; //--></script>
-                <script language="JavaScript" type="text/javascript" src="/sage/menu_core.js"></script>
-                <script language="JavaScript" type="text/javascript" src="/sage/menu_items.js"></script>
-                <script language="JavaScript" type="text/javascript" src="/sage/menu_style.js"></script>
-                <script language="JavaScript" type="text/javascript">
-                <!--//
-                        if ( MENU_ITEMS==null ) {
-                                alert("Error in menu_items.js - check syntax");
-                        } else {
-                                doMenu(MENU_ITEMS, MENU_POS);
-                        }
-                //-->
-                </script>
         </body>
 </html>

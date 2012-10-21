@@ -43,13 +43,13 @@ public class XmlImporterServlet extends SageServlet {
             xhtmlHeaders(out);
             out.println("<head>");
             jsCssImport(req, out);
+    		printMenu(out);
             out.println("<title>Import Sage XML</title></head>");
             out.println("<body>");
             printTitle(out,"Import Sage XML: Error");
             out.println("<div id=\"content\">");
             out.println("<h3>Cannot run in the context of a client</h3>");
             out.println("</div>");
-            printMenu(req,out);
             out.println("</body></html>");
             out.close();
             return;
@@ -72,6 +72,7 @@ public class XmlImporterServlet extends SageServlet {
         xhtmlHeaders(out);
         out.println("<head>");
         jsCssImport(req, out);
+		printMenu(out);
         out.println("<title>Import Sage XML</title></head>");
         out.println("<body>");
 
@@ -91,7 +92,6 @@ public class XmlImporterServlet extends SageServlet {
                 out.println("Invalid MediaFileID: "+e);
                 out.println("</form>");
                 out.println("</div>");//content
-                printMenu(out);
                 out.println("</body></html>");
                 out.close();
                 return;
@@ -101,7 +101,6 @@ public class XmlImporterServlet extends SageServlet {
                 out.println("cannot import show info for DVDs");
                 out.println("</form>");
                 out.println("</div>");//content
-                printMenu(out);
                 out.println("</body></html>");
                 out.close();
                 return;
@@ -110,7 +109,6 @@ public class XmlImporterServlet extends SageServlet {
                 out.println("argument is not a Sage Media File");
                 out.println("</form>");
                 out.println("</div>");//content
-                printMenu(out);
                 out.println("</body></html>");
                 out.close();
                 return;
@@ -188,7 +186,6 @@ public class XmlImporterServlet extends SageServlet {
         
         printFooter(req,out);
         out.println("</div>");//content
-        printMenu(out);
         out.println("</body></html>");
         out.close();
     }
@@ -286,6 +283,7 @@ public class XmlImporterServlet extends SageServlet {
             xhtmlHeaders(out);
             out.println("<head>");
             jsCssImport(req, out);
+    		printMenu(out);
             out.println("<title>Import Sage XML</title></head>");
             out.println("<body>");
 
@@ -303,7 +301,6 @@ public class XmlImporterServlet extends SageServlet {
                 } catch (Exception e){
                     out.println("Invalid MediaFileID: "+e);
                     out.println("</div>");//content
-                    printMenu(out);
                     out.println("</body></html>");
                     out.close();
                     return;
@@ -312,7 +309,6 @@ public class XmlImporterServlet extends SageServlet {
                 if ( pastedStringReader != null && fileReader!=null ) {
                     out.println("Error: can only use either pasted XML or uploaded file, not both");
                     out.println("</div>");//content
-                    printMenu(out);
                     out.println("</body></html>");
                     out.close();
                     return;
@@ -321,7 +317,6 @@ public class XmlImporterServlet extends SageServlet {
                 if ( (directoryXml != null ) && (directoryXml.trim().length() > 0)) {
                     out.println("Error: directory import feature cannot be used when attaching to a single media file");
                     out.println("</div>");//content
-                    printMenu(out);
                     out.println("</body></html>");
                     out.close();
                     return;
@@ -336,7 +331,6 @@ public class XmlImporterServlet extends SageServlet {
                         out.println(Translate.encode(reader.getLastError()));
                     out.println("</pre>");
                     out.println("</div>");//content
-                    printMenu(out);
                     out.println("</body></html>");
                     out.close();
                     return;
@@ -354,7 +348,6 @@ public class XmlImporterServlet extends SageServlet {
                             reader.getAiringsWithMediaFiles().size()+reader.getAiringsWithoutMediaFiles().size()+
                             " airings - it must contain 1 single airing for this function to work.");
                     out.println("</div>");//content
-                    printMenu(out);
                     out.println("</body></html>");
                     out.close();
                     return;
@@ -373,7 +366,6 @@ public class XmlImporterServlet extends SageServlet {
                                               forceUnviewableChannel,impShowOverwrite,
                                               impMFRename,impMFRedate, impMFOverwrite);
                 out.println("</pre></div>");//content
-                printMenu(out);
                 out.println("</body></html>");
                 out.close();
                 return;
@@ -393,7 +385,6 @@ public class XmlImporterServlet extends SageServlet {
                     if (listing == null) {
                         out.println(directory.getPath() + " is not a valid directory on the server");
                         out.println("</div>");//content
-                        printMenu(out);
                         out.println("</body></html>");
                         out.close();
                         return;
@@ -420,7 +411,6 @@ public class XmlImporterServlet extends SageServlet {
                 } else {
                     out.println("Error: no input data was entered");
                     out.println("</div>");//content
-                    printMenu(out);
                     out.println("</body></html>");
                     out.close();
                     return;
@@ -446,7 +436,6 @@ public class XmlImporterServlet extends SageServlet {
                 }
             }
             out.println("</div>");//content
-            printMenu(out);
             out.println("</body></html>");
             out.flush();
             out.close();

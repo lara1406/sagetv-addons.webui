@@ -43,6 +43,7 @@ public class GlobalCommandServlet extends SageServlet {
 			out.println("<html>" +
 			"<head><title>Force EPG Update</title>");
 			jsCssImport(req, out);
+			printMenu(out);
 			out.println("</head><body>");
 			printTitle(out,"Force EPG Update");
 			out.println("<div id=\"content\">");
@@ -75,6 +76,7 @@ public class GlobalCommandServlet extends SageServlet {
 			out.println("<html>" +
 			"<head><title>Refresh Media Library</title>");
 			jsCssImport(req, out);
+			printMenu(out);
 			out.println("</head><body>");
 			printTitle(out,"Refresh Media Library");
 			out.println("<div id=\"content\">");
@@ -113,7 +115,6 @@ public class GlobalCommandServlet extends SageServlet {
 		}
 		
 		out.println("</div>"); //content
-		printMenu(out);
 		out.println("</body></html>");
 		out.close();
 	}

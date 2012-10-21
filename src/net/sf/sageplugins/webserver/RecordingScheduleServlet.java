@@ -88,6 +88,7 @@ public class RecordingScheduleServlet extends SageServlet {
 		    xhtmlHeaders(out);
 		    out.println("<head>");
 		    jsCssImport(req, out);
+		    printMenu(out);
             String rssurl = GetRssUrl(req, "RecordingSchedule");
 		    out.println("<title>Recording Schedule</title>");
 		    out.println("<link rel=\"alternate\" type=\"application/rss+xml\""
@@ -96,7 +97,7 @@ public class RecordingScheduleServlet extends SageServlet {
             
 		    out.println("</head>");
 		    out.println("<body>");
-            out.println("<div id=\"title\">"+
+            out.println("<div id=\"menuContainer\"></div><div id=\"title\">"+
                     "<h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>Recording Schedule\r\n"+
                     "<a href=\""+GetXmlUrl(req)+"\" title=\"Return page in XML\"><img src=\"xml_button.png\" alt=\"[XML]\"/></a>\r\n" +
                     "<a href=\""+rssurl.toString()+"\" title=\"RSS feed for this page\"><img src=\"rss_button.png\" alt=\"[RSS]\"/></a>\r\n" +

@@ -131,6 +131,7 @@ public class RecordingsServlet extends SageServlet {
             xhtmlHeaders(out);
             out.println("<head>");
             jsCssImport(req, out);
+            printMenu(out);
             out.println("<title>Sage Recordings</title>");
             out.println("</head>");
             out.println("<body onload=\"hideAll()\">");
