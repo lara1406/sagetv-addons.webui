@@ -59,7 +59,7 @@ public class EpgChannelServlet extends EpgServlet {
 		    out.println("<title>TV Guide</title>");
 		    out.println("</head>");
 		    out.println("<body>");
-		    printTitle(out,"TV guide");
+		    printTitle(out,"TV guide", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 		    SimpleDateFormat fmt=new SimpleDateFormat("EEE, MMM d");
 		    int cellheight=Integer.parseInt(GetOption(req,"channel_cell_height","120"));

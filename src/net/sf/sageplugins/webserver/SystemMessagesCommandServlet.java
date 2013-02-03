@@ -75,7 +75,7 @@ public class SystemMessagesCommandServlet extends SageServlet {
 	            jsCssImport(req, out);
 	            out.println("<title>InternalCommand</title></head>");
 	            out.println("<body>");
-	            printTitle(out,"Error");
+	            printTitle(out,"Error", SageServlet.isTitleBroken(req));
 	            out.println("<div id=\"content\">");
 	            out.println("<h3>No command passed</h3>");
 	            out.println("</div>");
@@ -93,7 +93,7 @@ public class SystemMessagesCommandServlet extends SageServlet {
 	        jsCssImport(req, out);
 	        out.println("<title>SystemMessageCommand</title></head>");
 	        out.println("<body>");
-	        printTitle(out,"Error");
+	        printTitle(out,"Error", SageServlet.isTitleBroken(req));
 	        out.println("<div id=\"content\">");
 	        out.println("<h3>Unable to perform action on SystemCommand</h3>");
 	        e.printStackTrace();
@@ -123,7 +123,7 @@ public class SystemMessagesCommandServlet extends SageServlet {
 		    jsCssImport(req, out);
 		    out.println("<title>InternalCommand</title></head>");
 		    out.println("<body>");
-		    printTitle(out,"");
+		    printTitle(out,"", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 		    out.print("Applied command on system messages");
 		    out.println("</div>");

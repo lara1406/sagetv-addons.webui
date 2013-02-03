@@ -1,8 +1,6 @@
 <project name="Nielm's SageTV Web Interface for Jetty" default="dist" basedir=".">
-  <!-- Import svn tasks -->
-  <taskdef resource="org/tigris/subversion/svnant/svnantlib.xml" />
-
   <!-- set global properties for this build -->
+  <property name="plugin.version" value="2.37" />
   <property file="build.properties"/>
   <property name="src" location="src"/>
   <property name="build" location="build"/>
@@ -32,17 +30,13 @@
     <mkdir dir="${build}/packages/war"/>
     <mkdir dir="${build}/packages/warfiles"/>
     <mkdir dir="${dist}"/>
-  	
-    <svn javahl="true">
-		<wcVersion path="." />
-   		<propget path="." name="app.version" property="plugin.version" />
-    </svn>
-    <property name="pkg.context.name" value="nielm-websrv-context-file-${plugin.version}.${revision.max-with-flags}.zip" />
-  	<property name="pkg.jar.name" value="nielm-websrv-jar-file-${plugin.version}.${revision.max-with-flags}.zip" />
-  	<property name="pkg.props.name" value="nielm-websrv-properties-file-${plugin.version}.${revision.max-with-flags}.zip" />
-  	<property name="pkg.user.name" value="nielm-websrv-user-file-${plugin.version}.${revision.max-with-flags}.zip" />
-  	<property name="pkg.war.name" value="nielm-websrv-war-file-${plugin.version}.${revision.max-with-flags}.zip" />
-  	<property name="pkg.plugin.name" value="nielm-websrv-plugin-${plugin.version}.${revision.max-with-flags}.zip" />
+
+  	<property name="pkg.context.name" value="nielm-websrv-context-file-${plugin.version}.zip" />
+  	<property name="pkg.jar.name" value="nielm-websrv-jar-file-${plugin.version}.zip" />
+  	<property name="pkg.props.name" value="nielm-websrv-properties-file-${plugin.version}.zip" />
+  	<property name="pkg.user.name" value="nielm-websrv-user-file-${plugin.version}.zip" />
+  	<property name="pkg.war.name" value="nielm-websrv-war-file-${plugin.version}.zip" />
+  	<property name="pkg.plugin.name" value="nielm-websrv-plugin-${plugin.version}.zip" />
   </target>
 
   <target name="compile" depends="init"
@@ -56,9 +50,9 @@
       <fileset dir="${build}/classes" />
       <manifest>
         <attribute name="Specification-Title" value="SageTV Web Interface"/>
-        <attribute name="Specification-Version" value="${plugin.version}.${revision.max-with-flags}"/>
+        <attribute name="Specification-Version" value="${plugin.version}"/>
         <attribute name="Implementation-Title" value="SageTV Web Interface"/>
-        <attribute name="Implementation-Version" value="${plugin.version}.${revision.max-with-flags}"/>
+        <attribute name="Implementation-Version" value="${plugin.version}"/>
       </manifest>
     </jar>
   </target>
@@ -215,7 +209,6 @@
       <replacefilter token="@@war-file-checksum@@"             value="${md5.war-file}"/>
       <replacefilter token="@@last-modified@@"                 value="${last.modified}"/>
       <replacefilter token="@@download-url-location@@"         value="${download.url.location}"/>
-      <replacefilter token="@@build-num@@"                     value="${revision.max-with-flags}"/>
       <replacefilter token="@@plugin-version@@"                value="${plugin.version}"/>
       <replacefilter token="@@plugin-impl-version@@"           value="${plugin.version}"/>
     </replace>

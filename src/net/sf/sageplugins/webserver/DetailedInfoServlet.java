@@ -106,7 +106,7 @@ public class DetailedInfoServlet extends SageServlet {
 			PrintWriter out = getGzippedWriter(req,resp);
             out.println("<head><title>"+"Detailed Information"+"</title></head>");
             out.println("<body>");
-            printTitle(out,"Error");
+            printTitle(out,"Error", SageServlet.isTitleBroken(req));
             out.println("<div id=\"content\">");
             out.println("<h3>"+e.getMessage()+"</h3>");
             out.println("</div>");

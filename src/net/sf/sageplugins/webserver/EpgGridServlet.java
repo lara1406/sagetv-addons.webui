@@ -57,7 +57,7 @@ public class EpgGridServlet extends EpgServlet {
             out.println("<title>TV Guide</title>");
             out.println("</head>");
             out.println("<body>");
-            printTitle(out,"TV guide");
+            printTitle(out,"TV guide", SageServlet.isTitleBroken(req));
             out.println("<div id=\"content\">");
             SimpleDateFormat fmt=new SimpleDateFormat("EEE, MMM d");
             int cellsize=Integer.parseInt(GetOption(req,"grid_cell_size","240"));

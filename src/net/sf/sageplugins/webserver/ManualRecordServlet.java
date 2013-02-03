@@ -47,7 +47,7 @@ public class ManualRecordServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Manual Record</title></head>");
 			out.println("<body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<h3>Unknown Airing/MediaFile ID passed</h3>");
 			out.println("</div>");
@@ -66,7 +66,7 @@ public class ManualRecordServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Manual Record</title></head>");
 			out.println("<body>");
-		    printTitle(out,"Error");
+		    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 			out.println("<h3>No command passed</h3>");
 			out.println("</div>");
@@ -85,7 +85,7 @@ public class ManualRecordServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Manual Record</title></head>");
 			out.println("<body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<h3>Invalid command passed</h3>");
 			out.println("</div>");
@@ -130,7 +130,7 @@ public class ManualRecordServlet extends SageServlet {
 				jsCssImport(req, out);
 				out.println("<title>Manual Record</title></head>");
 				out.println("<body>");
-			    printTitle(out,"Error");
+			    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 				out.println("<div id=\"content\">");
 				out.println("<h3>Invalid padding arguments passed</h3>");
 				out.println("</div>");
@@ -174,7 +174,7 @@ public class ManualRecordServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Manual Record</title></head>");
 			out.println("<body>");
-		    printTitle(out,"Error");
+		    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<p>Cannot record this episode of <a href=\"DetailedInfo?"+airing.getIdArg()+"\">"+airingTitle+"</a> because it would coflict with the following manual recording(s)</p>");
 			out.println("<p>You must cancel one of the following recordings and re-set this manual recording</p>");
@@ -255,7 +255,7 @@ public class ManualRecordServlet extends SageServlet {
 					jsCssImport(req, out);
 					out.println("<title>Manual Record</title></head>");
 					out.println("<body>");
-				    printTitle(out,"Error");
+				    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 					out.println("<div id=\"content\">");
 					out.println("<h3>Invalid recording quality passed</h3>");
 					out.println("</div>");
@@ -293,7 +293,7 @@ public class ManualRecordServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Manual Record</title></head>");
 			out.println("<body>");
-			printTitle(out,"");
+			printTitle(out,"", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.print("Applied command: "+command+" on "+airingTitle);
 			String ep=airing.getEpisode();

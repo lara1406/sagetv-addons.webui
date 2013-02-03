@@ -46,7 +46,7 @@ public class XmlImporterServlet extends SageServlet {
     		printMenu(out);
             out.println("<title>Import Sage XML</title></head>");
             out.println("<body>");
-            printTitle(out,"Import Sage XML: Error");
+            printTitle(out,"Import Sage XML: Error", SageServlet.isTitleBroken(req));
             out.println("<div id=\"content\">");
             out.println("<h3>Cannot run in the context of a client</h3>");
             out.println("</div>");
@@ -76,7 +76,7 @@ public class XmlImporterServlet extends SageServlet {
         out.println("<title>Import Sage XML</title></head>");
         out.println("<body>");
 
-        printTitle(out,"Import Sage XML Info");
+        printTitle(out,"Import Sage XML Info", SageServlet.isTitleBroken(req));
         out.println("<div id=\"content\">");
          
         out.println("<h3>Warning: This is an experimental feature. \n" +
@@ -287,7 +287,7 @@ public class XmlImporterServlet extends SageServlet {
             out.println("<title>Import Sage XML</title></head>");
             out.println("<body>");
 
-            printTitle(out,"Import Sage XML Info Results:");
+            printTitle(out,"Import Sage XML Info Results:", SageServlet.isTitleBroken(req));
             out.println("<div id=\"content\">");
             if ( mediaFileID!=null) {
                 // import a single airing and associate with an existing mediaFile

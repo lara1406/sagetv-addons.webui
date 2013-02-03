@@ -102,7 +102,7 @@ public class PlaylistGeneratorServlet extends SageServlet {
 	    		    jsCssImport(req, out);
 	    		    out.println("<title>Playlist Manager</title></head>");
 	    		    out.println("<body>");
-	    		    printTitle(out,"Playlists");
+	    		    printTitle(out,"Playlists", SageServlet.isTitleBroken(req));
 	    		    out.println("<div id=\"content\">");
 	    		    out.println("<table border=\"1\">");
 	    		    out.println("<tr><td>Name</td><td>Content</td><td colspan=\"2\" align=\"center\">Export</td></tr>");
@@ -265,7 +265,7 @@ public class PlaylistGeneratorServlet extends SageServlet {
 				jsCssImport(req, out);
 				out.println("<title>Playlist Manager</title></head>");
 				out.println("<body>");
-			    printTitle(out,"Error");
+			    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			    out.println("<div id=\"content\">");
 				out.println("<h3>Invalid command passed</h3>");
 				out.println("<pre>Request can be:\r\n"+
@@ -305,7 +305,7 @@ public class PlaylistGeneratorServlet extends SageServlet {
     		jsCssImport(req, out);
     		out.println("<title>Playlist Manager</title></head>");
     		out.println("<body>");
-    		printTitle(out,"Error");
+    		printTitle(out,"Error", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 			out.println("<h3>"+e.getMessage()+"</h3>");
 			out.println("<pre>"+e.toString());

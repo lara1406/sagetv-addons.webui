@@ -55,7 +55,7 @@ public class FavoriteCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>InternalCommand</title></head>");
 			out.println("<body>");
-		    printTitle(out,"Error");
+		    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 			out.println("<h3>No command passed</h3>");
 			out.println("</div>");
@@ -74,7 +74,7 @@ public class FavoriteCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>InternalCommand</title></head>");
 			out.println("<body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<h3>Invalid command passed</h3>");
 			out.println("</div>");
@@ -203,7 +203,7 @@ public class FavoriteCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>FavoriteCommand</title></head>");
 			out.println("<body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<h3>Unable to perform action "+command+" on Favorite</h3>");
 			out.println("id:" + id + " -- " + e.toString());
@@ -238,7 +238,7 @@ public class FavoriteCommandServlet extends SageServlet {
 		    jsCssImport(req, out);
 		    out.println("<title>InternalCommand</title></head>");
 		    out.println("<body>");
-		    printTitle(out,"");
+		    printTitle(out,"", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 		    out.print("Applied command: " + command + " on favorite");
 		    out.println("</div>");

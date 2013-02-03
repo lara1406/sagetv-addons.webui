@@ -33,7 +33,7 @@ public class TranscodeJobsServlet extends SageServlet {
 			out.println("<title>Video Conversions</title>");
 			out.println("</head>");
 			out.println("<body>");
-			printTitle(out,"Video Conversions");
+			printTitle(out,"Video Conversions", SageServlet.isTitleBroken(req));
 
 
 			out.println("<div id=\"content\">\r\n");

@@ -65,7 +65,7 @@ public class TimedRecordServlet extends SageServlet {
 		out.println("<title>Create Timed Recording</title>");
 	    out.println("</head>");
 	    out.println("<body>");
-	    printTitle(out,"Create Timed Recording");
+	    printTitle(out,"Create Timed Recording", SageServlet.isTitleBroken(req));
 	    out.println("<div id=\"content\">\r\n");
 	    		
 		if ( req.getParameterMap()==null || req.getParameterMap().isEmpty()) {

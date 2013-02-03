@@ -77,7 +77,7 @@ public class FavoriteDetailsServlet extends SageServlet {
                 PrintWriter out = getGzippedWriter(req,resp);
                 out.println("<head><title>"+"Favorite Information"+"</title></head>");
                 out.println("<body>");
-                printTitle(out,"Error");
+                printTitle(out,"Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>"+e.getMessage()+"</h3>");
                 out.println("</div>");
@@ -127,7 +127,7 @@ public class FavoriteDetailsServlet extends SageServlet {
 		                    if (person == null) {
 		                        out.println("<title>New Favorite</title></head>");
 		                        out.println("<body>");
-		                        printTitle(out,"Error");
+		                        printTitle(out,"Error", SageServlet.isTitleBroken(req));
 		                        out.println("<div id=\"content\">");
 		                        out.println("<h3>Category, title, keyword, or person required for new favorite.</h3>");
 		                        out.println("</div>");
@@ -171,7 +171,7 @@ public class FavoriteDetailsServlet extends SageServlet {
 		    out.println("</head>");
 		    out.println("<body>");
 		    if (isNew) {
-		        printTitle(out,"New Favorite");
+		        printTitle(out,"New Favorite", SageServlet.isTitleBroken(req));
 		    } else {
 		        printTitleWithXml(out,"Favorite Details",req);
 		    }

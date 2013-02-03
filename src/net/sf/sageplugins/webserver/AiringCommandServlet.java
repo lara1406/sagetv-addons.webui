@@ -129,7 +129,7 @@ public class AiringCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>InternalCommand</title></head>");
 			out.println("<body>");
-		    printTitle(out,"Error");
+		    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 			out.println("<h3>No command passed</h3>");
 			out.println("</div>");
@@ -148,7 +148,7 @@ public class AiringCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>InternalCommand</title></head>");
 			out.println("<body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<h3>Invalid command passed</h3>");
 			out.println("</div>");
@@ -195,7 +195,7 @@ public class AiringCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>InternalCommand</title></head>");
 			out.println("<body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("<h3>Unknown Airing/MediaFile ID passed</h3>");
 			out.println("type:"+currType+" id:"+currId+" --"+e.toString());
@@ -227,7 +227,7 @@ public class AiringCommandServlet extends SageServlet {
                     jsCssImport(req, out);
                     out.println("<title>InternalCommand</title></head>");
                     out.println("<body>");
-                    printTitle(out,"");
+                    printTitle(out,"", SageServlet.isTitleBroken(req));
                     out.println("<div id=\"content\">");
                     out.print("Command cancelled");
                     out.println("</div>");
@@ -248,7 +248,7 @@ public class AiringCommandServlet extends SageServlet {
                     jsCssImport(req, out);
                     out.println("<title>Command confirmation required</title></head>");
                     out.println("<body>");
-                    printTitle(out,"Confirmation required:");
+                    printTitle(out,"Confirmation required:", SageServlet.isTitleBroken(req));
                     out.println("<div id=\"content\">");
                     out.println("<p>Attempting to perfom command \""+params.commandDesc+"\" on the following "+airings.size()+" shows requires confirmation:</p>");
                     boolean showFileSize=GetOption(req,"ShowFileSize","true").equalsIgnoreCase("true");
@@ -333,7 +333,7 @@ public class AiringCommandServlet extends SageServlet {
                       "<head><title>SageTV Airing Command</title>");
                     jsCssImport(req, out);
                     out.println("</head><body>");
-                    printTitle(out,"Error");
+                    printTitle(out,"Error", SageServlet.isTitleBroken(req));
                     out.println("<div id=\"content\">");
                     if ( context == null )
                         out.println("<p>No UI Context Specified:<br/>");
@@ -464,7 +464,7 @@ public class AiringCommandServlet extends SageServlet {
 			printMenu(out);
 		    out.println("<title>InternalCommand</title></head>");
 		    out.println("<body>");
-		    printTitle(out,"");
+		    printTitle(out,"", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 		    out.print("Applied command: "+command+" on "+Integer.toString(airings.size())+" airings");
 		    out.println("</div>");
@@ -497,9 +497,9 @@ public class AiringCommandServlet extends SageServlet {
 				}
 				out.println("<body>");
                 if (airings.size() == 1) {
-                    printTitle(out,"Convert Media File");
+                    printTitle(out,"Convert Media File", SageServlet.isTitleBroken(req));
                 } else {
-                    printTitle(out,"Convert Media Files");
+                    printTitle(out,"Convert Media Files", SageServlet.isTitleBroken(req));
                 }
 	            out.println("<div id=\"content\">");
 	            boolean showFileSize=GetOption(req,"ShowFileSize","true").equalsIgnoreCase("true");
@@ -713,7 +713,7 @@ public class AiringCommandServlet extends SageServlet {
 				printMenu(out);
 				out.println("<title>Convert Media File(s)</title></head>");
 				out.println("<body>");
-			    printTitle(out,"Converting Media File(s)");
+			    printTitle(out,"Converting Media File(s)", SageServlet.isTitleBroken(req));
 				out.println("<h3>Converting Media file(s):</h3>");
 	            out.println("<div id=\"content\">");
 				
@@ -760,7 +760,7 @@ public class AiringCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Convert Media File(s): Error</title></head>");
 			out.println("<body>");
-		    printTitle(out,"Convert Media File(s): Error");
+		    printTitle(out,"Convert Media File(s): Error", SageServlet.isTitleBroken(req));
 			out.println("<h3>Failed to convert media file(s):</h3>");
             out.println("<div id=\"content\">");
             boolean showFileSize=GetOption(req,"ShowFileSize","true").equalsIgnoreCase("true");

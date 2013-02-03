@@ -54,6 +54,9 @@
         </head>
         <body>
         		<div id="menuContainer"></div>
+        		<% if(request.getHeader('User-Agent').contains('Firefox/')) { %>
+        			<br/>
+        		<% } %>
                 <div id="title">
                         <h1><a href="/sage/index.html" title="home"><img id="logoimg" src="/sage/sagelogo.gif" alt="SageTV logo" title="Home Screen" border="0"/></a>${request.getAttribute('pageTitle') ?: ''}</h1>
                 </div>

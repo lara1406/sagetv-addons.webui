@@ -97,7 +97,7 @@ public class MediaFileThumbnailServlet extends SageServlet {
             jsCssImport(req, out);
             out.println("<title>"+"MediaFile Thumbnail Servlet"+"</title></head>"); 
             out.println("<body>");
-            printTitle(out,"Error");
+            printTitle(out,"Error", SageServlet.isTitleBroken(req));
             out.println("<div id=\"content\">");
             out.println("<h3>"+"failed to get thumbnail for mediafile</h3><pre>");
             out.println(e);

@@ -53,7 +53,7 @@ public class CommandServlet extends SageServlet {
 			  "<head><title>SageTV Command</title>");
 			jsCssImport(req, out);
 			out.println("</head><body>");
-			printTitle(out,"Error");
+			printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			if ( command==null )
 			    out.println("<p>No Command Specified:<br/>");
@@ -95,7 +95,7 @@ public class CommandServlet extends SageServlet {
 			  "<head><title>SageTV Command</title>");
 			jsCssImport(req, out);
 			out.println("</head><body>");
-			printTitle(out,"SageTV Command");
+			printTitle(out,"SageTV Command", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("Sent Sage Command: \""+command+"\" to UI with context \""+context+"");
 			out.println("</div></body></html>");

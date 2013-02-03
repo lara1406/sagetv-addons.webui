@@ -60,7 +60,7 @@ public class SetOptionsServlet extends SageServlet {
 			  "<head><title>SetOptions</title>");
 			jsCssImport(req, out);
 			out.println("</head><body>");
-			printTitle(out,"SageTV Command");
+			printTitle(out,"SageTV Command", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			out.println("Options have been set");
 			out.println("</div></body></html>");

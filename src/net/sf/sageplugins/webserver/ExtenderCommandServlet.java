@@ -57,7 +57,7 @@ public class ExtenderCommandServlet extends SageServlet {
 	            printMenu(out);
 	            out.println("<title>Command confirmation required</title></head>");
 	            out.println("<body>");
-	            printTitle(out,"Confirmation required:");
+	            printTitle(out,"Confirmation required:", SageServlet.isTitleBroken(req));
 	            out.println("<div id=\"content\">");
 	            out.println("<p>Are you sure you want to "+command+" the "+
 	            		(isMvp(uicontext)?"MVP":(isHDExtender(uicontext)?"HD Extender":"Placeshifter"))+
@@ -127,7 +127,7 @@ public class ExtenderCommandServlet extends SageServlet {
 				    jsCssImport(req, out);
 				    out.println("<title>Mvp Command</title></head>");
 				    out.println("<body>");
-				    printTitle(out,"");
+				    printTitle(out,"", SageServlet.isTitleBroken(req));
 				    out.println("<div id=\"content\">");
 				    out.print("Applied command: "+command+" on "+uicontext);
 				    out.println("</div>");
@@ -157,7 +157,7 @@ public class ExtenderCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>MVP Command</title></head>");
 			out.println("<body>");
-		    printTitle(out,"Error");
+		    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 			out.println("<h3>Failed to send command to MVP:</h3>");
 			out.println("<pre>"+e.toString()+"</pre>");

@@ -190,12 +190,18 @@ public abstract class SageServlet extends HttpServlet {
                 "       <a href=\"http://jigsaw.w3.org/css-validator/\"><img  src=\"valid-css.gif\"  alt=\"Valid CSS2!\" height=\"31\" width=\"88\" /></a><a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZPBAK9WRNH2BQ\"><img src=\"//www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif\" /></a>\r\n"+
                 "</p>");
     }
-    static protected void printTitle(PrintWriter out, String screenname) {
+    static protected void printTitle(PrintWriter out, String screenname, boolean fixFirefox) {
     	out.println("<div id=\"menuContainer\"></div>");
+    	if(fixFirefox)
+    		out.println("<br/>");
         out.println("<div id=\"title\">");
         out.println("<h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>"+screenname+"</h1>");
         out.println("</div>");
         
+    }
+    static protected boolean isTitleBroken(HttpServletRequest req) {
+    	String hdr = req.getHeader("User-Agent");
+    	return hdr != null && hdr.contains("Firefox/");
     }
     static protected void printTitleWithXml(PrintWriter out, String screenname,HttpServletRequest req) {
         out.println("<div id=\"menuContainer\"></div>\n<div id=\"title\">"+

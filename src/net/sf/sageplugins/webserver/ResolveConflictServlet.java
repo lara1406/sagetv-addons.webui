@@ -31,7 +31,7 @@ public class ResolveConflictServlet extends SageServlet {
 		jsCssImport(req, out);
 		out.println("<title>Resolving Conflicts</title></head>");
 		out.println("<body>");
-	    printTitle(out,"Error");
+	    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 	    out.println("<div id=\"content\">");
 		out.println("<h3>"+err+"</h3>");
 		out.println("</div>");
@@ -138,7 +138,7 @@ public class ResolveConflictServlet extends SageServlet {
 			jsCssImport(req, out);
 			out.println("<title>Resolved Conflicts</title></head>");
 			out.println("<body>");
-		    printTitle(out,"");
+		    printTitle(out,"", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			if ( command.equals("ConfirmManRecOverride")){
 				out.println("Confirmed manual record has priority over favorite");

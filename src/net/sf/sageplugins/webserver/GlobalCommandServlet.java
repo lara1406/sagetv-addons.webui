@@ -45,7 +45,7 @@ public class GlobalCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			printMenu(out);
 			out.println("</head><body>");
-			printTitle(out,"Force EPG Update");
+			printTitle(out,"Force EPG Update", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			Object AllInputs = SageApi.Api("GetConfiguredCaptureDeviceInputs");
 			if ( SageApi.Size(AllInputs)> 0){
@@ -78,7 +78,7 @@ public class GlobalCommandServlet extends SageServlet {
 			jsCssImport(req, out);
 			printMenu(out);
 			out.println("</head><body>");
-			printTitle(out,"Refresh Media Library");
+			printTitle(out,"Refresh Media Library", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
 			SageApi.Api("RunLibraryImportScan",Boolean.FALSE);
 			out.println("<p>Sage is now rescanning all media import directories for new/removed content</p>");
@@ -107,7 +107,7 @@ public class GlobalCommandServlet extends SageServlet {
 				"<head><title>Cancel Transcode Jobs</title>");
 				jsCssImport(req, out);
 				out.println("</head><body>");
-				printTitle(out,"Cancel Transcode Jobs");
+				printTitle(out,"Cancel Transcode Jobs", SageServlet.isTitleBroken(req));
 				out.println("<div id=\"content\">");
 				out.println("<p>Selected transcode jobs have been cancelled</p>");
 				out.println("<p>Returning to <a href=\"Home\">System Info page</a></p>");

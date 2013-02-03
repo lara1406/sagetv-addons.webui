@@ -229,7 +229,7 @@ public class SearchServlet extends SageServlet {
                 out.println("<title>Search Sage Database</title>");
                 out.println("</head>");
                 out.println("<body onload=\"document.SearchForm.SearchString.focus();\">");
-                printTitle(out,"Search");
+                printTitle(out,"Search", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
             }
             

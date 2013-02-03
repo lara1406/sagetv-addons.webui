@@ -1,3 +1,5 @@
 bin
 sagewebserver.jar
 desc
+/build
+/dist

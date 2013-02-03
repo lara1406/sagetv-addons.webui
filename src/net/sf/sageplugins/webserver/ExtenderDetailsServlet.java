@@ -51,7 +51,7 @@ public class ExtenderDetailsServlet extends SageServlet {
             out.println("<title>" + pageTitle + "</title>");
 		    out.println("</head>");
 		    out.println("<body>");
-            printTitle(out,pageTitle);
+            printTitle(out,pageTitle, SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 		    out.println("<div id=\"airdetailedinfo\">");
 		    

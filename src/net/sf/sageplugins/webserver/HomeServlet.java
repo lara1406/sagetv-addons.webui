@@ -120,7 +120,7 @@ public class HomeServlet extends SageServlet {
 		    out.println("<title>SageTV Web Interface</title>");
 		    out.println("</head>");
 		    out.println("<body>");
-		    printTitle(out,"");
+		    printTitle(out,"", SageServlet.isTitleBroken(req));
 		    out.println("<div id=\"content\">");
 		    
 		    boolean usechannellogos=GetOption(req,"UseChannelLogos","true").equalsIgnoreCase("true");

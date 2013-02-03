@@ -140,7 +140,7 @@ public class EditShowInfoServlet extends SageServlet {
         super();
     }
     private void editShow(HttpServletRequest req, HttpServletResponse resp,Airing airing, File file, PrintWriter out) throws Exception {
-        printTitle(out,"Edit Show Info");
+        printTitle(out,"Edit Show Info", SageServlet.isTitleBroken(req));
         out.println("<div id=\"content\">");
 
         // Ok, what do we have to do here...
@@ -726,7 +726,7 @@ public class EditShowInfoServlet extends SageServlet {
     private void printForm(HttpServletRequest req, HttpServletResponse resp,Airing airing, PrintWriter out) throws Exception {
 
         // print form
-        printTitle(out,"Edit Show Info");
+        printTitle(out,"Edit Show Info", SageServlet.isTitleBroken(req));
         out.println("<div id=\"content\">");
         out.println("<h3>Warning: This is an experimental feature, and if things go wrong, you may lose the DB information for the show being edited.<br/>(The file itself should appear in the imported videos)</h3>");
         out.println("<form method='post' action='EditShowInfo' name='EditShowForm'>");
@@ -1037,7 +1037,7 @@ public class EditShowInfoServlet extends SageServlet {
                 airing=new Airing(req);
             } catch ( Exception e) {
 
-                printTitle(out,"Edit Show Info: Error");
+                printTitle(out,"Edit Show Info: Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>Unknown airing/media file ID passed</h3>");
                 out.println("<p>"+e.toString()+"</p>");
@@ -1048,7 +1048,7 @@ public class EditShowInfoServlet extends SageServlet {
                 return;
             }
             if ( ! OVERRIDE_CLIENT_CHECK && SageApi.booleanApi("IsClient",null) ) {
-                printTitle(out,"Edit Show Info: Error");
+                printTitle(out,"Edit Show Info: Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>Cannot run in the context of a client</h3>");
                 out.println("</div>");
@@ -1058,7 +1058,7 @@ public class EditShowInfoServlet extends SageServlet {
                 return;
             }
             if ( airing.idType != Airing.ID_TYPE_MEDIAFILE){
-                printTitle(out,"Edit Show Info: Error");
+                printTitle(out,"Edit Show Info: Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>No MediaFile passed</h3>");
                 out.println("</div>");
@@ -1067,7 +1067,7 @@ public class EditShowInfoServlet extends SageServlet {
                 out.close();
             }
             if ( ! SageApi.booleanApi("IsVideoFile",new Object[]{airing.sageAiring})){
-                printTitle(out,"Edit Show Info: Error");
+                printTitle(out,"Edit Show Info: Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>Can only edit show info for video files</h3>");
                 out.println("</div>");
@@ -1077,7 +1077,7 @@ public class EditShowInfoServlet extends SageServlet {
             }
             Object SegmentFiles=SageApi.Api("GetSegmentFiles",airing.sageAiring);
             if ( SageApi.Size(SegmentFiles)!=1){
-                printTitle(out,"Edit Show Info: Error");
+                printTitle(out,"Edit Show Info: Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>MediaFile is segmented: cannot function on segmented media files</h3>");
                 out.println("</div>");
@@ -1087,7 +1087,7 @@ public class EditShowInfoServlet extends SageServlet {
             }
             File file=(File)SageApi.GetElement(SegmentFiles,0);
             if (!file.exists() || !file.canWrite()) {
-                printTitle(out,"Edit Show Info: Error");
+                printTitle(out,"Edit Show Info: Error", SageServlet.isTitleBroken(req));
                 out.println("<div id=\"content\">");
                 out.println("<h3>File: "+file.getPath()+" is not Writable</h3>");
                 out.println("</div>");
