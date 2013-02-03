@@ -55,7 +55,7 @@ public class ConflictsServlet extends SageServlet {
             
     		out.println("</head>");
     		out.println("<body>");
-            out.println("<div id=\"menuContainer\"></div><div id=\"title\">"+
+            out.println(String.format("<div id=\"menuContainer\"></div>%s<div id=\"title\">", SageServlet.isTitleBroken(req) ? "<br/>" : "") +
                     "<h1><a href=\"index.html\" title=\"home\"><img id=\"logoimg\" src=\"sagelogo.gif\" alt=\"SageTV logo\" title=\"Home Screen\" border=\"0\"/></a>Recording Conflicts\r\n"+
                     "<a href=\""+GetXmlUrl(req)+"\" title=\"Return page in XML\"><img src=\"xml_button.png\" alt=\"[XML]\"/></a>\r\n" +
                     "<a href=\""+rssurl+"\" title=\"RSS feed for this page\"><img src=\"rss_button.png\" alt=\"[RSS]\"/></a>\r\n" +
