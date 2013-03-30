@@ -12,6 +12,12 @@
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.38
+1. Issue 356: Fix invalid reference to background image in CSS
+2. Issue 352: Fix typo on schedule recording page
+3. Issue 329: Move command buttons to top of System Messages page
+4. Fix bug with menu injections where injections into existing menus didn't work
+ 
 Version 2.37
 1. Migrate source code from svn to git
 2. Build fixes to support building from git
