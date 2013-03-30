@@ -1,7 +1,7 @@
 <div id="smoothmenu1" class="ddsmoothmenu">
 	<ul id="menuRoot">
 		<li id="menuSagetv"><a href="#">SageTV</a>
-			<ul>
+			<ul id="menuSagetvItems">
 				<li><a href="/sage/Home">Home</a></li>
 				<li><a href="/sage/Recordings">Recordings</a></li>
 				<li><a href="/sage/Search?searchType=TVFiles&amp;sort1=title_asc&amp;sort2=airdate_asc">Search Recorded TV</a></li>
@@ -15,7 +15,7 @@
 			</ul>
 		</li>
 		<li id="menuRecSched"><a href="#">Schedule Recordings</a>
-			<ul>
+			<ul id="menuRecSchedItems">
 				<li><a href="/sage/RecordingSchedule">Upcoming Recordings</a></li>
 				<li><a href="/sage/IRSuggestions">Intelligent Suggestions</a></li>
 				<li><a href="/sage/Favorites">Favorites Manager</a></li>
@@ -24,7 +24,7 @@
 			</ul>
 		</li>
 		<li id="menuGuide"><a href="#">Program Guide</a>
-			<ul>
+			<ul id="menuGuideItems">
 				<li><a href="/sage/EpgList">EPG List View</a></li>
 				<li><a href="/sage/EpgGrid">EPG Grid View</a></li>
 				<li><a href="/sage/EpgChannel">EPG Channel View</a></li>
@@ -38,7 +38,7 @@
 			</ul>
 		</li>
 		<li id="menuLib"><a href="#">Media Library</a>
-			<ul>
+			<ul id="menuLibItems">
 				<li><a href="/sage/Search?searchType=MediaFiles&amp;DVD=on&amp;sort1=title_asc&amp;sort2=none">Search DVDs</a></li>
 				<li><a href="/sage/Search?searchType=MediaFiles&amp;Video=on&amp;sort1=title_asc&amp;sort2=none">Search Imported Videos</a></li>
 				<li><a href="/sage/Search?searchType=MediaFiles&amp;Music=on&amp;search_fields=episode&amp;sort1=episode_asc&amp;sort2=none">Search Music by Track Title</a></li>
