@@ -176,7 +176,7 @@ public class ManualRecordServlet extends SageServlet {
 			out.println("<body>");
 		    printTitle(out,"Error", SageServlet.isTitleBroken(req));
 			out.println("<div id=\"content\">");
-			out.println("<p>Cannot record this episode of <a href=\"DetailedInfo?"+airing.getIdArg()+"\">"+airingTitle+"</a> because it would coflict with the following manual recording(s)</p>");
+			out.println("<p>Cannot record this episode of <a href=\"DetailedInfo?"+airing.getIdArg()+"\">"+airingTitle+"</a> because it would conflict with the following manual recording(s)</p>");
 			out.println("<p>You must cancel one of the following recordings and re-set this manual recording</p>");
 			out.println("<div class=\"airings\">");
             boolean usechannellogos=GetOption(req,"UseChannelLogos","true").equalsIgnoreCase("true");
