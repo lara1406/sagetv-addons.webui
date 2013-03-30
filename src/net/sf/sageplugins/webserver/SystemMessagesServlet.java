@@ -87,7 +87,14 @@ public class SystemMessagesServlet extends SageServlet {
 					out.println("            <a href=\"javascript:checkAllSystemMessages(true)\">[Select all]</a>");
 					out.println("            <a href=\"javascript:checkAllSystemMessages(false)\">[Unselect all]</a>");
 					out.println("         </div>");
-
+					out.println("<div>");
+                    Integer alertLevel = (Integer) SageApi.Api("GetSystemAlertLevel");
+                    if (alertLevel.intValue() > 0) {
+                        out.println("      <input type=\"submit\" name=\"ResetSystemAlertLevel\" value=\"Reset Alert Level\"/>");
+                    }
+					out.println("      <input type=\"submit\" name=\"DeleteSystemMessage\" value=\"Delete Selected Messages\"/>");
+					out.println("      <input type=\"submit\" name=\"DeleteAllSystemMessages\" value=\"Delete All Messages\"/>");
+					out.println("</div>");
                     for (int i = 1; i <= SageApi.Size(systemMessagesList); i++) {
 						Object currentSystemMessage = SageApi.GetElement(systemMessagesList, i - 1);
 						int level = SageApi.IntApi("GetSystemMessageLevel", new Object[]{currentSystemMessage});
@@ -161,13 +168,6 @@ public class SystemMessagesServlet extends SageServlet {
 			        out.println("            <a href=\"javascript:checkAllSystemMessages(false)\">[Unselect all]</a>");
 					out.println("         </div>");
                     out.println("      </div>");//alertslist
-
-                    Integer alertLevel = (Integer) SageApi.Api("GetSystemAlertLevel");
-                    if (alertLevel.intValue() > 0) {
-                        out.println("      <input type=\"submit\" name=\"ResetSystemAlertLevel\" value=\"Reset Alert Level\"/>");
-                    }
-					out.println("      <input type=\"submit\" name=\"DeleteSystemMessage\" value=\"Delete Selected Messages\"/>");
-					out.println("      <input type=\"submit\" name=\"DeleteAllSystemMessages\" value=\"Delete All Messages\"/>");
 					out.println("   </form>");
 				}
 			}		    
