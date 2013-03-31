@@ -35,9 +35,10 @@ void injectSource(File src, def xml) {
 
 response.contentType = 'text/plain'
 def xml = new XmlSlurper().parse(new File('jetty/webapps/nielm_sagewebserver/webapp/ddmenu.txt'))
+def processed = new HashSet()
 PluginAPI.GetInstalledPlugins().each {
 	def src = new File(PluginAPI.GetPluginResourcePath(it), 'web.menu')
-	if(src.canRead() && src.parentFile.absoluteFile != new File('.').absoluteFile)
+	if(src.canRead() && src.parentFile.absoluteFile != new File('.').absoluteFile && processed.add(src.absoluteFile))
 		injectSource(src, xml)
 }
 def outputBuilder = new StreamingMarkupBuilder()
