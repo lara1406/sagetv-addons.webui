@@ -1,6 +1,6 @@
 <%
 /*
-*      Copyright 2012 Battams, Derek
+*      Copyright 2012-2013 Battams, Derek
 *      
 *      This is a modified version of the code; original code by nielm, et al.
 *
@@ -22,9 +22,9 @@ import net.sf.sageplugins.webserver.Version
                         <p>Page generated at: ${new Date()}
                         <br/>Sage Webserver version ${Version.VERSION}
 
-                        <br/><a href="http://validator.w3.org/check?uri=referer"><img  src="valid-xhtml10.gif"  alt="Valid XHTML 1.0!" height="31" width="88" /></a>
+                        <br/><a href="http://validator.w3.org/check?uri=referer"><img  src="/sage/valid-xhtml10.gif"  alt="Valid XHTML 1.0!" height="31" width="88" /></a>
 
-                        <a href="http://jigsaw.w3.org/css-validator/"><img  src="valid-css.gif"  alt="Valid CSS2!" height="31" width="88" /></a>
+                        <a href="http://jigsaw.w3.org/css-validator/"><img  src="/sage/valid-css.gif"  alt="Valid CSS2!" height="31" width="88" /></a>
                         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZPBAK9WRNH2BQ"><img src="//www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
                 </div>
         </body>
