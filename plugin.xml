@@ -12,6 +12,10 @@
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.39
+1. Issue 357: Ensure menu injections are processed only once
+2. Fix invalid relative references to images in groovy header/footer
+ 
 Version 2.38
 1. Issue 356: Fix invalid reference to background image in CSS
 2. Issue 352: Fix typo on schedule recording page
