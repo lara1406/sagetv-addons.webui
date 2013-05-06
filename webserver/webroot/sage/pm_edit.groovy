@@ -1,5 +1,5 @@
 /*
-*      Copyright 2012 Battams, Derek
+*      Copyright 2012-2013 Battams, Derek
 *
 *      This is a modified version of the code; original code by nielm, et al.
 *
@@ -33,10 +33,10 @@ switch(action) {
 		PluginAPI.GetPluginConfigSettings(p).each {
 			def type = PluginAPI.GetPluginConfigType(p, it)	
 			def result
-			if(type != 'Multichoice')
+			if(type == 'Multichoice')
+				result = PluginAPI.SetPluginConfigValues(p, it, request.getParameterValues(it))			
+			else if(type != 'Button' || params[it] == PluginAPI.GetPluginConfigValue(p, it))
 				result = PluginAPI.SetPluginConfigValue(p, it, getValue(type, params[it]))
-			else
-				result = PluginAPI.SetPluginConfigValues(p, it, request.getParameterValues(it))
 			if(result) errs[it] = result
 		}
 		if(errs.keySet().size() > 0)
@@ -118,8 +118,8 @@ def getOpts(def plugin) {
 				vals['html'].append('</select>\n')
 				vals['html'] = vals['html'].toString()
 				break
-			default:
-				vals['html'] = "<p><b>Option type '$type' not supported via the web!</b></p>\n"
+			default: // It must be a button
+				vals['html'] = "<input type=\"submit\" name=\"$it\" value=\"${PluginAPI.GetPluginConfigValue(plugin, it)}\" />\n"
 		}
 		map[it] = vals
 	}
