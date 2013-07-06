@@ -12,6 +12,9 @@
   <Webpage title="GeekTonic Review">http://www.geektonic.com/2008/03/sagetv-web-interface-control-sagetv.html</Webpage>
   <ReleaseNotes>
     <![CDATA[
+Version 2.40
+1. Issue 361: Add support for button options in online plugin manager
+ 
 Version 2.39
 1. Issue 357: Ensure menu injections are processed only once
 2. Fix invalid relative references to images in groovy header/footer
